@@ -1,0 +1,26 @@
+{
+  "name": "bubble",
+  "version": "1.0.0",
+  "description": "ISU4U Term Project - Bubble, the chatting app that prevents Yang from spamming.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TsundereKermit/bubble.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TsundereKermit/bubble/issues"
+  },
+  "homepage": "https://github.com/TsundereKermit/bubble#readme",
+  "dependencies": {
+    "@pusher/chatkit-client": "^1.13.1",
+    "@pusher/chatkit-server": "^2.1.1",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2"
+  }
+}
