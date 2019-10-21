@@ -43,6 +43,6 @@ $(document).ready(function(){
     });
 
 //Stop click event
-$('a').click(function(event){
+$('btn').click(function(event){
     event.preventDefault(); 
 	});
