@@ -32,10 +32,6 @@
                 const li = document.createElement("li");
                 li.appendChild(
                   document.createTextNode(`${message.senderId}: ${
-                    // We know our message will have a single part with
-                    // a plain text content because we used
-                    // sendSimpleMessage. In general we'd have to check
-                    // the partType here.
                     message.parts[0].payload.content
                   }`)
                 );
