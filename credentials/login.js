@@ -1,28 +1,3 @@
-/*
-var objPeople = [
-	{ 
-		username: "test1",
-		password: "12345"
-	},
-	{ 
-		username: "test2",
-		password: "12345"
-	}
-]
-
-function getInfo() {
-    let username = document.getElementById("username").value
-    let password = document.getElementById("password").value
-    for(var i = 0; i < objPeople.length; i++) {
-		if(username == objPeople[i].username && password == objPeople[i].password) {
-			console.log(username + " is logged in!!!")
-			return
-		}
-	}
-	console.log("incorrect username or password")
-}
-*/
-
 function fieldFocus(field, text) {
    if(field.value == text)
    {
@@ -37,12 +12,22 @@ function fieldBlur(field, text) {
    }
 }
 
-//Fade in dashboard box
-$(document).ready(function(){
-    $('.box').hide().fadeIn(1000);
-    });
-
-//Stop click event
-$('btn').click(function(event){
-    event.preventDefault(); 
-	});
+function testFunction() {
+	var form = document.getElementById("pwForm");
+	var uName = form.elements[0].value
+	var pWord = form.elements[1].value
+	//Delete the following line after testing
+	console.log('username: ' + uName + ' password: ' + pWord)
+	//I need to get the usernames and passwords in an array somehow
+	var objPeople = [
+		{username: 'tonydagenius', password: '12345'}, 
+		{username: 'TsundereKermit', password: '12345'}
+	];
+	for(var i = 0; i < objPeople.length; i++) {
+		if(uName == objPeople[i].username && pWord == objPeople[i].password) {
+			console.log(username.value + " is logged in!!!")
+			return
+		}
+	}
+	console.log('Credentials do not exist')
+  }
