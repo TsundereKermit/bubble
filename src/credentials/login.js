@@ -12,7 +12,7 @@ function fieldBlur(field, text) {
    }
 }
 
-function testFunction() {
+function login() {
 	var form = document.getElementById("pwForm");
 	var un = form.elements[0].value
 	var pw = form.elements[1].value
@@ -31,4 +31,4 @@ function testFunction() {
 		}
 	}
 	console.log('Credentials do not exist')
-  }
+}
