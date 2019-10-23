@@ -12,7 +12,7 @@ function login() {
 	for(var i = 0; i < objPeople.length; i++) {
 		if(un == objPeople[i].username && pw == objPeople[i].password) {
 			console.log(un + " is logged in!!!")
-			window.location.assign("../main_page/index.html");
+			window.location.assign("../../main_page/index.html");
 			return
 		}
 	}
