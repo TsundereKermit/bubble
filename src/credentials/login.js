@@ -1,17 +1,3 @@
-function fieldFocus(field, text) {
-   if(field.value == text)
-   {
-     field.value = '';
-   }
-}
-
-function fieldBlur(field, text) {
-   if(field.value == '')
-   {
-     field.value = text;
-   }
-}
-
 function login() {
 	var form = document.getElementById("pwForm");
 	var un = form.elements[0].value
