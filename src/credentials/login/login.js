@@ -2,8 +2,6 @@ function login() {
 	var form = document.getElementById("pwForm");
 	var un = form.elements[0].value
 	var pw = form.elements[1].value
-	//Delete the following line after testing
-	console.log('username: ' + un + ' password: ' + pw)
 	//I need to get the usernames and passwords in an array somehow
 	var objPeople = [
 		{username: 'tonydagenius', password: '12345'}, 
