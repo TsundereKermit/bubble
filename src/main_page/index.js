@@ -1,8 +1,8 @@
 const tokenProvider = new Chatkit.TokenProvider({
-    url: "https://us1.pusherplatform.io/services/chatkit_token_provider/v1/e85ec3c9-83f0-40ff-9f45-457141e6177d/token"
+    url: "https://us1.pusherplatform.io/services/chatkit_token_provider/v1/c8c2181d-9998-47f7-afab-c3978ecf675c/token"
   });
   const chatManager = new Chatkit.ChatManager({
-    instanceLocator: "v1:us1:e85ec3c9-83f0-40ff-9f45-457141e6177d",
+    instanceLocator: "v1:us1:c8c2181d-9998-47f7-afab-c3978ecf675c",
     userId: "tony_userid",
     tokenProvider: tokenProvider
   });
