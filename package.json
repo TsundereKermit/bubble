@@ -4,7 +4,8 @@
   "description": "ISU4U Term Project - Bubble, the chatting app that prevents Yang from spamming.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -21,14 +22,22 @@
     "@pusher/chatkit-client": "^1.13.1",
     "@pusher/chatkit-client-react": "^0.1.2",
     "@pusher/chatkit-server": "^2.1.1",
+    "bcryptjs": "^2.4.3",
     "connect": "^3.7.0",
+    "connect-flash": "^0.1.1",
+    "ejs": "^2.7.1",
     "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0",
+    "express-session": "^1.17.0",
+    "mongoose": "^5.7.7",
+    "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2"
   },
   "devDependencies": {
     "browserify": "^16.5.0",
+    "nodemon": "^1.19.4",
     "watchify": "^3.11.1"
   }
 }
