@@ -21,7 +21,14 @@
     "@pusher/chatkit-client": "^1.13.1",
     "@pusher/chatkit-client-react": "^0.1.2",
     "@pusher/chatkit-server": "^2.1.1",
+    "connect": "^3.7.0",
+    "express": "^4.17.1",
+    "passport-local": "^1.0.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2"
+  },
+  "devDependencies": {
+    "browserify": "^16.5.0",
+    "watchify": "^3.11.1"
   }
 }
