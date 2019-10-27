@@ -1,4 +1,18 @@
-const tokenProvider = new Chatkit.TokenProvider({
+<html lang=en>
+  <head>
+    <meta charset=utf-8>
+    <title>Chatkit demo</title>
+  </head>
+  <body>
+    <ul id="message-list"></ul>
+    <form id="message-form">
+      <input type='text' id='message-text'>
+      <input type="submit">
+    </form>
+
+    <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
+    <script>
+    const tokenProvider = new Chatkit.TokenProvider({
     url: "https://us1.pusherplatform.io/services/chatkit_token_provider/v1/c8c2181d-9998-47f7-afab-c3978ecf675c/token"
   });
   const chatManager = new Chatkit.ChatManager({
@@ -40,3 +54,6 @@ const tokenProvider = new Chatkit.TokenProvider({
     .catch(error => {
       console.error("error:", error);
     });
+    </script>
+  </body>
+</html>
