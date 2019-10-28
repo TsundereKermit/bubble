@@ -1,3 +1,9 @@
+import React, {Component} from 'react'
+import MessageList from './components/MessageList'
+import SendMessageForm from './components/SendMessageForm'
+import RoomList from './components/RoomList'
+import NewRoomForm from './components/NewRoomForm'
+
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
@@ -10,6 +16,16 @@ const app = express();
 require('./config/passport')(passport);
 
 const db = require('./config/keys').MongoURI;
+
+class app extends Component {
+  render() {
+    return (
+      <div className="app">
+        <MessageList messages={this.state.messages} />
+      </div>
+    )
+  }
+}
 
 mongoose
   .connect(
