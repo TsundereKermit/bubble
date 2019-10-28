@@ -28,7 +28,7 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended:false }));
 
 app.use(session({
-  secret: 'nom is blessed',
+  secret: 'nom is cursed',
   resave: true,
   saveUninitialized: true
 }));
