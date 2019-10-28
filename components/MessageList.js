@@ -15,4 +15,4 @@ class MessageList extends Component {
         )
     }
 }
-export default;
+export default MessageList;

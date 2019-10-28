@@ -1,10 +1,13 @@
+var email = document.getElementById("email");
+var chatKitUsername = email.textContent || email.innerText;
+
 const tokenProvider = new Chatkit.TokenProvider({
     url: "https://us1.pusherplatform.io/services/chatkit_token_provider/v1/c8c2181d-9998-47f7-afab-c3978ecf675c/token"
 });
 
 const chatManager = new Chatkit.ChatManager({
     instanceLocator: "v1:us1:c8c2181d-9998-47f7-afab-c3978ecf675c",
-    userId: "tony_userid",
+    userId: chatKitUsername,
     tokenProvider: tokenProvider
 });
 
