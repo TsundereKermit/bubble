@@ -2,8 +2,13 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const Chatkit = require('@pusher/chatkit-server');
+const chatkit = new Chatkit.default({
+    instanceLocator: 'v1:us1:c8c2181d-9998-47f7-afab-c3978ecf675c',
+    key: 'd5eb01bb-3869-4621-a4a9-4ca902a83460:v3tYLijCNYuz65zdgorTxF1wybw2wVvbX924i0rByNM=',
+  });
 
-const User = require('../model/User')
+const User = require('../model/User');
 
 router.get('/login', (req, res) => res.render('login'));
 
@@ -50,6 +55,16 @@ router.post('/register', (req, res) => {
                     name, 
                     email,
                     password
+                });
+
+                chatkit.createUser({
+                    id: name,
+                    name: name,
+                })
+                .then(() => {
+                    console.log('User created successfully');
+                }).catch((err) => {
+                    console.log(err);
                 });
 
                 bcrypt.genSalt(10, (err, salt) => bcrypt.hash(newUser.password, salt, (err, hash) => {
