@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+//Initializes a model for user creation when the registration is done
 const userSchema = new mongoose.Schema({
     name: {
         type: String,

@@ -13,12 +13,25 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
     <script>
+    /**
+     * Temporary solution
+     * Storing javascipts directly within the "html" file is inappropriate, however, ejs does not appear to 
+     * support client side javascripts...
+    */
+
+    //Gets the ChatKit userId (identical to the Bubble username)
     var username = document.getElementById("name").textContent;
 
-    const tokenProvider = new Chatkit.TokenProvider({
+    /**
+     * Experimental
+     * We are using our own token provider instead of ChatKit's native token provider right now, the native one 
+     * supports production usage while our own supports experimental usage
+    */
+     const tokenProvider = new Chatkit.TokenProvider({
         url: "https://us1.pusherplatform.io/services/chatkit_token_provider/v1/c8c2181d-9998-47f7-afab-c3978ecf675c/token"
     });
-
+    
+    //Initializes our ChatKit's chatmanager
     const chatManager = new Chatkit.ChatManager({
         instanceLocator: "v1:us1:c8c2181d-9998-47f7-afab-c3978ecf675c",
         userId: username,
@@ -27,6 +40,7 @@
 
     chatManager
         .connect()
+        //Renders the messages from the first room that the user is in 
         .then(currentUser => {
             currentUser.subscribeToRoomMultipart({
                 roomId: currentUser.rooms[0].id,
@@ -37,13 +51,12 @@
                     li.appendChild(
                     document.createTextNode(`${message.senderId}: ${
                         message.parts[0].payload.content
-                    }`)
-                    );
+                    }`));
                     ul.appendChild(li);
                 }
             }
         });
-
+            //When the message input is detected, a simple mesage is sent to the chatkit servers
             const form = document.getElementById("message-form");
             form.addEventListener("submit", e => {
                 e.preventDefault();
