@@ -6,12 +6,13 @@ const router = express.Router();
  */
 
 //When localhost:5000 is called
-router.get('/', (req, res) => res.render('welcome'));
+router.get('/', (req, res) => res.render('welcome', {title: 'Welcome to Bubble'}));
 
 //When localhost:5000/index is called
 router.get('/index', (req, res) => 
     res.render('index', {
-        name: req.user.name
+        name: req.user.name,
+        title: 'Bubble'
     }));
 
 module.exports = router;

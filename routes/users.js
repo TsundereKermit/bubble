@@ -14,10 +14,10 @@ const chatkit = new Chatkit.default({
 const User = require('../model/User');
 
 //Triggered when localhost:5000/login is called
-router.get('/login', (req, res) => res.render('login'));
+router.get('/login', (req, res) => res.render('login', {title: 'Login to Bubble'}));
 
 //Triggered when localhost:5000/register is called
-router.get('/register', (req, res) => res.render('register'));
+router.get('/register', (req, res) => res.render('register', {title: 'Register a bubble account'}));
 
 //Handles the POST request from the register page
 router.post('/register', (req, res) => {

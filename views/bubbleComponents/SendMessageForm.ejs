@@ -1,0 +1,19 @@
+<form id="message-form">
+    <input type='text' id='message-text'>
+    <input type="submit">
+</form>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
+<script>
+    //When the message input is detected, a simple mesage is sent to the chatkit servers
+    const form = document.getElementById("message-form");
+            form.addEventListener("submit", e => {
+                e.preventDefault();
+                const input = document.getElementById("message-text");
+                currentUser.sendSimpleMessage({
+                    text: input.value,
+                    roomId: currentUser.rooms[0].id
+                });
+                input.value = "";
+            });
+</script>
