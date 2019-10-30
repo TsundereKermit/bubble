@@ -13,7 +13,9 @@
                 currentUser.sendSimpleMessage({
                     text: input.value,
                     roomId: currentUser.rooms[0].id
-                });
+                })
+                .then(res => console.log('sent message with id', res.id))
+                .catch(err => console.error(err));
                 input.value = "";
             });
 </script>
