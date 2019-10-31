@@ -1,3 +1,4 @@
+<div style="position:absolute;top:-20000px" id="name"><%= name %></div>
 <form id="message-form">
     <input type='text' id='message-text'>
     <input type="submit">
@@ -5,8 +6,14 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
 <script>
-    //When the message input is detected, a simple mesage is sent to the chatkit servers
-    const form = document.getElementById("message-form");
+    //Gets the ChatKit userId (identical to the Bubble username)
+    var username = document.getElementById("name").textContent;
+
+    chatManager
+        .connect()
+        //When the message input is detected, a simple mesage is sent to the chatkit servers
+        .then(currentUser => {
+            const form = document.getElementById("message-form");
             form.addEventListener("submit", e => {
                 e.preventDefault();
                 const input = document.getElementById("message-text");
@@ -18,4 +25,8 @@
                 .catch(err => console.error(err));
                 input.value = "";
             });
+        })
+        .catch(error => {
+            console.error("error:", error);
+        });
 </script>
