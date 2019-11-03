@@ -1,0 +1,29 @@
+<div style="position:absolute;top:-20000px" id="name"><%= name %></div>
+<div class="btn-group-vertical" role="group" aria-label="Room list button group" id="roomList"></div>
+
+<script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
+<script>
+        //Gets the ChatKit userId (identical to the Bubble username)
+        var username = document.getElementById("name").textContent;
+    
+        chatManager
+            .connect()
+            //Renders the messages from the first room that the user is in 
+            .then(currentUser => {
+                const div = document.getElementById("roomList");
+                const userRooms = currentUser.rooms;
+                console.log(userRooms);
+                userRooms.forEach(element => {
+                    console.log(element.name);
+                    var button = document.createElement("button");
+                    button.setAttribute("class", "btn btn-secondary");
+                    button.innerHTML = element.name;
+                    //TODO When the button is clicked change the MessageList.ejs to that room
+                    //button.setAttribute("onclick", "function?");
+                    div.appendChild(button);
+                });
+            })
+            .catch(error => {
+                console.error("error:", error);
+            });
+    </script>
