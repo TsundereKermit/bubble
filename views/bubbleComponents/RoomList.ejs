@@ -12,9 +12,7 @@
             .then(currentUser => {
                 const div = document.getElementById("roomList");
                 const userRooms = currentUser.rooms;
-                console.log(userRooms);
                 userRooms.forEach(element => {
-                    console.log(element.name);
                     var button = document.createElement("button");
                     button.setAttribute("class", "btn btn-secondary");
                     button.innerHTML = element.name;
