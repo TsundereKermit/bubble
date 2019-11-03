@@ -1,4 +1,6 @@
-//import MessageList from './components/MessageList'
+import React, {Component} from 'react';
+import {ChatManager, TokenProvider} from '@pusher/chatkit-client';
+import MessageList from './components/MessageList'
 //import SendMessageForm from './components/SendMessageForm'
 //import RoomList from './components/RoomList'
 //import NewRoomForm from './components/NewRoomForm'
@@ -18,17 +20,15 @@ require('./config/passport')(passport);
 //MongoDB
 const db = require('./config/keys').MongoURI;
 
-/*
-class app extends React.Component {
-  render() {
+
+ /* render() {
     return (
       <div className="app">
         <MessageList messages={this.state.messages} />
       </div>
     )
-  }
-}
-*/
+  }*/
+
 
 //Connections to MongoDB
 mongoose
@@ -49,7 +49,7 @@ app.use(express.urlencoded({ extended:false }));
 
 //Express-session
 app.use(session({
-  secret: 'nom is blessed',
+  secret: 'sliding',
   resave: true,
   saveUninitialized: true
 }));

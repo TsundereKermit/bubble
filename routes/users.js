@@ -79,7 +79,7 @@ router.post('/register', (req, res) => {
                     console.log(err);
                 });
                 
-                //A randomly regerated 10-character salt is appended to the password and hashed
+                //A randomly generated 10-character salt is appended to the password and hashed
                 bcrypt.genSalt(10, (err, salt) => bcrypt.hash(newUser.password, salt, (err, hash) => {
                     if (err) throw err;
                     //The hashed password is then passed to MongoDB along with the rest of the information

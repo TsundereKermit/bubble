@@ -16,7 +16,7 @@ module.exports = function (passport) {
                     return done(null, false, { message: 'That email is not registered' });
                 } 
 
-                //Checks the password for autheticity
+                //Checks the password for authenticity
                 bcrypt.compare(password, user.password, (err, isMatch) => {
                     if (err) throw err;
                     //If a match is not found, the error message will be appended to the UI of login page
