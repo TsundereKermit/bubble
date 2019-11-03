@@ -27,16 +27,14 @@ router.post('/newRoom', (req, res) => {
     let errors = []
 
     if (!roomName || !roomId) {
-        console.log(roomName + ' ' + roomId);
         errors.push({ msg: 'Please fill in all fields' })
     }
 
     if (errors.length > 0) {
-        res.render('index', { name: req.user.name, errors, title: 'Bubble' })
+        res.render('index', { name: inputUser, errors, title: 'Bubble' })
     } else {
-        console.log(inputUser + ' ' + roomName + ' ' + roomId);
         chatkit.createRoom({
-            id: inputUser,
+            id: roomId,
             creatorId: inputUser,
             name: roomName,
         })
@@ -47,8 +45,30 @@ router.post('/newRoom', (req, res) => {
             console.log(err);
         });
 
-        req.flash('success_msg', 'Room created');
-        res.render('index', { name: req.user.name, title: 'Bubble' })
+        res.render('index', { name: inputUser, title: 'Bubble' })
+    }
+});
+
+router.post('/joinRoom', (req, res) => {
+    const { inputUser, roomId } = req.body;
+    let errors = []
+
+    if (!roomId) {
+        errors.push({ msg: 'Please fill in the room ID' })
+    }
+
+    if (errors.length > 0) {
+        res.render('index', { name: inputUser, errors, title: 'Bubble' })
+    } else {
+        chatkit
+          .addUsersToRoom({
+            roomId: roomId,
+            userIds: [inputUser]
+          })
+          .then(() => console.log("added " + inputUser + " to room ID: " + roomId))
+          .catch(err => console.error(err));
+
+        res.render('index', { name: inputUser, title: 'Bubble' })
     }
 });
 
