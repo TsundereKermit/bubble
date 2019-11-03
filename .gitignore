@@ -3,3 +3,6 @@ node_modules
 
 # Ignore the key to the MongoDB database
 config/keys.js
+
+# Ignore the automatically generated debugging files
+.vscode
