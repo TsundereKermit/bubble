@@ -71,6 +71,7 @@ app.use((req, res, next) => {
 //Redirects to the main page and uses the user strategy
 app.use('/', require('./routes/index.js'));
 app.use('/users', require('./routes/users'));
+app.use('/index', require('./routes/index'));
 
 //Creates port 5000 (localhost:5000)
 const PORT = process.env.PORT || 5000;
