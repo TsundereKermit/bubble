@@ -1,6 +1,63 @@
 <div style="position:absolute;top:-20000px" id="name"><%= name %></div>
 <h2><%= name %></h2>
-<ul id="message-list"></ul>
+<div class = "row">
+    <div class="card" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title" id="hd0"></h5>
+          <p class="card-text" id="0"></p>
+        </div>
+    </div>
+    <div class="card" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title" id="hd1"></h5>
+          <p class="card-text" id="1"></p>
+        </div>
+    </div>
+    <div class="card" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title" id="hd2"></h5>
+          <p class="card-text" id="2"></p>
+        </div>
+    </div>
+</div><div class = "row">
+    <div class="card" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title" id="hd3"></h5>
+          <p class="card-text" id="3"></p>
+        </div>
+    </div>
+    <div class="card" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title" id="hd4"></h5>
+          <p class="card-text" id="4"></p>
+        </div>
+    </div>
+    <div class="card" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title" id="hd5"></h5>
+          <p class="card-text" id="5"></p>
+        </div>
+    </div>
+</div><div class = "row">
+    <div class="card" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title" id="hd6"></h5>
+          <p class="card-text" id="6"></p>
+        </div>
+    </div>
+    <div class="card" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title" id="hd7"></h5>
+          <p class="card-text" id="7"></p>
+        </div>
+    </div>
+    <div class="card" style="width: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title" id="hd8"></h5>
+          <p class="card-text" id="8"></p>
+        </div>
+    </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
 <script>
@@ -25,19 +82,48 @@
 
     chatManager
         .connect()
-        //Renders the messages from the first room that the user is in 
         .then(currentUser => {
+            var userArray = [];
             currentUser.subscribeToRoomMultipart({
                 roomId: currentUser.rooms[0].id,
                 hooks: {
                     onMessage: message => {
-                        const ul = document.getElementById("message-list");
-                        const li = document.createElement("li");
-                        li.appendChild(
-                            document.createTextNode(`${message.senderId}: ${
-                                message.parts[0].payload.content
-                                }`));
-                        ul.appendChild(li);
+                        var roomId = currentUser.rooms[0].id;
+                        userArray = currentUser.rooms[0].users;
+                        for (var i = 0; i < userArray.length; i++) {
+                            console.log(i);
+                            console.log(userArray.length)
+                            var cardUser = userArray[i];
+                            var lastMessage;
+                            currentUser.fetchMultipartMessages({
+                                roomId: roomId,
+                                direction: 'newer',
+                                limit: 100,
+                            })
+                                .then(messages => {
+                                    for (var j = 0; j < 100; j++) {
+                                        if (messages[j].sender.id === cardUser.id) {
+                                            console.log(i);
+                                            lastMessage = messages[j].parts[0].payload.content;
+                                            var cardId = j.toString();
+                                            var cardUserId = "hd" + cardId;
+                                            document.getElementById(cardId).innerHTML = lastMessage;
+                                            document.getElementById(cardUserId).innerHTML = cardUser.id;
+                                            break;
+                                        } else {
+                                            lastMessage = `${user} has not sent a message in this room recently`;
+                                            var cardId = j.toString();
+                                            var cardUserId = "hd" + cardId;
+                                            document.getElementById(cardId).innerHTML = lastMessage;
+                                            document.getElementById(cardUserId).innerHTML = cardUser.id;
+                                            break;
+                                        }
+                                    }
+                                })
+                                .catch(err => {
+                                    console.log(`Error fetching messages: ${err}`)
+                                })
+                        }
                     }
                 }
             });
