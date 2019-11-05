@@ -12,27 +12,32 @@ const chatkit = new Chatkit.default({
     key: 'd5eb01bb-3869-4621-a4a9-4ca902a83460:v3tYLijCNYuz65zdgorTxF1wybw2wVvbX924i0rByNM=',
 });
 
-//When localhost:5000 is called
+//localhost:5000 is called
 router.get('/', (req, res) => res.render('welcome', {title: 'Welcome to Bubble'}));
 
-//When localhost:5000/index is called
+//localhost:5000/index is called
 router.get('/index', (req, res) => 
     res.render('index', {
         name: req.user.name,
         title: 'Bubble'
     }));
 
+//newRoom form is submitted
 router.post('/newRoom', (req, res) => {
+    //Form data
     const { inputUser, roomName, roomId } = req.body;
     let errors = []
 
+    //Empty form
     if (!roomName || !roomId) {
         errors.push({ msg: 'Please fill in all fields' })
     }
 
+    //Refreshes the page if an empty form is filled
     if (errors.length > 0) {
         res.render('index', { name: inputUser, errors, title: 'Bubble' })
     } else {
+        //Creates the room based on submitted data
         chatkit.createRoom({
             id: roomId,
             creatorId: inputUser,
@@ -49,17 +54,22 @@ router.post('/newRoom', (req, res) => {
     }
 });
 
+//joinRoom form is submitted
 router.post('/joinRoom', (req, res) => {
+    //Form data
     const { inputUser, roomId } = req.body;
     let errors = []
 
+    //Empty form
     if (!roomId) {
         errors.push({ msg: 'Please fill in the room ID' })
     }
 
+    //Refreshes the page if empty form
     if (errors.length > 0) {
         res.render('index', { name: inputUser, errors, title: 'Bubble' })
     } else {
+        //Join the room
         chatkit
           .addUsersToRoom({
             roomId: roomId,
