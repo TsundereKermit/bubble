@@ -1,6 +1,64 @@
 <div style="position:absolute;top:-20000px" id="name"><%= name %></div>
-<h2><%= name %></h2>
-<ul id="message-list"></ul>
+<div class="d-flex flex-row">
+    <div class="card mx-auto overflow-auto" style="width: 20rem;">
+        <div class="card-body">
+            <h5 class="card-title" id="hd0"></h5>
+            <p class="card-text" id="0"></p>
+        </div>
+    </div>
+    <div class="card mx-auto overflow-auto" style="width: 20rem;">
+        <div class="card-body">
+            <h5 class="card-title" id="hd1"></h5>
+            <p class="card-text" id="1"></p>
+        </div>
+    </div>
+    <div class="card mx-auto overflow-auto" style="width: 20rem;">
+        <div class="card-body">
+            <h5 class="card-title" id="hd2"></h5>
+            <p class="card-text" id="2"></p>
+        </div>
+    </div>
+</div>
+<div class="d-flex flex-row">
+    <div class="card mx-auto overflow-auto" style="width: 20rem;">
+        <div class="card-body">
+            <h5 class="card-title" id="hd3"></h5>
+            <p class="card-text" id="3"></p>
+        </div>
+    </div>
+    <div class="card mx-auto overflow-auto" style="width: 20rem;">
+        <div class="card-body">
+            <h5 class="card-title" id="hd4"></h5>
+            <p class="card-text" id="4"></p>
+        </div>
+    </div>
+    <div class="card mx-auto overflow-auto" style="width: 20rem;">
+        <div class="card-body">
+            <h5 class="card-title" id="hd5"></h5>
+            <p class="card-text" id="5"></p>
+        </div>
+    </div>
+</div>
+<div class="d-flex flex-row">
+    <div class="card mx-auto overflow-auto" style="width: 20rem;">
+        <div class="card-body">
+            <h5 class="card-title" id="hd6"></h5>
+            <p class="card-text" id="6"></p>
+        </div>
+    </div>
+    <div class="card mx-auto overflow-auto" style="width: 20rem;">
+        <div class="card-body">
+            <h5 class="card-title" id="hd7"></h5>
+            <p class="card-text" id="7"></p>
+        </div>
+    </div>
+    <div class="card mx-auto overflow-auto" style="width: 20rem;">
+        <div class="card-body">
+            <h5 class="card-title" id="hd8"></h5>
+            <p class="card-text" id="8"></p>
+        </div>
+    </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
 <script>
@@ -25,19 +83,53 @@
 
     chatManager
         .connect()
-        //Renders the messages from the first room that the user is in 
         .then(currentUser => {
+            var userArray = [];
             currentUser.subscribeToRoomMultipart({
                 roomId: currentUser.rooms[0].id,
                 hooks: {
                     onMessage: message => {
-                        const ul = document.getElementById("message-list");
-                        const li = document.createElement("li");
-                        li.appendChild(
-                            document.createTextNode(`${message.senderId}: ${
-                                message.parts[0].payload.content
-                                }`));
-                        ul.appendChild(li);
+                        var roomId = currentUser.rooms[0].id;
+                        //Gets the most recent 100 messages ordered from newest to oldest
+                        currentUser.fetchMultipartMessages({
+                            roomId: roomId,
+                            direction: 'newer',
+                            limit: 100,
+                        })
+                            .then(messages => {
+                                //Gets an array of all users in the room
+                                var userArray = currentUser.rooms[0].users;
+                                //Loops through all the users to get content for each card
+                                for (let i = 0; i < userArray.length; i++) {
+                                    var cardUser = userArray[i];
+                                    //Loops for the 
+                                    for (let j = 0; j < messages.length; j++) {
+                                        if (messages[j].sender.id === cardUser.id) {
+                                            //Gets the text portion of the most recent message
+                                            lastMessage = messages[j].parts[0].payload.content;
+                                            //Get the card component ids
+                                            var cardId = i.toString();
+                                            var cardUserId = "hd" + cardId;
+                                            //Changes the card components
+                                            document.getElementById(cardId).innerHTML = lastMessage;
+                                            document.getElementById(cardUserId).innerHTML = cardUser.id;
+                                        } else if (i === (messages.length - 1)) {
+                                            //This will only be triggered if no message sent from this user is found in the recent 100 msgs
+                                            lastMessage = `${cardUser} has not sent a message in this room recently`;
+                                            //Get the card component ids
+                                            var cardId = j.toString();
+                                            var cardUserId = "hd" + cardId;
+                                            //Changes the card components
+                                            document.getElementById(cardId).innerHTML = lastMessage;
+                                            document.getElementById(cardUserId).innerHTML = cardUser.id;
+                                        }
+                                    }
+                                }
+                            })
+                            .catch(err => {
+                                console.log(`Error fetching messages: ${err}`)
+                            })
+
                     }
                 }
             });

@@ -61,7 +61,7 @@ app.use((req, res, next) => {
   next();
 })
 
-//Redirects to the main page and uses the user strategy
+//Shortens the routes when post/get requests are called
 app.use('/', require('./routes/index.js'));
 app.use('/users', require('./routes/users'));
 app.use('/index', require('./routes/index'));
