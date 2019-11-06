@@ -1,7 +1,3 @@
-//import SendMessageForm from './components/SendMessageForm'
-//import RoomList from './components/RoomList'
-//import NewRoomForm from './components/NewRoomForm'
-//import MessageList from './components/MessageList'
 const React = require('react');
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');

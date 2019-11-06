@@ -21,7 +21,7 @@
         instanceLocator: "v1:us1:c8c2181d-9998-47f7-afab-c3978ecf675c",
         userId: username,
         tokenProvider: tokenProvider
-    });
+    })
 
     chatManager
         .connect()
@@ -42,7 +42,8 @@
                 }
             });
         })
+    
         .catch(error => {
             console.error("error:", error);
-        });
+        })
 </script>
