@@ -1,18 +1,19 @@
-<html lang=en>
+<html lang=en class="vw-100 vh-100">
   <head>
     <meta charset=utf-8>
     <title>Chatkit demo</title>
   </head>
   <body>
-    <div id="bubbleApp">
-      <% include ./partials/messages %>
-      <% include ./bubbleComponents/MessageList %>
-      <% include ./bubbleComponents/SendMessageForm %>
-      <br><br>
-      <% include ./bubbleComponents/NewRoomForm %>
-      <% include ./bubbleComponents/JoinRoomForm %>
-      <br><br>
-      <% include ./bubbleComponents/RoomList %>
+    <div id="bubbleApp" class="d-flex">
+      <div id="messageComponents">
+          <% include ./bubbleComponents/MessageList %>
+          <% include ./bubbleComponents/SendMessageForm %>
+      </div>
+      <div id="roomComponents" class="d-flex flex-column">
+        <% include ./bubbleComponents/RoomList %>
+        <% include ./bubbleComponents/NewRoomForm %>
+        <% include ./bubbleComponents/JoinRoomForm %>
+      </div>
     </div>
   </body>
 </html>
