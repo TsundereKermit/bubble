@@ -1,6 +1,6 @@
 <div style="position:absolute;top:-20000px" id="name"><%= name %></div>
 <div class="btn-group-vertical" role="group" aria-label="Room list button group" id="roomList"></div>
-
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
 <script>
         //Gets the ChatKit userId (identical to the Bubble username)
@@ -13,15 +13,20 @@
                 const div = document.getElementById("roomList");
                 const userRooms = currentUser.rooms;
                 userRooms.forEach(element => {
-                    var button = document.createElement("button");
-                    button.setAttribute("class", "btn btn-secondary");
+                    var button = document.createElement("a");
+                    button.setAttribute("class", "btn btn-secondary roomName");
+                    button.setAttribute("id", element.id);
                     button.innerHTML = element.name;
-                    //TODO When the button is clicked change the MessageList.ejs to that room
-                    //button.setAttribute("onclick", "function?");
                     div.appendChild(button);
                 });
             })
             .catch(error => {
                 console.error("error:", error);
             });
+
+            $(document).ready(() => {
+                    $('.roomName').click(() => {
+                        $.post("index/changeRoom", { userId: username, changeRoomName: this.id.textContent });
+                    });
+                });
     </script>

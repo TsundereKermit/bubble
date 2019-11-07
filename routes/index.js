@@ -19,7 +19,8 @@ router.get('/', (req, res) => res.render('welcome', {title: 'Welcome to Bubble'}
 router.get('/index', (req, res) => 
     res.render('index', {
         name: req.user.name,
-        title: 'Bubble'
+        title: 'Bubble', 
+        roomId: 'jPBGwdGQli'
     }));
 
 //newRoom form is submitted
@@ -50,7 +51,11 @@ router.post('/newRoom', (req, res) => {
             console.log(err);
         });
 
-        res.render('index', { name: inputUser, title: 'Bubble' })
+        res.render('index', { 
+            name: inputUser, 
+            title: 'Bubble', 
+            roomId: 'jPBGwdGQli' 
+        });
     }
 });
 
@@ -78,8 +83,22 @@ router.post('/joinRoom', (req, res) => {
           .then(() => console.log("added " + inputUser + " to room ID: " + roomId))
           .catch(err => console.error(err));
 
-        res.render('index', { name: inputUser, title: 'Bubble' })
+        res.render('index', { 
+            name: inputUser, 
+            title: 'Bubble', 
+            roomId: 'jPBGwdGQli' 
+        });
     }
 });
+
+router.post('/changeRoom', (req, res) => {
+    const { inputUser, changeRoomId } = req.body; 
+    console.log('changed to room: ' + changeRoomId);
+    res.render('index', { 
+        name: inputUser, 
+        title: 'Bubble',
+        roomId: changeRoomId
+    });
+}) 
 
 module.exports = router;
