@@ -91,6 +91,22 @@
             if (roomId === "jPBGwdGQli") {
                 roomId = currentUser.rooms[0].id;
             }
+            <button type="button" id="logBtn" class="btn btn-secondary" onclick="change()" value="Bubble Mode">Chat Log</button>
+             function change() { 
+                var x = document.getElementById("logBtn")
+                if(x.value === "Bubble Mode"){
+                    //switch to Chat Log mode
+                    x.value = "Chat Log"
+                    x.class = "btn btn-primary"
+                    console.log("Chat log")
+                }else{
+                    //switch to Bubble mode
+                    x.value = "Bubble Mode"
+                    x.class = "btn btn-secondary"
+                    console.log("Bubble")
+                }
+                }
+  
             var userArray = [];
             currentUser.subscribeToRoomMultipart({
                 roomId: roomId,
@@ -102,6 +118,7 @@
                             direction: 'newer',
                             limit: 100,
                         })
+                        
                             .then(messages => {
                                 //Gets an array of all users in the room
                                 var userArray = currentUser.rooms[0].users;

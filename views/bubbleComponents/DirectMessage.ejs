@@ -1,0 +1,19 @@
+<div style="position: absolute;top: -20000px" id="name"><%= name %></div>
+<div class="card mx-auto overflow-auto" style="width: 60rem;">
+    <div class="card-body">
+        <h5 class="card-title" id="hd0"></h5>
+        <p class="card-text" id="0"></p>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
+<script>
+    //Gets the ChatKit userId (identical to the Bubble username)
+    var username = document.getElementById("name").textContent;
+
+    chatManager
+        .connect()
+        .then(currentUser => {
+           
+        })
+</script>
