@@ -1,34 +1,35 @@
 <div style="position:absolute;top:-20000px" id="name"><%= name %></div>
 <div class="btn-group-vertical" role="group" aria-label="Room list button group" id="roomList"></div>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
 <script>
-        //Gets the ChatKit userId (identical to the Bubble username)
-        var username = document.getElementById("name").textContent;
-    
-        chatManager
-            .connect()
-            //Renders the messages from the first room that the user is in 
-            .then(currentUser => {
-                const div = document.getElementById("roomList");
-                //Gets all user rooms in an array
-                const userRooms = currentUser.rooms;
-                //Loops through 
-                userRooms.forEach(element => {
-                    var button = document.createElement("a");
-                    button.setAttribute("class", "btn btn-secondary roomName");
-                    button.setAttribute("id", element.id);
-                    button.innerHTML = element.name;
-                    div.appendChild(button);
-                });
-            })
-            .catch(error => {
-                console.error("error:", error);
-            });
+    //Gets the ChatKit userId (identical to the Bubble username)
+    var username = document.getElementById("name").textContent;
 
+    chatManager
+        .connect()
+        //Renders the messages from the first room that the user is in 
+        .then(currentUser => {
+            const div = document.getElementById("roomList");
+            //Gets all user rooms in an array
+            const userRooms = currentUser.rooms;
+            //Loops through the user's rooms
+            userRooms.forEach(element => {
+                var button = document.createElement("button");
+                button.setAttribute("class", "btn btn-secondary roomName");
+                button.setAttribute("id", element.id);
+                button.innerHTML = element.name;
+                div.appendChild(button);
+                
+            });
             $(document).ready(() => {
-                    $("input[value='roomName']").click(() => {
-                        $.post("/index/changeRoom", { userId: username, changeRoomName: this.id.textContent });
-                    });
+                $(".roomName").click((e) => {
+                    console.log("Post: " + username + " " + e.target.id);
+                    //$.post("/index/changeRoom", { userId: username, changeRoomName: e.target.id });
                 });
-    </script>
+            });
+        })
+        .catch(error => {
+            console.error("error:", error);
+        });
+</script>

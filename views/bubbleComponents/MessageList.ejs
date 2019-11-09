@@ -1,7 +1,7 @@
 <div style="position:absolute;top:-20000px" id="name"><%= name %></div>
 <div style="position:absolute;top:-20000px" id="roomId"><%= roomId %></div>
-<button type="button" id="logBtn" class="btn btn-primary" value="Log Mode">Chat Log</button>
-<button type="button" id="bubBtn" class="btn btn-secondary" value="Bubble Mode">Bubble</button>
+<button type="button" id="logBtn" class="btn btn-secondary" value="Log Mode">Chat Log</button>
+<button type="button" id="bubBtn" class="btn btn-primary" value="Bubble Mode">Bubble</button>
 <div id="bubble">
     <div class="d-flex flex-row">
         <div class="card mx-auto overflow-auto" style="width: 20rem;">
@@ -64,10 +64,10 @@
         </div>
     </div>
 </div>
-<div id="log">
-    <div>hi</div>
+<div id="log" style="display: none">
+    <ul id="logList" style="list-style-type:none; padding:0"></ul>
 </div>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
 <script>
     //Gets the ChatKit userId (identical to the Bubble username)
@@ -104,13 +104,19 @@
                 roomId: roomId,
                 hooks: {
                     onMessage: message => {
+                        const ul = document.getElementById("logList");
+                        if (message.sender.id === currentUser.id) {
+                            var li = document.createElement("li");
+                            console.log(message.parts[0].payload.content);
+                            li.appendChild(document.createTextNode(message.parts[0].payload.content));
+                            ul.appendChild(li);
+                        }
                         //Gets the most recent 100 messages ordered from newest to oldest
                         currentUser.fetchMultipartMessages({
                             roomId: roomId,
                             direction: 'newer',
                             limit: 100,
                         })
-                        
                             .then(messages => {
                                 //Gets an array of all users in the room
                                 var userArray = currentUser.rooms[0].users;
@@ -154,7 +160,6 @@
 </script>
 <script>
     $(document).ready(() => {
-        $("#log").hide();
         $("#logBtn").click(() => {
             $("#logBtn").removeClass();
             $("#logBtn").addClass("btn btn-primary");
