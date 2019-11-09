@@ -18,7 +18,8 @@ router.get('/', (req, res) => res.render('welcome', {title: 'Welcome to Bubble'}
 //localhost:5000/index is called
 router.get('/index', (req, res) => 
     res.render('index', {
-        name: req.user.name,
+        //name: req.user.name,
+        name: "TsundereKermit",
         title: 'Bubble', 
         roomId: 'jPBGwdGQli'
     }));
@@ -94,7 +95,7 @@ router.post('/joinRoom', (req, res) => {
 router.post('/changeRoom', (req, res) => {
     const { inputUser, changeRoomId } = req.body; 
     console.log('changed to room: ' + changeRoomId);
-    res.render('index', { 
+    res.render('/index', { 
         name: inputUser, 
         title: 'Bubble',
         roomId: changeRoomId
