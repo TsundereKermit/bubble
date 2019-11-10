@@ -1,70 +1,94 @@
 <div style="position:absolute;top:-20000px" id="name"><%= name %></div>
 <div style="position:absolute;top:-20000px" id="roomId"><%= roomId %></div>
-<button type="button" id="logBtn" class="btn btn-secondary" value="Log Mode">Chat Log</button>
-<button type="button" id="bubBtn" class="btn btn-primary" value="Bubble Mode">Bubble</button>
-<div id="bubble">
-    <div class="d-flex flex-row">
-        <div class="card mx-auto overflow-auto" style="width: 20rem;">
-            <div class="card-body">
-                <h5 class="card-title" id="hd0"></h5>
-                <p class="card-text" id="0"></p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="btn-group" role="group">
+            <button type="button" id="bubBtn" class="btn btn-primary rounded-0" value="Bubble Mode">Bubble</button>
+            <button type="button" id="logBtn" class="btn btn-secondary rounded-0" value="Log Mode">Chat Log</button>
+        </div>
+    </div>
+</div>
+<div id="bubble" class="border border-dark">
+    <div class="row">
+        <div class="col-md-4 pr-0">
+            <div class="card overflow-auto h-100">
+                <div class="card-body">
+                    <h5 class="card-title" id="hd0"></h5>&nbsp;
+                    <p class="card-text" id="0"></p>&nbsp;
+                </div>
             </div>
         </div>
-        <div class="card mx-auto overflow-auto" style="width: 20rem;">
-            <div class="card-body">
-                <h5 class="card-title" id="hd1"></h5>
-                <p class="card-text" id="1"></p>
+        <div class="col-md-4 px-0">
+            <div class="card overflow-auto h-100">
+                <div class="card-body">
+                    <h5 class="card-title" id="hd1"></h5>&nbsp;
+                    <p class="card-text" id="1"></p>&nbsp;
+                </div>
             </div>
         </div>
-        <div class="card mx-auto overflow-auto" style="width: 20rem;">
-            <div class="card-body">
-                <h5 class="card-title" id="hd2"></h5>
-                <p class="card-text" id="2"></p>
+        <div class="col-md-4 pl-0">
+            <div class="card overflow-auto h-100">
+                <div class="card-body">
+                    <h5 class="card-title" id="hd2"></h5>&nbsp;
+                    <p class="card-text" id="2"></p>&nbsp;
+                </div>
             </div>
         </div>
     </div>
-    <div class="d-flex flex-row">
-        <div class="card mx-auto overflow-auto" style="width: 20rem;">
-            <div class="card-body">
-                <h5 class="card-title" id="hd3"></h5>
-                <p class="card-text" id="3"></p>
+    <div class="row h-100">
+        <div class="col-md-4 pr-0">
+            <div class="card overflow-auto">
+                <div class="card-body">
+                    <h5 class="card-title" id="hd3"></h5>&nbsp;
+                    <p class="card-text" id="3"></p>&nbsp;
+                </div>
             </div>
         </div>
-        <div class="card mx-auto overflow-auto" style="width: 20rem;">
-            <div class="card-body">
-                <h5 class="card-title" id="hd4"></h5>
-                <p class="card-text" id="4"></p>
+        <div class="col-md-4 px-0">
+            <div class="card overflow-auto">
+                <div class="card-body">
+                    <h5 class="card-title" id="hd4"></h5>&nbsp;
+                    <p class="card-text" id="4"></p>&nbsp;
+                </div>
             </div>
         </div>
-        <div class="card mx-auto overflow-auto" style="width: 20rem;">
-            <div class="card-body">
-                <h5 class="card-title" id="hd5"></h5>
-                <p class="card-text" id="5"></p>
+        <div class="col-md-4 pl-0">
+            <div class="card overflow-auto">
+                <div class="card-body">
+                    <h5 class="card-title" id="hd5"></h5>&nbsp;
+                    <p class="card-text" id="5"></p>&nbsp;
+                </div>
             </div>
         </div>
     </div>
-    <div class="d-flex flex-row">
-        <div class="card mx-auto overflow-auto" style="width: 20rem;">
-            <div class="card-body">
-                <h5 class="card-title" id="hd6"></h5>
-                <p class="card-text" id="6"></p>
+    <div class="row">
+        <div class="col-md-4 pr-0">
+            <div class="card overflow-auto">
+                <div class="card-body">
+                    <h5 class="card-title" id="hd6"></h5>&nbsp;
+                    <p class="card-text" id="6"></p>&nbsp;
+                </div>
             </div>
         </div>
-        <div class="card mx-auto overflow-auto" style="width: 20rem;">
-            <div class="card-body">
-                <h5 class="card-title" id="hd7"></h5>
-                <p class="card-text" id="7"></p>
+        <div class="col-md-4 px-0">
+            <div class="card overflow-auto">
+                <div class="card-body">
+                    <h5 class="card-title" id="hd7"></h5>&nbsp;
+                    <p class="card-text" id="7"></p>&nbsp;
+                </div>
             </div>
         </div>
-        <div class="card mx-auto overflow-auto" style="width: 20rem;">
-            <div class="card-body">
-                <h5 class="card-title" id="hd8"></h5>
-                <p class="card-text" id="8"></p>
+        <div class="col-md-4 pl-0">
+            <div class="card overflow-auto">
+                <div class="card-body">
+                    <h5 class="card-title" id="hd8"></h5>&nbsp;
+                    <p class="card-text" id="8"></p>&nbsp;
+                </div>
             </div>
         </div>
     </div>
 </div>
-<div id="log" style="display: none">
+<div id="log" style="display: none" class="border border-dark">
     <div class="card mx-auto px-3 w-auto">
         <div class="card-body py-2"></div>
             <h5 class="card-title" id="titId"></h5>
@@ -172,18 +196,18 @@
         //Chat log button clicked
         $("#logBtn").click(() => {
             $("#logBtn").removeClass();
-            $("#logBtn").addClass("btn btn-primary");
+            $("#logBtn").addClass("btn btn-primary rounded-0");
             $("#bubBtn").removeClass();
-            $("#bubBtn").addClass("btn btn-secondary");
+            $("#bubBtn").addClass("btn btn-secondary rounded-0");
             $("#log").show();
             $("#bubble").hide();
         });
         //Bubble button clicked
         $("#bubBtn").click(() => {
             $("#logBtn").removeClass();
-            $("#logBtn").addClass("btn btn-secondary");
+            $("#logBtn").addClass("btn btn-secondary rounded-0");
             $("#bubBtn").removeClass();
-            $("#bubBtn").addClass("btn btn-primary");
+            $("#bubBtn").addClass("btn btn-primary rounded-0");
             $("#log").hide();
             $("#bubble").show();
         });
