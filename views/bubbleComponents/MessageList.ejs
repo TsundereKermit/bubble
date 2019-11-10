@@ -65,7 +65,12 @@
     </div>
 </div>
 <div id="log" style="display: none">
-    <ul id="logList" style="list-style-type:none; padding:0"></ul>
+    <div class="card mx-auto px-3 w-auto">
+        <div class="card-body py-2"></div>
+            <h5 class="card-title" id="titId"></h5>
+            <p class="card-text"><ul id="logList" style="list-style-type:none; padding:0"></ul></p>
+        </div>
+    </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
@@ -107,10 +112,11 @@
                         const ul = document.getElementById("logList");
                         if (message.sender.id === currentUser.id) {
                             var li = document.createElement("li");
-                            console.log(message.parts[0].payload.content);
                             li.appendChild(document.createTextNode(message.parts[0].payload.content));
                             ul.appendChild(li);
                         }
+                        const h5 = document.getElementById("titId");
+                        h5.innerHTML = currentUser.name;
                         //Gets the most recent 100 messages ordered from newest to oldest
                         currentUser.fetchMultipartMessages({
                             roomId: roomId,
