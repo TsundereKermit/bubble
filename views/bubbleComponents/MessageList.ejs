@@ -1,5 +1,6 @@
 <div style="position:absolute;top:-20000px" id="name"><%= name %></div>
 <div style="position:absolute;top:-20000px" id="roomId"><%= roomId %></div>
+<<<<<<< HEAD
 <button type="button" id="bubbleBtn" class="btn btn-primary" onclick="changeToMode()" value="Bubble Mode">Bubble Mode</button> 
 <button type="button" id="logBtn" class="btn btn-secondary" onclick="changeToLog()" value="Bubble Mode">Chat Log</button> 
 <div class="d-flex flex-row">
@@ -7,62 +8,76 @@
         <div class="card-body">
             <h5 class="card-title" id="hd0"></h5>
             <p class="card-text" id="0"></p>
+=======
+<button type="button" id="logBtn" class="btn btn-secondary" value="Log Mode">Chat Log</button>
+<button type="button" id="bubBtn" class="btn btn-primary" value="Bubble Mode">Bubble</button>
+<div id="bubble">
+    <div class="d-flex flex-row">
+        <div class="card mx-auto overflow-auto" style="width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title" id="hd0"></h5>
+                <p class="card-text" id="0"></p>
+            </div>
+>>>>>>> 623515c9cfdcc03e76c44957ce559778595ac79b
+        </div>
+        <div class="card mx-auto overflow-auto" style="width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title" id="hd1"></h5>
+                <p class="card-text" id="1"></p>
+            </div>
+        </div>
+        <div class="card mx-auto overflow-auto" style="width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title" id="hd2"></h5>
+                <p class="card-text" id="2"></p>
+            </div>
         </div>
     </div>
-    <div class="card mx-auto overflow-auto" style="width: 20rem;">
-        <div class="card-body">
-            <h5 class="card-title" id="hd1"></h5>
-            <p class="card-text" id="1"></p>
+    <div class="d-flex flex-row">
+        <div class="card mx-auto overflow-auto" style="width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title" id="hd3"></h5>
+                <p class="card-text" id="3"></p>
+            </div>
+        </div>
+        <div class="card mx-auto overflow-auto" style="width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title" id="hd4"></h5>
+                <p class="card-text" id="4"></p>
+            </div>
+        </div>
+        <div class="card mx-auto overflow-auto" style="width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title" id="hd5"></h5>
+                <p class="card-text" id="5"></p>
+            </div>
         </div>
     </div>
-    <div class="card mx-auto overflow-auto" style="width: 20rem;">
-        <div class="card-body">
-            <h5 class="card-title" id="hd2"></h5>
-            <p class="card-text" id="2"></p>
+    <div class="d-flex flex-row">
+        <div class="card mx-auto overflow-auto" style="width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title" id="hd6"></h5>
+                <p class="card-text" id="6"></p>
+            </div>
+        </div>
+        <div class="card mx-auto overflow-auto" style="width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title" id="hd7"></h5>
+                <p class="card-text" id="7"></p>
+            </div>
+        </div>
+        <div class="card mx-auto overflow-auto" style="width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title" id="hd8"></h5>
+                <p class="card-text" id="8"></p>
+            </div>
         </div>
     </div>
 </div>
-<div class="d-flex flex-row">
-    <div class="card mx-auto overflow-auto" style="width: 20rem;">
-        <div class="card-body">
-            <h5 class="card-title" id="hd3"></h5>
-            <p class="card-text" id="3"></p>
-        </div>
-    </div>
-    <div class="card mx-auto overflow-auto" style="width: 20rem;">
-        <div class="card-body">
-            <h5 class="card-title" id="hd4"></h5>
-            <p class="card-text" id="4"></p>
-        </div>
-    </div>
-    <div class="card mx-auto overflow-auto" style="width: 20rem;">
-        <div class="card-body">
-            <h5 class="card-title" id="hd5"></h5>
-            <p class="card-text" id="5"></p>
-        </div>
-    </div>
+<div id="log" style="display: none">
+    <ul id="logList" style="list-style-type:none; padding:0"></ul>
 </div>
-<div class="d-flex flex-row">
-    <div class="card mx-auto overflow-auto" style="width: 20rem;">
-        <div class="card-body">
-            <h5 class="card-title" id="hd6"></h5>
-            <p class="card-text" id="6"></p>
-        </div>
-    </div>
-    <div class="card mx-auto overflow-auto" style="width: 20rem;">
-        <div class="card-body">
-            <h5 class="card-title" id="hd7"></h5>
-            <p class="card-text" id="7"></p>
-        </div>
-    </div>
-    <div class="card mx-auto overflow-auto" style="width: 20rem;">
-        <div class="card-body">
-            <h5 class="card-title" id="hd8"></h5>
-            <p class="card-text" id="8"></p>
-        </div>
-    </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
 <script>
     //Gets the ChatKit userId (identical to the Bubble username)
@@ -93,6 +108,7 @@
             if (roomId === "jPBGwdGQli") {
                 roomId = currentUser.rooms[0].id;
             }
+<<<<<<< HEAD
             
             function changeToLog() { 
                 var x = document.getElementById("logBtn")
@@ -106,18 +122,27 @@
                 }
             }
 
+=======
+  
+>>>>>>> 623515c9cfdcc03e76c44957ce559778595ac79b
             var userArray = [];
             currentUser.subscribeToRoomMultipart({
                 roomId: roomId,
                 hooks: {
                     onMessage: message => {
+                        const ul = document.getElementById("logList");
+                        if (message.sender.id === currentUser.id) {
+                            var li = document.createElement("li");
+                            console.log(message.parts[0].payload.content);
+                            li.appendChild(document.createTextNode(message.parts[0].payload.content));
+                            ul.appendChild(li);
+                        }
                         //Gets the most recent 100 messages ordered from newest to oldest
                         currentUser.fetchMultipartMessages({
                             roomId: roomId,
                             direction: 'newer',
                             limit: 100,
                         })
-                        
                             .then(messages => {
                                 //Gets an array of all users in the room
                                 var userArray = currentUser.rooms[0].users;
@@ -150,14 +175,32 @@
                             })
                             .catch(err => {
                                 console.log(`Error fetching messages: ${err}`)
-                            })
-
+                            });
                     }
                 }
             });
         })
-    
         .catch(error => {
             console.error("error:", error);
-        })
+        });
+</script>
+<script>
+    $(document).ready(() => {
+        $("#logBtn").click(() => {
+            $("#logBtn").removeClass();
+            $("#logBtn").addClass("btn btn-primary");
+            $("#bubBtn").removeClass();
+            $("#bubBtn").addClass("btn btn-secondary");
+            $("#log").show();
+            $("#bubble").hide();
+        });
+        $("#bubBtn").click(() => {
+            $("#logBtn").removeClass();
+            $("#logBtn").addClass("btn btn-secondary");
+            $("#bubBtn").removeClass();
+            $("#bubBtn").addClass("btn btn-primary");
+            $("#log").hide();
+            $("#bubble").show();
+        });
+    });
 </script>
