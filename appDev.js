@@ -5,16 +5,13 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
 
+/**
+ * School/library version of app.js
+ * The MongoDB implementation is removed in this version because the port that MongoDB uses was blocked by the school
+ */
+
 //Express
 const app = express();
-
- /* render() {
-    return (
-      <div className="app">
-        <MessageList messages={this.state.messages} />
-      </div>
-    )
-  }*/
 
 //EJS usage with ExpressJS
 app.use(expressLayouts);

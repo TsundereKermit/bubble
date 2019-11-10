@@ -100,16 +100,18 @@
     chatManager
         .connect()
         .then(currentUser => {
+            //Default room
             if (roomId === "jPBGwdGQli") {
                 roomId = currentUser.rooms[0].id;
             }
-  
             var userArray = [];
             currentUser.subscribeToRoomMultipart({
                 roomId: roomId,
                 hooks: {
                     onMessage: message => {
+                        //Chat log mode
                         const ul = document.getElementById("logList");
+                        //Adds the message to the log if it belongs to the user
                         if (message.sender.id === currentUser.id) {
                             var li = document.createElement("li");
                             li.appendChild(document.createTextNode(message.parts[0].payload.content));
@@ -117,6 +119,7 @@
                         }
                         const h5 = document.getElementById("titId");
                         h5.innerHTML = currentUser.name;
+                        //Bubble mode
                         //Gets the most recent 100 messages ordered from newest to oldest
                         currentUser.fetchMultipartMessages({
                             roomId: roomId,
@@ -166,6 +169,7 @@
 </script>
 <script>
     $(document).ready(() => {
+        //Chat log button clicked
         $("#logBtn").click(() => {
             $("#logBtn").removeClass();
             $("#logBtn").addClass("btn btn-primary");
@@ -174,6 +178,7 @@
             $("#log").show();
             $("#bubble").hide();
         });
+        //Bubble button clicked
         $("#bubBtn").click(() => {
             $("#logBtn").removeClass();
             $("#logBtn").addClass("btn btn-secondary");
