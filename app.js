@@ -13,16 +13,6 @@ require('./config/passport')(passport);
 //MongoDB
 const db = require('./config/keys').MongoURI;
 
-
- /* render() {
-    return (
-      <div className="app">
-        <MessageList messages={this.state.messages} />
-      </div>
-    )
-  }*/
-
-
 //Connections to MongoDB
 mongoose
   .connect(

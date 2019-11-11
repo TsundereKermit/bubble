@@ -1,19 +1,35 @@
 <html lang=en class="vw-100 vh-100">
-  <head>
-    <meta charset=utf-8>
-    <title>Chatkit demo</title>
-  </head>
-  <body>
-    <div id="bubbleApp" class="d-flex">
-      <div id="messageComponents">
-          <% include ./bubbleComponents/MessageList %>
-          <% include ./bubbleComponents/SendMessageForm %>
+
+<head>
+  <meta charset=utf-8>
+  <title>Chatkit demo</title>
+</head>
+
+<body>
+  <div id="bubbleApp">
+    <div class="row">
+      <div class="col-9" id="messageList-and-aux">
+        <% include ./bubbleComponents/MessageList %>
       </div>
-      <div id="roomComponents" class="d-flex flex-column">
-        <% include ./bubbleComponents/RoomList %>
-        <% include ./bubbleComponents/NewRoomForm %>
-        <% include ./bubbleComponents/JoinRoomForm %>
+      <div class="col-3" id="rooms-group-dm">
+        <div class="btn-group btn-group-sm" role="group">
+          <!-- DM/group rooms mode buttons here -->
+        </div>
+        <div class="btn-group btn-group-vertical d-flex" role="group">
+          <% include ./bubbleComponents/RoomList %>
+        </div>
+        <div class="btn-group d-flex" role="group">
+          <% include ./bubbleComponents/NewRoomForm %>
+          <% include ./bubbleComponents/JoinRoomForm %>
+        </div>
       </div>
     </div>
-  </body>
+    <div class="row">
+      <div class="col-md-12">
+          <% include ./bubbleComponents/SendMessageForm %>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>

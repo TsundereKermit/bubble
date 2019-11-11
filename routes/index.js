@@ -93,8 +93,9 @@ router.post('/joinRoom', (req, res) => {
 });
 
 router.post('/changeRoom', (req, res) => {
+    //Form data
     const { inputUser, changeRoomId } = req.body; 
-    console.log('changed to room: ' + changeRoomId);
+    //Change room
     res.render('/index', { 
         name: inputUser, 
         title: 'Bubble',
