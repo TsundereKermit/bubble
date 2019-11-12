@@ -5,20 +5,19 @@
   <title>Chatkit demo</title>
 </head>
 
-<body>
-  <div id="bubbleApp">
-    <div class="row">
-      <div class="col-9" id="messageList-and-aux">
+<body class="h-100">
+  <div id="bubbleApp" class="vh-100">
+    <div class="row h-100">
+      <div class="col-9 mh-100" id="messageList-and-aux" style="margin-bottom:32px">
         <% include ./bubbleComponents/MessageList %>
       </div>
-      <div class="col-3" id="rooms-group-dm">
-        <div class="btn-group btn-group-sm" role="group">
-          <!-- DM/group rooms mode buttons here -->
-        </div>
+      <div class="col-3 px-0 h-100 d-flex flex-column" id="rooms-group-dm" style="margin-top:39px; padding-bottom:70px">
+        <% include ./bubbleComponents/ChooseRooms %>
         <div class="btn-group btn-group-vertical d-flex" role="group">
           <% include ./bubbleComponents/RoomList %>
         </div>
-        <div class="btn-group d-flex" role="group">
+        <div class="flex-grow-1 bg-secondary"></div>
+        <div class="btn-group" role="group">
           <% include ./bubbleComponents/NewRoomForm %>
           <% include ./bubbleComponents/JoinRoomForm %>
         </div>
