@@ -160,6 +160,7 @@
                             .then(messages => {
                                 var currentRooms = currentUser.rooms;
                                 var thisRoom;
+                                //Get the room that the MessageList should display based on roomId
                                 currentRooms.forEach(element => {
                                     if (element.id === roomId) {
                                         thisRoom = element;
@@ -214,10 +215,12 @@
     $(document).ready(() => {
         //Chat log button clicked
         $("#logBtn").click(() => {
+            //Change button color
             $("#logBtn").removeClass();
             $("#logBtn").addClass("btn btn-primary rounded-0");
             $("#bubBtn").removeClass();
             $("#bubBtn").addClass("btn btn-secondary rounded-0");
+            //Change display properties
             $("#log").removeClass();
             $("#log").addClass("d-block");
             $("#bub").removeClass();
@@ -225,10 +228,12 @@
         });
         //Bubble button clicked
         $("#bubBtn").click(() => {
+            //Change button color
             $("#logBtn").removeClass();
             $("#logBtn").addClass("btn btn-secondary rounded-0");
             $("#bubBtn").removeClass();
             $("#bubBtn").addClass("btn btn-primary rounded-0");
+            //Change display properties
             $("#bub").removeClass();
             $("#bub").addClass("d-block");
             $("#log").removeClass();

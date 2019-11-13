@@ -1,5 +1,6 @@
 <div style="position:absolute;top:-20000px" id="name"><%= name %></div>
 <div style="position:absolute;top:-20000px" id="roomId"><%= roomId %></div>
+<!-- sendMessageForm view -->
 <form class="fixed-bottom d-flex" id="message-form">
     <input type='text' id='message-text' class="flex-grow-1">
     <input type="submit">
@@ -14,19 +15,22 @@
     var roomId = document.getElementById("roomId").textContent;
 
     chatManager
+        //Connect to chatkit servers
         .connect()
-        //When the message input is detected, a simple mesage is sent to the chatkit servers
         .then(currentUser => {
             const form = document.getElementById("message-form");
+            //When the message input is detected, a simple mesage is sent to the chatkit servers
             form.addEventListener("submit", e => {
                 e.preventDefault();
                 const input = document.getElementById("message-text");
+                //Sending input
                 currentUser.sendSimpleMessage({
                     text: input.value,
                     roomId: roomId
                 })
-                .then(res => console.log('sent message with id', res.id))
+                .then()
                 .catch(err => console.error(err));
+                //Clear input form
                 input.value = "";
             });
         })
