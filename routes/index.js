@@ -94,12 +94,12 @@ router.post('/joinRoom', (req, res) => {
 
 router.post('/changeRoom', (req, res) => {
     //Form data
-    const { inputUser, changeRoomId } = req.body; 
+    const { userId, changeRoomName } = req.body; 
     //Change room
-    res.render('/index', { 
-        name: inputUser, 
+    res.render('index', { 
+        name: userId, 
         title: 'Bubble',
-        roomId: changeRoomId
+        roomId: changeRoomName
     });
 }) 
 
