@@ -18,8 +18,8 @@ router.get('/', (req, res) => res.render('welcome', {title: 'Welcome to Bubble'}
 //localhost:5000/index is called
 router.get('/index', (req, res) => 
     res.render('index', {
-        name: req.user.name,
-        //name: "TsundereKermit",
+        //name: req.user.name,
+        name: "Ace",
         title: 'Bubble', 
         roomId: 'jPBGwdGQli'
     }));
