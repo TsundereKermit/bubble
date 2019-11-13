@@ -1,4 +1,5 @@
 <div style="position:absolute;top:-20000px" id="name"><%= name %></div>
+<div style="position:absolute;top:-20000px" id="roomId"><%= roomId %></div>
 <form class="fixed-bottom d-flex" id="message-form">
     <input type='text' id='message-text' class="flex-grow-1">
     <input type="submit">
@@ -8,6 +9,9 @@
 <script>
     //Gets the ChatKit userId (identical to the Bubble username)
     var username = document.getElementById("name").textContent;
+
+    //Gets the ChatKit roomId 
+    var roomId = document.getElementById("roomId").textContent;
 
     chatManager
         .connect()
@@ -19,7 +23,7 @@
                 const input = document.getElementById("message-text");
                 currentUser.sendSimpleMessage({
                     text: input.value,
-                    roomId: currentUser.rooms[0].id
+                    roomId: roomId
                 })
                 .then(res => console.log('sent message with id', res.id))
                 .catch(err => console.error(err));

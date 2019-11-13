@@ -1,4 +1,7 @@
 <div style="position:absolute;top:-20000px" id="name"><%= name %></div>
+<form action="/index/changeRoom" method="POST" class="d-none" id="changeRoomForm">
+    <input type="text" name="userId" value=<%- name %>>
+</form>
 <div class="btn-group-vertical w-100" role="group" aria-label="Room list button group" id="roomList"></div>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
@@ -16,18 +19,15 @@
             //Loops through the user's rooms
             userRooms.forEach(element => {
                 //Makes a room button for each room in the array
-                var button = document.createElement("button");
-                button.setAttribute("class", "btn btn-secondary roomName rounded-0 w-100");
+                var button = document.createElement("input");
+                button.setAttribute("class", "btn btn-secondary roomName rounded-0 w-100 px-0 mx-0");
+                button.setAttribute("form", "changeRoomForm");
+                button.setAttribute("type", "submit");
                 button.setAttribute("id", element.id);
+                button.setAttribute("value", element.id);
+                button.setAttribute("name", "changeRoomName");
                 button.innerHTML = element.name;
                 div.appendChild(button); 
-            });
-            $(document).ready(() => {
-                //Sends a POST request when a room button is clicked
-                $(".roomName").click((e) => {
-                    console.log("Post: " + username + " " + e.target.id);
-                    //$.post("/index/changeRoom", { userId: username, changeRoomName: e.target.id });
-                });
             });
         })
         .catch(error => {
