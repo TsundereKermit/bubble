@@ -52,6 +52,7 @@ router.post('/newRoom', (req, res) => {
             console.log(err);
         });
 
+        //Renders the index page
         res.render('index', { 
             name: inputUser, 
             title: 'Bubble', 
@@ -84,6 +85,7 @@ router.post('/joinRoom', (req, res) => {
           .then(() => console.log("added " + inputUser + " to room ID: " + roomId))
           .catch(err => console.error(err));
 
+        //Renders the index page
         res.render('index', { 
             name: inputUser, 
             title: 'Bubble', 
@@ -95,7 +97,7 @@ router.post('/joinRoom', (req, res) => {
 router.post('/changeRoom', (req, res) => {
     //Form data
     const { userId, changeRoomName } = req.body; 
-    //Change room
+    //Render the new room
     res.render('index', { 
         name: userId, 
         title: 'Bubble',
