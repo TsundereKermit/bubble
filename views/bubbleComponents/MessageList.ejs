@@ -158,8 +158,15 @@
                             limit: 100,
                         })
                             .then(messages => {
+                                var currentRooms = currentUser.rooms;
+                                var thisRoom;
+                                currentRooms.forEach(element => {
+                                    if (element.id === roomId) {
+                                        thisRoom = element;
+                                    } 
+                                });
                                 //Gets an array of all users in the room
-                                var userArray = currentUser.rooms[0].users;
+                                var userArray = thisRoom.users;
                                 //Loops through all the users to get content for each card
                                 for (let i = 0; i < userArray.length; i++) {
                                     var cardUser = userArray[i];
