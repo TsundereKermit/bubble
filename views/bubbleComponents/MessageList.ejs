@@ -16,24 +16,24 @@
         <div class="col-4 pr-0">
             <div class="card h-100">
                 <div class="card-body h-100">
-                    <h5 class="card-title" id="hd0"></h5>&nbsp;
-                    <p class="card-text" id="0"></p>&nbsp;
+                    <h5 class="card-title usernameH5" id="hd0"></h5>&nbsp;
+                    <p class="card-text bubbleContent" id="0"></p>&nbsp;
                 </div>
             </div>
         </div>
         <div class="col-4 px-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title" id="hd1"></h5>&nbsp;
-                    <p class="card-text" id="1"></p>&nbsp;
+                    <h5 class="card-title usernameH5" id="hd1"></h5>&nbsp;
+                    <p class="card-text bubbleContent" id="1"></p>&nbsp;
                 </div>
             </div>
         </div>
         <div class="col-4 px-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title" id="hd2"></h5>&nbsp;
-                    <p class="card-text" id="2"></p>&nbsp;
+                    <h5 class="card-title usernameH5" id="hd2"></h5>&nbsp;
+                    <p class="card-text bubbleContent" id="2"></p>&nbsp;
                 </div>
             </div>
         </div>
@@ -42,24 +42,24 @@
         <div class="col-4 pr-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title" id="hd3"></h5>&nbsp;
-                    <p class="card-text" id="3"></p>&nbsp;
+                    <h5 class="card-title usernameH5" id="hd3"></h5>&nbsp;
+                    <p class="card-text bubbleContent" id="3"></p>&nbsp;
                 </div>
             </div>
         </div>
         <div class="col-4 px-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title" id="hd4"></h5>&nbsp;
-                    <p class="card-text" id="4"></p>&nbsp;
+                    <h5 class="card-title usernameH5" id="hd4"></h5>&nbsp;
+                    <p class="card-text bubbleContent" id="4"></p>&nbsp;
                 </div>
             </div>
         </div>
         <div class="col-4 px-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title" id="hd5"></h5>&nbsp;
-                    <p class="card-text" id="5"></p>&nbsp;
+                    <h5 class="card-title usernameH5" id="hd5"></h5>&nbsp;
+                    <p class="card-text bubbleContent" id="5"></p>&nbsp;
                 </div>
             </div>
         </div>
@@ -68,24 +68,24 @@
         <div class="col-4 pr-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title" id="hd6"></h5>&nbsp;
-                    <p class="card-text" id="6"></p>&nbsp;
+                    <h5 class="card-title usernameH5" id="hd6"></h5>&nbsp;
+                    <p class="card-text bubbleContent" id="6"></p>&nbsp;
                 </div>
             </div>
         </div>
         <div class="col-4 px-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title" id="hd7"></h5>&nbsp;
-                    <p class="card-text" id="7"></p>&nbsp;
+                    <h5 class="card-title usernameH5" id="hd7"></h5>&nbsp;
+                    <p class="card-text bubbleContent" id="7"></p>&nbsp;
                 </div>
             </div>
         </div>
         <div class="col-4 px-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title" id="hd8"></h5>&nbsp;
-                    <p class="card-text" id="8"></p>&nbsp;
+                    <h5 class="card-title usernameH5" id="hd8"></h5>&nbsp;
+                    <p class="card-text bubbleContent" id="8"></p>&nbsp;
                 </div>
             </div>
         </div>
@@ -102,6 +102,18 @@
             </p>
         </div>
     </div>
+</div>
+<!-- Username right click -->
+<div class="dropdown-menu dropdown-menu-sm" id="context-menu">
+    <a class="dropdown-item" href="#">Add friend</a>
+    <a class="dropdown-item" href="#">Block</a>
+</div>
+<!-- Message right click -->
+<!-- TODO admin privileges -->
+<div class="dropdown-menu dropdown-menu-sm" id="context-menu-2">
+    <a class="dropdown-item" href="#">Quote message</a>
+    <a class="dropdown-item" href="#">Edit message</a>
+    <a class="dropdown-item" href="#">Delete message</a>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
@@ -207,6 +219,7 @@
         });
 </script>
 <script>
+    //jQuery
     $(document).ready(() => {
         //Set the height of each bubble
         var viewportHeight = $(window).height();
@@ -237,6 +250,46 @@
             $("#bub").addClass("d-block");
             $("#log").removeClass();
             $("#log").addClass("d-none");
+        });
+
+        //Username right click
+        $('.usernameH5').on('contextmenu', function(e) {
+            var top = e.pageY;
+            var left = e.pageX;
+            $("#context-menu-2").hide();
+            $("#context-menu").css({
+                display: "block",
+                top: top,
+                left: left
+            }).addClass("show");
+            return false; //blocks default Webbrowser right click menu
+        });
+        //Hide right click menu when body is clicked
+        $("body").click(() => {
+            $("#context-menu").hide();
+        });
+        $("#context-menu a").on("click", function () {
+            $(this).parent().removeClass("show").hide();
+        });
+
+        //Bubble text right click
+        $('.bubbleContent').on('contextmenu', function(e) {
+            var top = e.pageY;
+            var left = e.pageX;
+            $("#context-menu").hide();
+            $("#context-menu-2").css({
+                display: "block",
+                top: top,
+                left: left
+            }).addClass("show");
+            return false; //blocks default Webbrowser right click menu
+        });
+        //Hide right click menu when body is clicked
+        $("body").click(() => {
+            $("#context-menu-2").hide();
+        });
+        $("#context-menu-2 a").on("click", function () {
+            $(this).parent().removeClass("show").hide();
         });
     });
 </script>
