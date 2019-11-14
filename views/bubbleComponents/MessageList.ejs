@@ -96,7 +96,7 @@
     <div class="card px-3 vh-100" style="padding-bottom:69px">
         <div class="card-body"></div>
         <h5 class="card-title" id="titId"></h5>
-        <div style="overflow-y:scroll">
+        <div style="overflow-y:scroll; display:flex; flex-direction:column-reverse" id="logBody">
             <p class="card-text">
                 <ul id="logList" style="list-style-type:none; padding:0"></ul>
             </p>
@@ -207,12 +207,11 @@
         });
 </script>
 <script>
-    //Set the height of each bubble
-    var viewportHeight = $(window).height();
-    var bubbleHeight = (viewportHeight-70)/3;
-    $(".bubbleRow").height(bubbleHeight);
-
     $(document).ready(() => {
+        //Set the height of each bubble
+        var viewportHeight = $(window).height();
+        var bubbleHeight = (viewportHeight-70)/3;
+        $(".bubbleRow").height(bubbleHeight);
         //Chat log button clicked
         $("#logBtn").click(() => {
             //Change button color
