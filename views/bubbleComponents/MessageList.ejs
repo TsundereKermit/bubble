@@ -15,8 +15,11 @@
     <div class="row bubbleRow pr-3">
         <div class="col-4 pr-0">
             <div class="card h-100">
-                <div class="card-body h-100">
-                    <h5 class="card-title usernameH5" id="hd0"></h5>&nbsp;
+                <div class="card-body">
+                    <div class="d-flex flex-row justify-content-between" id="header0">
+                        <h5 class="card-title usernameH5" id="hd0"></h5>&nbsp;
+                        <i id="img0" style="padding-top:5px"></i>
+                    </div>
                     <p class="card-text bubbleContent" id="0"></p>&nbsp;
                 </div>
             </div>
@@ -24,7 +27,10 @@
         <div class="col-4 px-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title usernameH5" id="hd1"></h5>&nbsp;
+                    <div class="d-flex flex-row justify-content-between" id="header1">
+                        <h5 class="card-title usernameH5" id="hd1"></h5>&nbsp;
+                        <i id="img1" style="padding-top:5px"></i>
+                    </div>
                     <p class="card-text bubbleContent" id="1"></p>&nbsp;
                 </div>
             </div>
@@ -32,7 +38,10 @@
         <div class="col-4 px-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title usernameH5" id="hd2"></h5>&nbsp;
+                    <div class="d-flex flex-row justify-content-between" id="header2">
+                        <h5 class="card-title usernameH5" id="hd2"></h5>&nbsp;
+                        <i id="img2" style="padding-top:5px"></i>
+                    </div>
                     <p class="card-text bubbleContent" id="2"></p>&nbsp;
                 </div>
             </div>
@@ -42,7 +51,10 @@
         <div class="col-4 pr-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title usernameH5" id="hd3"></h5>&nbsp;
+                    <div class="d-flex flex-row justify-content-between" id="header3">
+                        <h5 class="card-title usernameH5" id="hd3"></h5>&nbsp;
+                        <i id="img3" style="padding-top:5px"></i>
+                    </div>
                     <p class="card-text bubbleContent" id="3"></p>&nbsp;
                 </div>
             </div>
@@ -50,7 +62,10 @@
         <div class="col-4 px-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title usernameH5" id="hd4"></h5>&nbsp;
+                    <div class="d-flex flex-row justify-content-between" id="header4">
+                        <h5 class="card-title usernameH5" id="hd4"></h5>&nbsp;
+                        <i id="img4" style="padding-top:5px"></i>
+                    </div>
                     <p class="card-text bubbleContent" id="4"></p>&nbsp;
                 </div>
             </div>
@@ -58,7 +73,10 @@
         <div class="col-4 px-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title usernameH5" id="hd5"></h5>&nbsp;
+                    <div class="d-flex flex-row justify-content-between" id="header5">
+                        <h5 class="card-title usernameH5" id="hd5"></h5>&nbsp;
+                        <i id="img5" style="padding-top:5px"></i>
+                    </div>
                     <p class="card-text bubbleContent" id="5"></p>&nbsp;
                 </div>
             </div>
@@ -68,7 +86,10 @@
         <div class="col-4 pr-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title usernameH5" id="hd6"></h5>&nbsp;
+                    <div class="d-flex flex-row justify-content-between" id="header6">
+                        <h5 class="card-title usernameH5" id="hd6"></h5>&nbsp;
+                        <i id="img6" style="padding-top:5px"></i>
+                    </div>
                     <p class="card-text bubbleContent" id="6"></p>&nbsp;
                 </div>
             </div>
@@ -76,7 +97,10 @@
         <div class="col-4 px-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title usernameH5" id="hd7"></h5>&nbsp;
+                    <div class="d-flex flex-row justify-content-between" id="header7">
+                        <h5 class="card-title usernameH5" id="hd7"></h5>&nbsp;
+                        <i id="img7" style="padding-top:5px"></i>
+                    </div>
                     <p class="card-text bubbleContent" id="7"></p>&nbsp;
                 </div>
             </div>
@@ -84,7 +108,10 @@
         <div class="col-4 px-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title usernameH5" id="hd8"></h5>&nbsp;
+                    <div class="d-flex flex-row justify-content-between" id="header8">
+                        <h5 class="card-title usernameH5" id="hd8"></h5>&nbsp;
+                        <i id="img8" style="padding-top:5px"></i>
+                    </div>
                     <p class="card-text bubbleContent" id="8"></p>&nbsp;
                 </div>
             </div>
@@ -94,13 +121,14 @@
 <!-- Chat Log mode -->
 <div id="log" style="display:none">
     <div class="card px-3 vh-100" style="padding-bottom:69px">
-        <div class="card-body"></div>
-        <h5 class="card-title" id="titId"></h5>
-        <div style="overflow-y:scroll; display:flex; flex-direction:column-reverse" id="logBody">
-            <p class="card-text">
-                <ul id="logList" style="list-style-type:none; padding:0"></ul>
-            </p>
-        </div>
+        <div class="card-body">
+            <h5 class="card-title" id="titId"></h5>
+            <div style="overflow-y:scroll; display:flex; flex-direction:column-reverse" id="logBody">
+                <p class="card-text">
+                    <ul id="logList" style="list-style-type:none; padding:0"></ul>
+                </p>
+            </div>
+        </div>  
     </div>
 </div>
 <!-- Username right click -->
@@ -117,6 +145,7 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
+<!-- ChatKit -->
 <script>
     //Gets the ChatKit userId (identical to the Bubble username)
     var username = document.getElementById("name").textContent;
@@ -191,6 +220,10 @@
                                             //Get the card component ids
                                             var cardId = i.toString();
                                             var cardUserId = "hd" + cardId;
+                                            var imgId = "img" + cardId;
+                                            //Add the setting button
+                                            var settingsImg = document.getElementById(imgId);
+                                            settingsImg.setAttribute("class", "fas fa-ellipsis-v");
                                             //Changes the card components
                                             document.getElementById(cardId).innerHTML = lastMessage;
                                             document.getElementById(cardUserId).innerHTML = cardUser.id;
@@ -218,8 +251,8 @@
             console.error("error:", error);
         });
 </script>
+<!-- jQuery -->
 <script>
-    //jQuery
     $(document).ready(() => {
         //Set the height of each bubble
         var viewportHeight = $(window).height();
