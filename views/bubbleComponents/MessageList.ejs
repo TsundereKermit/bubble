@@ -133,15 +133,25 @@
 </div>
 <!-- Username right click -->
 <div class="dropdown-menu dropdown-menu-sm" id="context-menu">
-    <a class="dropdown-item" href="#">Add friend</a>
-    <a class="dropdown-item" href="#">Block</a>
+    <button class="dropdown-item" href="#">Chat Log</button>
+    <button class="dropdown-item" href="#">Add friend</button>
+    <button class="dropdown-item" href="#">Block</button>
 </div>
 <!-- Message right click -->
 <!-- TODO admin privileges -->
 <div class="dropdown-menu dropdown-menu-sm" id="context-menu-2">
-    <a class="dropdown-item" href="#">Quote message</a>
-    <a class="dropdown-item" href="#">Edit message</a>
-    <a class="dropdown-item" href="#">Delete message</a>
+    <button class="dropdown-item" href="#">Quote message</button>
+    <button class="dropdown-item" href="#">Edit message</button>
+    <button class="dropdown-item" href="#">Delete message</button>
+</div>
+<!-- Vertical ellipsis left click -->
+<div class="dropdown-menu dropdown-menu-sm" id="context-menu-3">
+    <button class="dropdown-item" href="#" id="dropdownLog">Chat Log</button>
+    <button class="dropdown-item" href="#" id="dropdownFriend">Add friend</button>
+    <button class="dropdown-item" href="#">Block</button>
+    <button class="dropdown-item" href="#">Quote message</button>
+    <button class="dropdown-item" href="#">Edit message</button>
+    <button class="dropdown-item" href="#">Delete message</button>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
@@ -233,6 +243,10 @@
                                             //Get the card component ids
                                             var cardId = j.toString();
                                             var cardUserId = "hd" + cardId;
+                                            var imgId = "img" + cardId;
+                                            //Add the setting button
+                                            var settingsImg = document.getElementById(imgId);
+                                            settingsImg.setAttribute("class", "fas fa-ellipsis-v");
                                             //Changes the card components
                                             document.getElementById(cardId).innerHTML = lastMessage;
                                             document.getElementById(cardUserId).innerHTML = cardUser.id;
@@ -285,11 +299,14 @@
             $("#log").addClass("d-none");
         });
 
+        var targetId;
+        var logUsername;
         //Username right click
         $('.usernameH5').on('contextmenu', function(e) {
             var top = e.pageY;
             var left = e.pageX;
             $("#context-menu-2").hide();
+            $("#context-menu-3").hide();
             $("#context-menu").css({
                 display: "block",
                 top: top,
@@ -297,11 +314,14 @@
             }).addClass("show");
             return false; //blocks default Webbrowser right click menu
         });
-        //Hide right click menu when body is clicked
+        //Hide contextmenu when body is clicked
         $("body").click(() => {
             $("#context-menu").hide();
         });
-        $("#context-menu a").on("click", function () {
+        $("#context-menu button").on("click", function () {
+            var userNumber = targetId.charAt(targetId.length-1);
+            logUsername = document.getElementById("hd"+userNumber).innerHTML;
+            console.log(logUsername);
             $(this).parent().removeClass("show").hide();
         });
 
@@ -310,6 +330,7 @@
             var top = e.pageY;
             var left = e.pageX;
             $("#context-menu").hide();
+            $("#context-menu-3").hide();
             $("#context-menu-2").css({
                 display: "block",
                 top: top,
@@ -317,12 +338,56 @@
             }).addClass("show");
             return false; //blocks default Webbrowser right click menu
         });
-        //Hide right click menu when body is clicked
+        //Hide contextmenu when body is clicked
         $("body").click(() => {
             $("#context-menu-2").hide();
         });
-        $("#context-menu-2 a").on("click", function () {
+        $("#context-menu-2 button").on("click", function () {
+            //Not sure what to do here
+            $(this).parent().removeClass("show").hide();
+        });
+
+        $("[id^='img']").click((e) => {
+            targetId = e.target.id;
+            var top = e.pageY;
+            var left = e.pageX;
+            $("#context-menu").hide();
+            $("#context-menu-2").hide();
+            $("#context-menu-3").css({
+                display: "block",
+                top: top,
+                left: left
+            }).addClass("show");
+            return false; //blocks default Webbrowser right click menu
+        });
+        //Hide contextmenu when body is clicked
+        $("body").click(() => {
+            $("#context-menu-3").hide();
+        });
+        $("#context-menu-3 button").on("click", function (e) {
+            var target = e.target.id;
+            var userNumber = targetId.charAt(targetId.length-1);
+            logUsername = document.getElementById("hd"+userNumber).innerHTML;
+            switch (target) {
+                case "dropdownLog":
+                    console.log("Chatlog for user: " + logUsername);
+                    break;
+                case "dropdownFriend": 
+                    console.log("Adding friend: " + logUsername);
+                    break;
+                case "":
+                    console.log("To be implemented...");
+                    break;
+                //TODO More cases for the other buttons to come...
+                default: 
+                    console.error("Uhh how did you break this lmao");
+            }
             $(this).parent().removeClass("show").hide();
         });
     });
 </script>
+<style>
+    .fa-ellipsis-v:hover {
+        color:dimgray;
+    }
+</style>

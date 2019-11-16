@@ -1,15 +1,4 @@
-<div style="position:absolute;top:-20000px" id="name"><%= name %></div>
-<div style="position:absolute;top:-20000px" id="roomId"><%= roomId %></div>
-<!-- sendMessageForm view -->
-<form class="fixed-bottom d-flex" id="message-form">
-    <input type='text' id='message-text' class="flex-grow-1">
-    <input type="submit">
-</form>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
-<!-- <script type="text/javascript" src="/js/SendMessageForm.js"></script> -->
-<script>
-    //Gets the ChatKit userId (identical to the Bubble username)
+//Gets the ChatKit userId (identical to the Bubble username)
 var username = document.getElementById("name").textContent;
 
 //Gets the ChatKit roomId
@@ -39,4 +28,3 @@ chatManager
   .catch(error => {
     console.error("error:", error);
   });
-</script>
