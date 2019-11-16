@@ -1,3 +1,50 @@
+#bubbleBody {
+    overflow:hidden;
+};
+
+/* Not working */
+#rooms-group-dm {
+    margin-top:39px; 
+    padding-bottom: 31px;
+};
+
 .fa-ellipsis-v:hover {
     color:dimgray;
-}
+};
+
+input[id^="img"] {
+    padding-top:5px;
+};
+
+#modeBtnGroup {
+    padding: 0px;
+};
+
+#logCard {
+    padding-bottom: 69px;
+};
+
+/* Not working */
+#logList {
+    list-style-type: none;
+    padding:0;
+};
+
+#logBody {
+    overflow-y:scroll; 
+    display:flex; 
+    flex-direction:column-reverse;
+};
+
+#log {
+    display:none;
+};
+
+#messageList-and-aux {
+    margin-bottom: 32px;
+};
+
+#bubbleIcon {
+    max-width:100%;
+    max-height:100%;
+};

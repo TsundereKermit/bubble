@@ -1,10 +1,12 @@
-<div style="position:absolute;top:-20000px" id="name"><%= name %></div>
-<div style="position:absolute;top:-20000px" id="roomId"><%= roomId %></div>
+<!-- Rendered data -->
+<div id="name" class="d-none"><%= name %></div>
+<div id="roomId" class="d-none"><%= roomId %></div>
 <!-- sendMessageForm view -->
 <form class="fixed-bottom d-flex" id="message-form">
     <input type='text' id='message-text' class="flex-grow-1">
     <input type="submit">
 </form>
+<!-- External scripts -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
 <script type="text/javascript" src="/js/SendMessageForm.js"></script>

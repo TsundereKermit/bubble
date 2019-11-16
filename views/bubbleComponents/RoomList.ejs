@@ -1,10 +1,12 @@
-<div style="position:absolute;top:-20000px" id="name"><%= name %></div>
-<div style="position:absolute;top:-20000px" id="roomId"><%= roomId %></div>
+<!-- Rendered data -->
+<div id="name" class="d-none"><%= name %></div>
+<div id="roomId" class="d-none"><%= roomId %></div>
 <!-- changeRoomForm -->
 <form action="/index/changeRoom" method="POST" class="d-none" id="changeRoomForm">
     <input type="text" name="userId" value=<%- name %>>
 </form>
 <div class="btn-group-vertical w-100" role="group" aria-label="Room list button group" id="roomList"></div>
+<!-- External scripts -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
 <script type="text/javascript" src="/js/RoomList.js"></script>

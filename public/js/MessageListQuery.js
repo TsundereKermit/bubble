@@ -32,6 +32,7 @@ $(document).ready(() => {
 
   var targetId;
   var logUsername;
+  var logText;
   //Username right click
   $(".usernameH5").on("contextmenu", function(e) {
     var top = e.pageY;
@@ -107,10 +108,12 @@ $(document).ready(() => {
   $("body").click(() => {
     $("#context-menu-3").hide();
   });
+  //Handles onclick events inside the contextmenu
   $("#context-menu-3 button").on("click", e => {
     var target = e.target.id;
     var userNumber = targetId.charAt(targetId.length - 1);
     logUsername = document.getElementById("hd" + userNumber).innerHTML;
+    logText = document.getElementById(userNumber).innerHTML;
     switch (target) {
       case "dropdownLog":
         console.log("Chatlog for user: " + logUsername);
@@ -118,10 +121,19 @@ $(document).ready(() => {
       case "dropdownFriend":
         console.log("Adding friend: " + logUsername);
         break;
+      case "dropdownQuote":
+        console.log("Quote: " + logText);
+        break;
+      /**
+       * //TODO Admin/sender privileges
+       * case: "dropdownEdit":
+       * case: "dropdownDelete":
+       * 
+       * //TODO Block friends (not sure to implement this)
+       */
       case "":
         console.log("To be implemented...");
         break;
-      //TODO More cases for the other buttons to come...
       default:
         console.error("One singular yike.");
     }

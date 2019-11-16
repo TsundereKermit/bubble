@@ -1,10 +1,10 @@
 <!-- Rendered data -->
-<div style="position:absolute;top:-20000px" id="name"><%= name %></div>
-<div style="position:absolute;top:-20000px" id="roomId"><%= roomId %></div>
+<div id="name" class="d-none"><%= name %></div>
+<div id="roomId" class="d-none"><%= roomId %></div>
 <!-- Choosing modes -->
 <div class="row" id="chooseYourPoison">
     <div class="col-12">
-        <div class="btn-group" role="group" style="padding:0px">
+        <div class="btn-group" id="modeBtnGroup" role="group">
             <button type="button" id="bubBtn" class="btn btn-primary rounded-0">Bubble</button>
             <button type="button" id="logBtn" class="btn btn-secondary rounded-0">Chat Log</button>
         </div>
@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <div class="d-flex flex-row justify-content-between" id="header0">
                         <h5 class="card-title usernameH5" id="hd0"></h5>&nbsp;
-                        <i id="img0" style="padding-top:5px"></i>
+                        <i id="img0"></i>
                     </div>
                     <p class="card-text bubbleContent" id="0"></p>&nbsp;
                 </div>
@@ -29,7 +29,7 @@
                 <div class="card-body">
                     <div class="d-flex flex-row justify-content-between" id="header1">
                         <h5 class="card-title usernameH5" id="hd1"></h5>&nbsp;
-                        <i id="img1" style="padding-top:5px"></i>
+                        <i id="img1"></i>
                     </div>
                     <p class="card-text bubbleContent" id="1"></p>&nbsp;
                 </div>
@@ -40,7 +40,7 @@
                 <div class="card-body">
                     <div class="d-flex flex-row justify-content-between" id="header2">
                         <h5 class="card-title usernameH5" id="hd2"></h5>&nbsp;
-                        <i id="img2" style="padding-top:5px"></i>
+                        <i id="img2"></i>
                     </div>
                     <p class="card-text bubbleContent" id="2"></p>&nbsp;
                 </div>
@@ -53,7 +53,7 @@
                 <div class="card-body">
                     <div class="d-flex flex-row justify-content-between" id="header3">
                         <h5 class="card-title usernameH5" id="hd3"></h5>&nbsp;
-                        <i id="img3" style="padding-top:5px"></i>
+                        <i id="img3"></i>
                     </div>
                     <p class="card-text bubbleContent" id="3"></p>&nbsp;
                 </div>
@@ -64,7 +64,7 @@
                 <div class="card-body">
                     <div class="d-flex flex-row justify-content-between" id="header4">
                         <h5 class="card-title usernameH5" id="hd4"></h5>&nbsp;
-                        <i id="img4" style="padding-top:5px"></i>
+                        <i id="img4"></i>
                     </div>
                     <p class="card-text bubbleContent" id="4"></p>&nbsp;
                 </div>
@@ -75,7 +75,7 @@
                 <div class="card-body">
                     <div class="d-flex flex-row justify-content-between" id="header5">
                         <h5 class="card-title usernameH5" id="hd5"></h5>&nbsp;
-                        <i id="img5" style="padding-top:5px"></i>
+                        <i id="img5"></i>
                     </div>
                     <p class="card-text bubbleContent" id="5"></p>&nbsp;
                 </div>
@@ -88,7 +88,7 @@
                 <div class="card-body">
                     <div class="d-flex flex-row justify-content-between" id="header6">
                         <h5 class="card-title usernameH5" id="hd6"></h5>&nbsp;
-                        <i id="img6" style="padding-top:5px"></i>
+                        <i id="img6"></i>
                     </div>
                     <p class="card-text bubbleContent" id="6"></p>&nbsp;
                 </div>
@@ -99,7 +99,7 @@
                 <div class="card-body">
                     <div class="d-flex flex-row justify-content-between" id="header7">
                         <h5 class="card-title usernameH5" id="hd7"></h5>&nbsp;
-                        <i id="img7" style="padding-top:5px"></i>
+                        <i id="img7"></i>
                     </div>
                     <p class="card-text bubbleContent" id="7"></p>&nbsp;
                 </div>
@@ -110,7 +110,7 @@
                 <div class="card-body">
                     <div class="d-flex flex-row justify-content-between" id="header8">
                         <h5 class="card-title usernameH5" id="hd8"></h5>&nbsp;
-                        <i id="img8" style="padding-top:5px"></i>
+                        <i id="img8"></i>
                     </div>
                     <p class="card-text bubbleContent" id="8"></p>&nbsp;
                 </div>
@@ -119,19 +119,20 @@
     </div>
 </div>
 <!-- Chat Log mode -->
-<div id="log" style="display:none">
-    <div class="card px-3 vh-100" style="padding-bottom:69px">
+<div id="log">
+    <div class="card px-3 vh-100" id="logCard">
         <div class="card-body">
             <h5 class="card-title" id="titId"></h5>
-            <div style="overflow-y:scroll; display:flex; flex-direction:column-reverse" id="logBody">
+            <div id="logBody">
                 <p class="card-text">
-                    <ul id="logList" style="list-style-type:none; padding:0"></ul>
+                    <ul id="logList" style="list-style-type: none;padding:0;"></ul>
                 </p>
             </div>
         </div>  
     </div>
 </div>
 <!-- Username right click -->
+<!-- TODO Add more IDs to implement the buttons -->
 <div class="dropdown-menu dropdown-menu-sm" id="context-menu">
     <button class="dropdown-item" href="#">Chat Log</button>
     <button class="dropdown-item" href="#">Add friend</button>
@@ -145,14 +146,16 @@
     <button class="dropdown-item" href="#">Delete message</button>
 </div>
 <!-- Vertical ellipsis left click -->
+<!-- TODO Add more IDs to implement the rest of the buttons -->
 <div class="dropdown-menu dropdown-menu-sm" id="context-menu-3">
     <button class="dropdown-item" href="#" id="dropdownLog">Chat Log</button>
     <button class="dropdown-item" href="#" id="dropdownFriend">Add friend</button>
     <button class="dropdown-item" href="#">Block</button>
-    <button class="dropdown-item" href="#">Quote message</button>
+    <button class="dropdown-item" href="#" id="dropdownQuote">Quote message</button>
     <button class="dropdown-item" href="#">Edit message</button>
     <button class="dropdown-item" href="#">Delete message</button>
 </div>
+<!-- External scripts -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
 <!-- ChatKit -->

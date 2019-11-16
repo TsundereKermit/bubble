@@ -8,11 +8,11 @@
 
 <body class="h-100">
   <div id="bubbleApp" class="vh-100">
-    <div class="row h-100">
-      <div class="col-9 mh-100" id="messageList-and-aux" style="margin-bottom:32px">
+    <div class="row h-100" id="bubbleMainBody">
+      <div class="col-9 mh-100" id="messageList-and-aux">
         <% include ./bubbleComponents/MessageList %>
       </div>
-      <div class="col-3 px-0 h-100 d-flex flex-column" id="rooms-group-dm" style="margin-top:39px; padding-bottom:70px">
+      <div class="col-3 px-0 pb-rooms mh-100 d-flex flex-column" id="rooms-group-dm" style="padding-bottom:31px">
         <% include ./bubbleComponents/ChooseRooms %>
         <div class="btn-group btn-group-vertical d-flex" role="group">
           <% include ./bubbleComponents/RoomList %>
