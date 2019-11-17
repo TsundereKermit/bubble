@@ -19,7 +19,7 @@ router.get('/', (req, res) => res.render('welcome', {title: 'Welcome to Bubble'}
 router.get('/index', (req, res) => 
     res.render('index', {
         //name: req.user.name,
-        name: "Ace",
+        name: "TsundereKermit",
         title: 'Bubble', 
         roomId: 'jPBGwdGQli'
     }));
