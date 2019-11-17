@@ -19,10 +19,27 @@ router.get('/', (req, res) => res.render('welcome', {title: 'Welcome to Bubble'}
 router.get('/index', (req, res) => 
     res.render('index', {
         //name: req.user.name,
-        name: "TsundereKermit",
+        name: "Ace",
         title: 'Bubble', 
         roomId: 'jPBGwdGQli'
     }));
+
+//addFriend form is submitted
+router.post('/addFriend', (req, res) => {
+    //Form data
+    const { inputUser, friendId } = req.body;
+    let errors = []
+
+    //Empty Form
+    if(!friendId){
+        errors.push({msg: 'Pleas fill in the Friend Id'})
+    }
+
+    //Refreshes the page if an empty form is filled
+    if(errors.length > 0){
+        res.render('index', {name: inputUser, errors, title: 'Bubble'})
+    }
+})
 
 //newRoom form is submitted
 router.post('/newRoom', (req, res) => {
