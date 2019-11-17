@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
+const path = require('path');
 
 //Express
 const app = express();
@@ -55,6 +56,9 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/index.js'));
 app.use('/users', require('./routes/users'));
 app.use('/index', require('./routes/index'));
+
+//Serves static files in public folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 //Creates port 5000 (localhost:5000)
 const PORT = process.env.PORT || 5000;

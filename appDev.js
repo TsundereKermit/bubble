@@ -4,6 +4,7 @@ const expressLayouts = require('express-ejs-layouts');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
+const path = require('path');
 
 /**
  * School/library version of app.js
@@ -39,6 +40,9 @@ app.use((req, res, next) => {
 app.use('/', require('./routes/index.js'));
 app.use('/users', require('./routes/users'));
 app.use('/index', require('./routes/index'));
+
+//Serves static files in public folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 //Creates port 5000 (localhost:5000)
 const PORT = process.env.PORT || 5000;

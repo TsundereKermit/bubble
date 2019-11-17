@@ -1,10 +1,10 @@
 <!-- Rendered data -->
-<div style="position:absolute;top:-20000px" id="name"><%= name %></div>
-<div style="position:absolute;top:-20000px" id="roomId"><%= roomId %></div>
+<div id="name" class="d-none"><%= name %></div>
+<div id="roomId" class="d-none"><%= roomId %></div>
 <!-- Choosing modes -->
 <div class="row" id="chooseYourPoison">
     <div class="col-12">
-        <div class="btn-group" role="group" style="padding:0px">
+        <div class="btn-group" id="modeBtnGroup" role="group">
             <button type="button" id="bubBtn" class="btn btn-primary rounded-0">Bubble</button>
             <button type="button" id="logBtn" class="btn btn-secondary rounded-0">Chat Log</button>
         </div>
@@ -15,8 +15,11 @@
     <div class="row bubbleRow pr-3">
         <div class="col-4 pr-0">
             <div class="card h-100">
-                <div class="card-body h-100">
-                    <h5 class="card-title usernameH5" id="hd0"></h5>&nbsp;
+                <div class="card-body">
+                    <div class="d-flex flex-row justify-content-between" id="header0">
+                        <h5 class="card-title usernameH5" id="hd0"></h5>&nbsp;
+                        <i id="img0"></i>
+                    </div>
                     <p class="card-text bubbleContent" id="0"></p>&nbsp;
                 </div>
             </div>
@@ -24,7 +27,10 @@
         <div class="col-4 px-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title usernameH5" id="hd1"></h5>&nbsp;
+                    <div class="d-flex flex-row justify-content-between" id="header1">
+                        <h5 class="card-title usernameH5" id="hd1"></h5>&nbsp;
+                        <i id="img1"></i>
+                    </div>
                     <p class="card-text bubbleContent" id="1"></p>&nbsp;
                 </div>
             </div>
@@ -32,7 +38,10 @@
         <div class="col-4 px-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title usernameH5" id="hd2"></h5>&nbsp;
+                    <div class="d-flex flex-row justify-content-between" id="header2">
+                        <h5 class="card-title usernameH5" id="hd2"></h5>&nbsp;
+                        <i id="img2"></i>
+                    </div>
                     <p class="card-text bubbleContent" id="2"></p>&nbsp;
                 </div>
             </div>
@@ -42,7 +51,10 @@
         <div class="col-4 pr-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title usernameH5" id="hd3"></h5>&nbsp;
+                    <div class="d-flex flex-row justify-content-between" id="header3">
+                        <h5 class="card-title usernameH5" id="hd3"></h5>&nbsp;
+                        <i id="img3"></i>
+                    </div>
                     <p class="card-text bubbleContent" id="3"></p>&nbsp;
                 </div>
             </div>
@@ -50,7 +62,10 @@
         <div class="col-4 px-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title usernameH5" id="hd4"></h5>&nbsp;
+                    <div class="d-flex flex-row justify-content-between" id="header4">
+                        <h5 class="card-title usernameH5" id="hd4"></h5>&nbsp;
+                        <i id="img4"></i>
+                    </div>
                     <p class="card-text bubbleContent" id="4"></p>&nbsp;
                 </div>
             </div>
@@ -58,7 +73,10 @@
         <div class="col-4 px-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title usernameH5" id="hd5"></h5>&nbsp;
+                    <div class="d-flex flex-row justify-content-between" id="header5">
+                        <h5 class="card-title usernameH5" id="hd5"></h5>&nbsp;
+                        <i id="img5"></i>
+                    </div>
                     <p class="card-text bubbleContent" id="5"></p>&nbsp;
                 </div>
             </div>
@@ -68,7 +86,10 @@
         <div class="col-4 pr-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title usernameH5" id="hd6"></h5>&nbsp;
+                    <div class="d-flex flex-row justify-content-between" id="header6">
+                        <h5 class="card-title usernameH5" id="hd6"></h5>&nbsp;
+                        <i id="img6"></i>
+                    </div>
                     <p class="card-text bubbleContent" id="6"></p>&nbsp;
                 </div>
             </div>
@@ -76,7 +97,10 @@
         <div class="col-4 px-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title usernameH5" id="hd7"></h5>&nbsp;
+                    <div class="d-flex flex-row justify-content-between" id="header7">
+                        <h5 class="card-title usernameH5" id="hd7"></h5>&nbsp;
+                        <i id="img7"></i>
+                    </div>
                     <p class="card-text bubbleContent" id="7"></p>&nbsp;
                 </div>
             </div>
@@ -84,7 +108,10 @@
         <div class="col-4 px-0">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title usernameH5" id="hd8"></h5>&nbsp;
+                    <div class="d-flex flex-row justify-content-between" id="header8">
+                        <h5 class="card-title usernameH5" id="hd8"></h5>&nbsp;
+                        <i id="img8"></i>
+                    </div>
                     <p class="card-text bubbleContent" id="8"></p>&nbsp;
                 </div>
             </div>
@@ -92,204 +119,46 @@
     </div>
 </div>
 <!-- Chat Log mode -->
-<div id="log" style="display:none">
-    <div class="card px-3 vh-100" style="padding-bottom:69px">
-        <div class="card-body"></div>
-        <h5 class="card-title" id="titId"></h5>
-        <div style="overflow-y:scroll; display:flex; flex-direction:column-reverse" id="logBody">
-            <p class="card-text">
-                <ul id="logList" style="list-style-type:none; padding:0"></ul>
-            </p>
-        </div>
+<div id="log">
+    <div class="card px-3 vh-100" id="logCard">
+        <div class="card-body">
+            <h5 class="card-title" id="titId"></h5>
+            <div id="logBody">
+                <p class="card-text">
+                    <ul id="logList" style="list-style-type: none;padding:0;"></ul>
+                </p>
+            </div>
+        </div>  
     </div>
 </div>
 <!-- Username right click -->
+<!-- TODO Add more IDs to implement the buttons -->
 <div class="dropdown-menu dropdown-menu-sm" id="context-menu">
-    <a class="dropdown-item" href="#">Add friend</a>
-    <a class="dropdown-item" href="#">Block</a>
+    <button class="dropdown-item" href="#">Chat Log</button>
+    <button class="dropdown-item" href="#">Add friend</button>
+    <button class="dropdown-item" href="#">Block</button>
 </div>
 <!-- Message right click -->
 <!-- TODO admin privileges -->
 <div class="dropdown-menu dropdown-menu-sm" id="context-menu-2">
-    <a class="dropdown-item" href="#">Quote message</a>
-    <a class="dropdown-item" href="#">Edit message</a>
-    <a class="dropdown-item" href="#">Delete message</a>
+    <button class="dropdown-item" href="#">Quote message</button>
+    <button class="dropdown-item" href="#">Edit message</button>
+    <button class="dropdown-item" href="#">Delete message</button>
 </div>
+<!-- Vertical ellipsis left click -->
+<!-- TODO Add more IDs to implement the rest of the buttons -->
+<div class="dropdown-menu dropdown-menu-sm" id="context-menu-3">
+    <button class="dropdown-item" href="#" id="dropdownLog">Chat Log</button>
+    <button class="dropdown-item" href="#" id="dropdownFriend">Add friend</button>
+    <button class="dropdown-item" href="#">Block</button>
+    <button class="dropdown-item" href="#" id="dropdownQuote">Quote message</button>
+    <button class="dropdown-item" href="#">Edit message</button>
+    <button class="dropdown-item" href="#">Delete message</button>
+</div>
+<!-- External scripts -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
-<script>
-    //Gets the ChatKit userId (identical to the Bubble username)
-    var username = document.getElementById("name").textContent;
-
-    //Gets the ChatKit roomId 
-    var roomId = document.getElementById("roomId").textContent;
-
-    /**
-     * Experimental
-     * We are using our own token provider instead of ChatKit's native token provider right now, the native one 
-     * supports production usage while our own supports experimental usage
-    */
-    const tokenProvider = new Chatkit.TokenProvider({
-        url: "https://us1.pusherplatform.io/services/chatkit_token_provider/v1/c8c2181d-9998-47f7-afab-c3978ecf675c/token"
-    });
-
-    //Initializes our ChatKit's chatmanager
-    const chatManager = new Chatkit.ChatManager({
-        instanceLocator: "v1:us1:c8c2181d-9998-47f7-afab-c3978ecf675c",
-        userId: username,
-        tokenProvider: tokenProvider
-    })
-
-    chatManager
-        .connect()
-        .then(currentUser => {
-            //Default room
-            if (roomId === "jPBGwdGQli") {
-                roomId = currentUser.rooms[0].id;
-            }
-            var userArray = [];
-            currentUser.subscribeToRoomMultipart({
-                roomId: roomId,
-                hooks: {
-                    onMessage: message => {
-                        //Chat log mode
-                        const ul = document.getElementById("logList");
-                        //Adds the message to the log if it belongs to the user
-                        if (message.sender.id === currentUser.id) {
-                            var li = document.createElement("li");
-                            li.appendChild(document.createTextNode(message.parts[0].payload.content));
-                            ul.appendChild(li);
-                        }
-                        const h5 = document.getElementById("titId");
-                        h5.innerHTML = currentUser.name;
-                        //Bubble mode
-                        //Gets the most recent 100 messages ordered from newest to oldest
-                        currentUser.fetchMultipartMessages({
-                            roomId: roomId,
-                            direction: 'newer',
-                            limit: 100,
-                        })
-                            .then(messages => {
-                                var currentRooms = currentUser.rooms;
-                                var thisRoom;
-                                //Get the room that the MessageList should display based on roomId
-                                currentRooms.forEach(element => {
-                                    if (element.id === roomId) {
-                                        thisRoom = element;
-                                    } 
-                                });
-                                //Gets an array of all users in the room
-                                var userArray = thisRoom.users;
-                                //Loops through all the users to get content for each card
-                                for (let i = 0; i < userArray.length; i++) {
-                                    var cardUser = userArray[i];
-                                    //Loops for the 
-                                    for (let j = 0; j < messages.length; j++) {
-                                        if (messages[j].sender.id === cardUser.id) {
-                                            //Gets the text portion of the most recent message
-                                            lastMessage = messages[j].parts[0].payload.content;
-                                            //Get the card component ids
-                                            var cardId = i.toString();
-                                            var cardUserId = "hd" + cardId;
-                                            //Changes the card components
-                                            document.getElementById(cardId).innerHTML = lastMessage;
-                                            document.getElementById(cardUserId).innerHTML = cardUser.id;
-                                        } else if (i === (messages.length - 1)) {
-                                            //This will only be triggered if no message sent from this user is found in the recent 100 msgs
-                                            lastMessage = `${cardUser} has not sent a message in this room recently`;
-                                            //Get the card component ids
-                                            var cardId = j.toString();
-                                            var cardUserId = "hd" + cardId;
-                                            //Changes the card components
-                                            document.getElementById(cardId).innerHTML = lastMessage;
-                                            document.getElementById(cardUserId).innerHTML = cardUser.id;
-                                        }
-                                    }
-                                }
-                            })
-                            .catch(err => {
-                                console.log(`Error fetching messages: ${err}`);
-                            });
-                    }
-                }
-            });
-        })
-        .catch(error => {
-            console.error("error:", error);
-        });
-</script>
-<script>
-    //jQuery
-    $(document).ready(() => {
-        //Set the height of each bubble
-        var viewportHeight = $(window).height();
-        var bubbleHeight = (viewportHeight-70)/3;
-        $(".bubbleRow").height(bubbleHeight);
-        //Chat log button clicked
-        $("#logBtn").click(() => {
-            //Change button color
-            $("#logBtn").removeClass();
-            $("#logBtn").addClass("btn btn-primary rounded-0");
-            $("#bubBtn").removeClass();
-            $("#bubBtn").addClass("btn btn-secondary rounded-0");
-            //Change display properties
-            $("#log").removeClass();
-            $("#log").addClass("d-block");
-            $("#bub").removeClass();
-            $("#bub").addClass("d-none");
-        });
-        //Bubble button clicked
-        $("#bubBtn").click(() => {
-            //Change button color
-            $("#logBtn").removeClass();
-            $("#logBtn").addClass("btn btn-secondary rounded-0");
-            $("#bubBtn").removeClass();
-            $("#bubBtn").addClass("btn btn-primary rounded-0");
-            //Change display properties
-            $("#bub").removeClass();
-            $("#bub").addClass("d-block");
-            $("#log").removeClass();
-            $("#log").addClass("d-none");
-        });
-
-        //Username right click
-        $('.usernameH5').on('contextmenu', function(e) {
-            var top = e.pageY;
-            var left = e.pageX;
-            $("#context-menu-2").hide();
-            $("#context-menu").css({
-                display: "block",
-                top: top,
-                left: left
-            }).addClass("show");
-            return false; //blocks default Webbrowser right click menu
-        });
-        //Hide right click menu when body is clicked
-        $("body").click(() => {
-            $("#context-menu").hide();
-        });
-        $("#context-menu a").on("click", function () {
-            $(this).parent().removeClass("show").hide();
-        });
-
-        //Bubble text right click
-        $('.bubbleContent').on('contextmenu', function(e) {
-            var top = e.pageY;
-            var left = e.pageX;
-            $("#context-menu").hide();
-            $("#context-menu-2").css({
-                display: "block",
-                top: top,
-                left: left
-            }).addClass("show");
-            return false; //blocks default Webbrowser right click menu
-        });
-        //Hide right click menu when body is clicked
-        $("body").click(() => {
-            $("#context-menu-2").hide();
-        });
-        $("#context-menu-2 a").on("click", function () {
-            $(this).parent().removeClass("show").hide();
-        });
-    });
-</script>
+<!-- ChatKit -->
+<script type="text/javascript" src="/js/MessageListChatKit.js"></script>
+<!-- jQuery -->
+<script type="text/javascript" src="/js/MessageListQuery.js"></script>
