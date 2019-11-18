@@ -91,7 +91,7 @@ router.post('/joinRoom', (req, res) => {
 
     //Refreshes the page if empty form
     if (errors.length > 0) {
-        res.render('index', { name: inputUser, errors, title: 'Bubble' })
+        res.render('index', { name: inputUser, errors, title: 'Bubble', roomId: 'jPBGwdGQli' })
     } else {
         //Join the room
         chatkit
