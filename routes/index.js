@@ -54,7 +54,7 @@ router.post('/newRoom', (req, res) => {
 
     //Refreshes the page if an empty form is filled
     if (errors.length > 0) {
-        res.render('index', { name: inputUser, errors, title: 'Bubble' })
+        res.render('index', { name: inputUser, errors, title: 'Bubble', roomId: 'jPBGwdGQli' })
     } else {
         //Creates the room based on submitted data
         chatkit.createRoom({
