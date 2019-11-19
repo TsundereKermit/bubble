@@ -30,11 +30,14 @@ $(document).ready(() => {
     $("#log").addClass("d-none");
   });
 
+  //Context menus
   var targetId;
   var logUsername;
   var logText;
   //Username right click
-  $(".usernameH5").on("contextmenu", function(e) {
+  $(".usernameH5").on("contextmenu", e => {
+    //Gets target ID
+    targetId = e.target.id;
     var top = e.pageY;
     var left = e.pageX;
     $("#context-menu-2").hide();
@@ -52,10 +55,26 @@ $(document).ready(() => {
   $("body").click(() => {
     $("#context-menu").hide();
   });
-  $("#context-menu button").on("click", function() {
+  $("#context-menu button").on("click", e => {
+    var target = e.target.id;
+    //Gets username
     var userNumber = targetId.charAt(targetId.length - 1);
     logUsername = document.getElementById("hd" + userNumber).innerHTML;
-    console.log(logUsername);
+    //Handles button click events
+    switch (target) {
+      case "log":
+        console.log("Display chat log of user: " + logUsername);
+        break;
+      case "friend":
+        console.log("Adding friend with username: " + logUsername);
+        break;
+      case "block": 
+        console.log("Blocking user: " + logUsername);
+        break;
+      default: 
+        console.error("One singular yike.");
+    }
+    //Hides menu after button click
     $(this)
       .parent()
       .removeClass("show")
@@ -63,7 +82,9 @@ $(document).ready(() => {
   });
 
   //Bubble text right click
-  $(".bubbleContent").on("contextmenu", function(e) {
+  $(".bubbleContent").on("contextmenu", e => {
+    //Get target ID
+    targetId = e.target.id;
     var top = e.pageY;
     var left = e.pageX;
     $("#context-menu").hide();
@@ -81,8 +102,26 @@ $(document).ready(() => {
   $("body").click(() => {
     $("#context-menu-2").hide();
   });
-  $("#context-menu-2 button").on("click", function() {
-    //Not sure what to do here
+  $("#context-menu-2 button").on("click", e => {
+    var target = e.target.id;
+    //Gets message text
+    var userNumber = targetId.charAt(targetId.length - 1);
+    logText = document.getElementById(userNumber).innerHTML;
+    //Handles button click events
+    switch (target) {
+      case "quote": 
+        console.log("Quoting message: " + logText);
+        break;
+      case "edit":
+        console.log("Edit message: " + logText);
+        break;
+      case "delete":
+        console.log("Delete message: " + logText);
+        break;
+      default: 
+        console.error("One singular yike.");
+    }
+    //Hides the menu after button click
     $(this)
       .parent()
       .removeClass("show")
@@ -90,6 +129,7 @@ $(document).ready(() => {
   });
 
   $("[id^='img']").click(e => {
+    //Gets target ID
     targetId = e.target.id;
     var top = e.pageY;
     var left = e.pageX;
@@ -111,9 +151,11 @@ $(document).ready(() => {
   //Handles onclick events inside the contextmenu
   $("#context-menu-3 button").on("click", e => {
     var target = e.target.id;
+    //Get username and message
     var userNumber = targetId.charAt(targetId.length - 1);
     logUsername = document.getElementById("hd" + userNumber).innerHTML;
     logText = document.getElementById(userNumber).innerHTML;
+    //Handles button click events
     switch (target) {
       case "dropdownLog":
         console.log("Chatlog for user: " + logUsername);
@@ -137,6 +179,7 @@ $(document).ready(() => {
       default:
         console.error("One singular yike.");
     }
+    //Hide menu after button click
     $(this)
       .parent()
       .removeClass("show")

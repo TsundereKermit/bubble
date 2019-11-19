@@ -15,6 +15,7 @@ chatManager
     userRooms.forEach(element => {
       //Makes a room input button for each room in the array
       var button = document.createElement("button");
+      //Changes button profile for current room
       if (roomId === element.id) {
         button.setAttribute(
           "class",
@@ -26,6 +27,7 @@ chatManager
           "btn btn-outline-primary roomName rounded-0 w-100 px-0 mx-0"
         );
       }
+      //Sets up data for POST request
       button.setAttribute("form", "changeRoomForm");
       button.setAttribute("type", "submit");
       button.setAttribute("id", element.id);

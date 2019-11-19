@@ -29,6 +29,7 @@ chatManager
       roomId = currentUser.rooms[0].id;
     }
     var userArray = [];
+    //Access room messages and users
     currentUser.subscribeToRoomMultipart({
       roomId: roomId,
       hooks: {
@@ -64,6 +65,7 @@ chatManager
               });
               //Gets an array of all users in the room
               var userArray = thisRoom.users;
+              //Setup boolean for if/else
               var messageAppended = false;
               //Loops through all the users to get content for each card
               for (let i = 0; i < userArray.length; i++) {
@@ -73,7 +75,6 @@ chatManager
                   if (messages[j].sender.id === cardUser.id) { //Other passed terms
                     //Gets the text portion of the most recent message
                     lastMessage = messages[j].parts[0].payload.content;
-                    console.log(lastMessage);
                     //Get the card component ids
                     var cardId = i.toString();
                     var cardUserId = "hd" + cardId;
