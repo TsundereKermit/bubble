@@ -30,16 +30,36 @@ router.post('/addFriend', (req, res) => {
     const { inputUser, friendId } = req.body;
     let errors = []
 
-    //Empty Form
-    if(!friendId){
-        errors.push({msg: 'Pleas fill in the Friend Id'})
+    //Empty form
+    if (!friendId) {
+        errors.push({ msg: 'Please fill in all fields' })
     }
 
     //Refreshes the page if an empty form is filled
-    if(errors.length > 0){
-        res.render('index', {name: inputUser, errors, title: 'Bubble'})
+    if (errors.length > 0) {
+        res.render('index', { name: inputUser, errors, title: 'Bubble' })
+    } else {
+        //Creates the room based on submitted data
+        chatkit.createRoom({
+            creatorId: inputUser,
+            name: friendId,
+            private: true,
+        })
+        .then(() => {
+            console.log('DM with ' + friendId + ' created successfully');
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+
+        //Renders the index page
+        res.render('index', { 
+            name: inputUser, 
+            title: 'Bubble', 
+            roomId: 'jPBGwdGQli' 
+        });
     }
-})
+});
 
 //newRoom form is submitted
 router.post('/newRoom', (req, res) => {
@@ -120,6 +140,17 @@ router.post('/changeRoom', (req, res) => {
         title: 'Bubble',
         roomId: changeRoomName
     });
-}) 
+});
+
+router.post('/changeDM', (req, res) => {
+    //Form data
+    const { userId, changeDMName } = req.body;
+    //Reder the new DM room
+    res.render('index', {
+        name: userId,
+        title: 'Bubble',
+        roomId: changeDMName
+    });
+});
 
 module.exports = router;

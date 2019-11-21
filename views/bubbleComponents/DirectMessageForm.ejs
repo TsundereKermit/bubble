@@ -1,0 +1,23 @@
+<!-- Rendered data -->
+<div id="name" class="d-none"><%= name %></div>
+<div id="roomId" class="d-none"><%= roomId %></div>
+<!-- Direct messaging -->
+<div id="dm"></div>
+<div class="card mx-auto overflow-auto" style="width: 60rem;">
+    <div class="card-body">
+        <h5 class="card-title" id="hd0"></h5>
+        <p class="card-text" id="0"></p>
+    </div>
+</div>
+<div class="dropdown-menu dropdown-menu-sm" id="context-menu-1">
+        <button class="dropdown-item" href="#">Quote message</button>
+        <button class="dropdown-item" href="#">Edit message</button>
+        <button class="dropdown-item" href="#">Delete message</button>
+</div>
+<!-- External scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
+<!-- ChatKit -->
+<script type="text/javascript" src="/js/DirectMessageListChatKit.js"></script>
+<!-- jQuery -->
+<script type="text/javascript" src="/js/ChooseRooms.js"></script>
