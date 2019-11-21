@@ -29,6 +29,7 @@ app.use(session({
 //Connect-flash, supporting error/success messages
 app.use(flash());
 
+//Flash messages
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');

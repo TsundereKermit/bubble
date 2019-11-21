@@ -19,7 +19,7 @@ router.get('/', (req, res) => res.render('welcome', {title: 'Welcome to Bubble'}
 router.get('/index', (req, res) => 
     res.render('index', {
         //name: req.user.name,
-        name: "Ace",
+        name: "TsundereKermit",
         title: 'Bubble', 
         roomId: 'jPBGwdGQli'
     }));
@@ -74,7 +74,7 @@ router.post('/newRoom', (req, res) => {
 
     //Refreshes the page if an empty form is filled
     if (errors.length > 0) {
-        res.render('index', { name: inputUser, errors, title: 'Bubble' })
+        res.render('index', { name: inputUser, errors, title: 'Bubble', roomId: 'jPBGwdGQli' })
     } else {
         //Creates the room based on submitted data
         chatkit.createRoom({
@@ -111,7 +111,7 @@ router.post('/joinRoom', (req, res) => {
 
     //Refreshes the page if empty form
     if (errors.length > 0) {
-        res.render('index', { name: inputUser, errors, title: 'Bubble' })
+        res.render('index', { name: inputUser, errors, title: 'Bubble', roomId: 'jPBGwdGQli' })
     } else {
         //Join the room
         chatkit

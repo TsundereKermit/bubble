@@ -29,6 +29,7 @@ chatManager
       roomId = currentUser.rooms[0].id;
     }
     var userArray = [];
+    //Access room messages and users
     currentUser.subscribeToRoomMultipart({
       roomId: roomId,
       hooks: {
@@ -50,7 +51,7 @@ chatManager
           currentUser
             .fetchMultipartMessages({
               roomId: roomId,
-              direction: "newer",
+              direction: 'older',
               limit: 100
             })
             .then(messages => {
@@ -64,6 +65,8 @@ chatManager
               });
               //Gets an array of all users in the room
               var userArray = thisRoom.users;
+              //Setup boolean for if/else
+              var messageAppended = false;
               //Loops through all the users to get content for each card
               for (let i = 0; i < userArray.length; i++) {
                 const cardUser = userArray[i];
@@ -82,23 +85,14 @@ chatManager
                     //Changes the card components
                     document.getElementById(cardId).innerHTML = lastMessage;
                     document.getElementById(cardUserId).innerHTML = cardUser.id;
-                    break;
-                  } else if (j === messages.length-1 && messages[j].sender.id === cardUser.id) { //Last passed term
-                    //Gets the text portion of the most recent message
-                    lastMessage = messages[j].parts[0].payload.content;
-                    //Get the card component ids
-                    var cardId = i.toString();
-                    var cardUserId = "hd" + cardId;
-                    var imgId = "img" + cardId;
-                    //Add the setting button
-                    var settingsImg = document.getElementById(imgId);
-                    settingsImg.setAttribute("class", "fas fa-ellipsis-v");
-                    //Changes the card components
-                    document.getElementById(cardId).innerHTML = lastMessage;
-                    document.getElementById(cardUserId).innerHTML = cardUser.id;
-                  } else if ((j === messages.length-1 && messages[j].sender.id !== cardUser.id) || messages.length === 0) { //Last failed term or no messages has been sent
-                    //This will only be triggered if no message sent from this user is found in the recent 100 msgs
-                    lastMessage = `${cardUser.name} has not sent a message in this room recently`;
+                    messageAppended = true;
+                  } else if (j === messages.length - 1) { //Last failed term or no messages has been sent
+                    //If a message is appended before, the defualt noMessage string will not be appended
+                    if (messageAppended === true) {
+                      break;
+                    } else {
+                      lastMessage = `${cardUser.name} has not sent a message in this room recently`;
+                    }
                     //Get the card component ids
                     var cardId = i.toString();
                     var cardUserId = "hd" + cardId;
