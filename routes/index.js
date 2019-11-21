@@ -32,7 +32,7 @@ router.post('/addFriend', (req, res) => {
 
     //Empty Form
     if(!friendId){
-        errors.push({msg: 'Pleas fill in the Friend Id'})
+        errors.push({msg: 'Please fill in the Friend Id'})
     }
 
     //Refreshes the page if an empty form is filled
@@ -49,7 +49,7 @@ router.post('/newRoom', (req, res) => {
 
     //Empty form
     if (!roomName || !roomId) {
-        errors.push({ msg: 'Please fill in all fields' })
+        errors.push({ msg: "Please fill in all fields" })
     }
 
     //Refreshes the page if an empty form is filled
@@ -62,16 +62,20 @@ router.post('/newRoom', (req, res) => {
             creatorId: inputUser,
             name: roomName,
         })
-        .then(() => {
-            console.log('Room created successfully');
-        })
+        .then(() => {})
         .catch((err) => {
-            console.log(err);
+            //Error in creating room
+            errors.push({ msg: "Something went wrong..." });
+            res.render('index', { name: inputUser, errors, title: 'Bubble', roomId: 'jPBGwdGQli' });
         });
+
+        //Sets up pushed messages
+        errors.push({ msg: "Room created." });
 
         //Renders the index page
         res.render('index', { 
             name: inputUser, 
+            errors,
             title: 'Bubble', 
             roomId: 'jPBGwdGQli' 
         });
@@ -86,25 +90,32 @@ router.post('/joinRoom', (req, res) => {
 
     //Empty form
     if (!roomId) {
-        errors.push({ msg: 'Please fill in the room ID' })
+        errors.push({ msg: "Please fill in the room ID" })
     }
 
     //Refreshes the page if empty form
     if (errors.length > 0) {
-        res.render('index', { name: inputUser, errors, title: 'Bubble', roomId: 'jPBGwdGQli' })
+        res.render('index', { name: inputUser, errors, title: 'Bubble', roomId: 'jPBGwdGQli' });
     } else {
         //Join the room
-        chatkit
-          .addUsersToRoom({
+        chatkit.addUsersToRoom({
             roomId: roomId,
             userIds: [inputUser]
-          })
-          .then(() => console.log("added " + inputUser + " to room ID: " + roomId))
-          .catch(err => console.error(err));
+        })
+        .then()
+        .catch(err => {
+            //Room does not exist
+            errors.push({ msg: "Something went wrong..." });
+            res.render('index', { name: inputUser, errors, title: 'Bubble', roomId: 'jPBGwdGQli' });
+        });
+        
+        //Sets up pushed messages
+        errors.push({ msg: "Room joined. You have joined room with ID: " + roomId });
 
         //Renders the index page
         res.render('index', { 
             name: inputUser, 
+            errors,
             title: 'Bubble', 
             roomId: 'jPBGwdGQli' 
         });
