@@ -73,6 +73,7 @@ $(document).ready(() => {
         break;
       default: 
         console.error("One singular yike.");
+        break;
     }
     //Hides menu after button click
     $(this)
@@ -87,6 +88,23 @@ $(document).ready(() => {
     targetId = e.target.id;
     var top = e.pageY;
     var left = e.pageX;
+    //Gets message text
+    var userNumber = targetId.charAt(targetId.length - 1);
+    logUsername = document.getElementById("hd" + userNumber).innerHTML;
+    logText = document.getElementById(userNumber).innerHTML;
+    if (userIsAdmin !== true && logUsername !== username) { //Not admin nor bubble owner
+      $("#delete").show();
+      $("#edit").show();
+      $("#delete").hide();
+      $("#edit").hide();
+    } else if (userIsAdmin !== true && logUsername === username) { //Not admin but bubble owner
+      $("#delete").show();
+      $("#edit").show();
+      $("#delete").hide();
+    } else { //Is admin
+      $("#delete").show();
+      $("#edit").show();
+    }
     $("#context-menu").hide();
     $("#context-menu-3").hide();
     $("#context-menu-2")
@@ -104,9 +122,6 @@ $(document).ready(() => {
   });
   $("#context-menu-2 button").on("click", e => {
     var target = e.target.id;
-    //Gets message text
-    var userNumber = targetId.charAt(targetId.length - 1);
-    logText = document.getElementById(userNumber).innerHTML;
     //Handles button click events
     switch (target) {
       case "quote": 
@@ -120,6 +135,7 @@ $(document).ready(() => {
         break;
       default: 
         console.error("One singular yike.");
+        break;
     }
     //Hides the menu after button click
     $(this)
@@ -130,7 +146,23 @@ $(document).ready(() => {
 
   $("[id^='img']").click(e => {
     //Gets target ID
-    targetId = e.target.id;
+    targetId = e.target.id;//Gets message text
+    var userNumber = targetId.charAt(targetId.length - 1);
+    logUsername = document.getElementById("hd" + userNumber).innerHTML;
+    logText = document.getElementById(userNumber).innerHTML;
+    if (userIsAdmin !== true && logUsername !== username) { //Not admin nor bubble owner
+      $("#dropdownDelete").show();
+      $("#dropdownEdit").show();
+      $("#dropdownDelete").hide();
+      $("#dropdownEdit").hide();
+    } else if (userIsAdmin !== true && logUsername === username) { //Not admin but bubble owner
+      $("#dropdownDelete").show();
+      $("#dropdownEdit").show();
+      $("#dropdownDelete").hide();
+    } else { //Is admin
+      $("#dropdownDelete").show();
+      $("#dropdownEdit").show();
+    }
     var top = e.pageY;
     var left = e.pageX;
     $("#context-menu").hide();
@@ -151,10 +183,6 @@ $(document).ready(() => {
   //Handles onclick events inside the contextmenu
   $("#context-menu-3 button").on("click", e => {
     var target = e.target.id;
-    //Get username and message
-    var userNumber = targetId.charAt(targetId.length - 1);
-    logUsername = document.getElementById("hd" + userNumber).innerHTML;
-    logText = document.getElementById(userNumber).innerHTML;
     //Handles button click events
     switch (target) {
       case "dropdownLog":
@@ -166,18 +194,21 @@ $(document).ready(() => {
       case "dropdownQuote":
         console.log("Quote: " + logText);
         break;
-      /**
-       * //TODO Admin/sender privileges
-       * case: "dropdownEdit":
-       * case: "dropdownDelete":
-       * 
-       * //TODO Block friends (not sure to implement this)
-       */
+      case "dropdownEdit":
+        console.log("Edit: " + logText);
+        break;
+      case "dropdownDelete":
+        console.log("Delete: " + logText);
+        break;
+      case "dropdownBlock": 
+        console.log("Block: " + logUsername);
+        break;
       case "":
         console.log("To be implemented...");
         break;
       default:
         console.error("One singular yike.");
+        break;
     }
     //Hide menu after button click
     $(this)

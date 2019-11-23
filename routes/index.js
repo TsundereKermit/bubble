@@ -16,13 +16,37 @@ const chatkit = new Chatkit.default({
 router.get('/', (req, res) => res.render('welcome', {title: 'Welcome to Bubble'}));
 
 //localhost:5000/index is called
-router.get('/index', (req, res) => 
-    res.render('index', {
+router.get("/index", (req, res) => {
+    var createdRooms = [];
+    //Get all rooms that the user is in
+    chatkit.getUserRooms({
+      userId: "TsundereKermit"
+    })
+    .then(res => {
+        //Add the room id to the rooms array if the user is the creator (admin)
+        res.forEach(element => {
+            if (element.created_by_id === "TsundereKermit") {
+                createRoom.push(element.id);
+            }
+        });
+        //Adds the room array to the user's permissions data
+        chatkit.updateUser({
+            id: "TsundereKermit",
+            customData: {
+                perm: createdRooms
+            }
+        });
+    })
+    .catch(err => console.error(err));
+
+    //Render the index page
+    res.render("index", {
         //name: req.user.name,
         name: "TsundereKermit",
-        title: 'Bubble', 
-        roomId: 'jPBGwdGQli'
-    }));
+        title: "Bubble",
+        roomId: "jPBGwdGQli"
+    });
+});
 
 //addFriend form is submitted
 router.post('/addFriend', (req, res) => {
@@ -49,7 +73,7 @@ router.post('/addFriend', (req, res) => {
             console.log('DM with ' + friendId + ' created successfully');
         })
         .catch((err) => {
-            console.log(err);
+            console.error(err);
         });
 
         //Renders the index page

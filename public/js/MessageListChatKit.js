@@ -21,6 +21,7 @@ const chatManager = new Chatkit.ChatManager({
   tokenProvider: tokenProvider
 });
 
+var userIsAdmin = false;
 chatManager
   .connect()
   .then(currentUser => {
@@ -28,7 +29,11 @@ chatManager
     if (roomId === "jPBGwdGQli") {
       roomId = currentUser.rooms[0].id;
     }
-    var userArray = [];
+    currentUser.customData.perm.forEach(element => {
+      if (element === roomId) {
+        userIsAdmin = true;
+      }
+    });
     //Access room messages and users
     currentUser.subscribeToRoomMultipart({
       roomId: roomId,
@@ -108,7 +113,7 @@ chatManager
               }
             })
             .catch(err => {
-              console.log(`Error fetching messages: ${err}`);
+              console.error(`Error fetching messages: ${err}`);
             });
         }
       }
