@@ -40,6 +40,12 @@ $(document).ready(() => {
     targetId = e.target.id;
     var top = e.pageY;
     var left = e.pageX;
+    //Gets username
+    var userNumber = targetId.charAt(targetId.length - 1);
+    logUsername = document.getElementById("hd" + userNumber).innerHTML;
+    var logButton = document.getElementById("logContextBtn");
+    logButton.innerHTML = "ChatLog (" + logUsername + ")";
+    logButton.value = logUsername;
     $("#context-menu-2").hide();
     $("#context-menu-3").hide();
     $("#context-menu")
@@ -57,9 +63,6 @@ $(document).ready(() => {
   });
   $("#context-menu button").on("click", e => {
     var target = e.target.id;
-    //Gets username
-    var userNumber = targetId.charAt(targetId.length - 1);
-    logUsername = document.getElementById("hd" + userNumber).innerHTML;
     //Handles button click events
     switch (target) {
       case "log":
@@ -150,6 +153,9 @@ $(document).ready(() => {
     var userNumber = targetId.charAt(targetId.length - 1);
     logUsername = document.getElementById("hd" + userNumber).innerHTML;
     logText = document.getElementById(userNumber).innerHTML;
+    var logButton = document.getElementById("dropdownLog");
+    logButton.innerHTML = "ChatLog (" + logUsername + ")";
+    logButton.value = logUsername;
     if (userIsAdmin !== true && logUsername !== username) { //Not admin nor bubble owner
       $("#dropdownDelete").show();
       $("#dropdownEdit").show();

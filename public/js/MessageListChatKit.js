@@ -4,6 +4,9 @@ var username = document.getElementById("name").textContent;
 //Gets the ChatKit roomId
 var roomId = document.getElementById("roomId").textContent;
 
+//Gets the ChatKit roomId
+var logId = document.getElementById("logId").textContent;
+
 /**
  * Experimental
  * We are using our own token provider instead of ChatKit's native token provider right now, the native one
@@ -42,7 +45,7 @@ chatManager
           //Chat log mode
           const ul = document.getElementById("logList");
           //Adds the message to the log if it belongs to the user
-          if (message.sender.id === currentUser.id) {
+          if (message.sender.id === logId) {
             var li = document.createElement("li");
             li.appendChild(
               document.createTextNode(message.parts[0].payload.content)
@@ -50,7 +53,7 @@ chatManager
             ul.appendChild(li);
           }
           const h5 = document.getElementById("titId");
-          h5.innerHTML = currentUser.name;
+          h5.innerHTML = logId;
           //Bubble mode
           //Gets the most recent 100 messages ordered from newest to oldest
           currentUser

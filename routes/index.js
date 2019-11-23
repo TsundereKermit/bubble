@@ -26,7 +26,7 @@ router.get("/index", (req, res) => {
         //Add the room id to the rooms array if the user is the creator (admin)
         res.forEach(element => {
             if (element.created_by_id === "TsundereKermit") {
-                createRoom.push(element.id);
+                createdRooms.push(element.id);
             }
         });
         //Adds the room array to the user's permissions data
@@ -44,7 +44,9 @@ router.get("/index", (req, res) => {
         //name: req.user.name,
         name: "TsundereKermit",
         title: "Bubble",
-        roomId: "jPBGwdGQli"
+        roomId: "jPBGwdGQli", 
+        //logId: req.user.name
+        logId: 'TsundereKermit'
     });
 });
 
@@ -98,7 +100,13 @@ router.post('/newRoom', (req, res) => {
 
     //Refreshes the page if an empty form is filled
     if (errors.length > 0) {
-        res.render('index', { name: inputUser, errors, title: 'Bubble', roomId: 'jPBGwdGQli' })
+        res.render('index', { 
+            name: inputUser, 
+            errors, 
+            title: 'Bubble', 
+            roomId: 'jPBGwdGQli', 
+            logId: inputUser
+        })
     } else {
         //Creates the room based on submitted data
         chatkit.createRoom({
@@ -110,7 +118,13 @@ router.post('/newRoom', (req, res) => {
         .catch((err) => {
             //Error in creating room
             errors.push({ msg: "Something went wrong..." });
-            res.render('index', { name: inputUser, errors, title: 'Bubble', roomId: 'jPBGwdGQli' });
+            res.render('index', { 
+                name: inputUser, 
+                errors, 
+                title: 'Bubble', 
+                roomId: 'jPBGwdGQli', 
+                logId: inputUser
+            });
         });
 
         //Sets up pushed messages
@@ -121,7 +135,8 @@ router.post('/newRoom', (req, res) => {
             name: inputUser, 
             errors,
             title: 'Bubble', 
-            roomId: 'jPBGwdGQli' 
+            roomId: 'jPBGwdGQli',
+            logId: inputUser
         });
     }
 });
@@ -139,7 +154,13 @@ router.post('/joinRoom', (req, res) => {
 
     //Refreshes the page if empty form
     if (errors.length > 0) {
-        res.render('index', { name: inputUser, errors, title: 'Bubble', roomId: 'jPBGwdGQli' });
+        res.render('index', { 
+            name: inputUser, 
+            errors, 
+            title: 'Bubble', 
+            roomId: 'jPBGwdGQli', 
+            logId: inputUser 
+        });
     } else {
         //Join the room
         chatkit.addUsersToRoom({
@@ -150,7 +171,13 @@ router.post('/joinRoom', (req, res) => {
         .catch(err => {
             //Room does not exist
             errors.push({ msg: "Something went wrong..." });
-            res.render('index', { name: inputUser, errors, title: 'Bubble', roomId: 'jPBGwdGQli' });
+            res.render('index', { 
+                name: inputUser, 
+                errors, 
+                title: 'Bubble', 
+                roomId: 'jPBGwdGQli', 
+                logId: inputUser
+            });
         });
         
         //Sets up pushed messages
@@ -161,7 +188,8 @@ router.post('/joinRoom', (req, res) => {
             name: inputUser, 
             errors,
             title: 'Bubble', 
-            roomId: 'jPBGwdGQli' 
+            roomId: 'jPBGwdGQli', 
+            logId: inputUser
         });
     }
 });
@@ -173,7 +201,8 @@ router.post('/changeRoom', (req, res) => {
     res.render('index', { 
         name: userId, 
         title: 'Bubble',
-        roomId: changeRoomName
+        roomId: changeRoomName,
+        logId: userId
     });
 });
 
@@ -185,6 +214,19 @@ router.post('/changeDM', (req, res) => {
         name: userId,
         title: 'Bubble',
         roomId: changeDMName
+    });
+});
+
+router.post("/chatlog", (req, res) => {
+    //Form data
+    const { userId, roomId, logChangeName } = req.body;
+    
+    //Render index with new log
+    res.render("index", {
+        name: userId,
+        title: "Bubble",
+        roomId: roomId,
+        logId: logChangeName
     });
 });
 
