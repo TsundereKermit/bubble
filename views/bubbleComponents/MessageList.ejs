@@ -18,7 +18,8 @@
             <div class="card h-100">
                 <div class="card-body" style="background-color:lightcoral">
                     <div class="d-flex flex-row justify-content-between" id="header0">
-                        <h5 class="card-title usernameH5" id="hd0"></h5>&nbsp;
+                        <i id="pres0"></i>
+                        <h5 class="card-title usernameH5 flex-grow-1" id="hd0"></h5>&nbsp;
                         <i id="img0"></i>
                     </div>
                     <p class="card-text bubbleContent" id="0"></p>&nbsp;
@@ -29,7 +30,8 @@
             <div class="card h-100">
                 <div class="card-body" style="background-color:lightsalmon">
                     <div class="d-flex flex-row justify-content-between" id="header1">
-                        <h5 class="card-title usernameH5" id="hd1"></h5>&nbsp;
+                        <i id="pres1"></i>
+                        <h5 class="card-title usernameH5 flex-grow-1" id="hd1"></h5>&nbsp;
                         <i id="img1"></i>
                     </div>
                     <p class="card-text bubbleContent" id="1"></p>&nbsp;
@@ -40,7 +42,8 @@
             <div class="card h-100">
                 <div class="card-body" style="background-color:lightgoldenrodyellow">
                     <div class="d-flex flex-row justify-content-between" id="header2">
-                        <h5 class="card-title usernameH5" id="hd2"></h5>&nbsp;
+                        <i id="pres2"></i>
+                        <h5 class="card-title usernameH5 flex-grow-1" id="hd2"></h5>&nbsp;
                         <i id="img2"></i>
                     </div>
                     <p class="card-text bubbleContent" id="2"></p>&nbsp;
@@ -53,7 +56,8 @@
             <div class="card h-100">
                 <div class="card-body" style="background-color:lightgreen">
                     <div class="d-flex flex-row justify-content-between" id="header3">
-                        <h5 class="card-title usernameH5" id="hd3"></h5>&nbsp;
+                        <i id="pres3"></i>
+                        <h5 class="card-title usernameH5 flex-grow-1" id="hd3"></h5>&nbsp;
                         <i id="img3"></i>
                     </div>
                     <p class="card-text bubbleContent" id="3"></p>&nbsp;
@@ -64,7 +68,8 @@
             <div class="card h-100">
                 <div class="card-body" style="background-color:lightseagreen">
                     <div class="d-flex flex-row justify-content-between" id="header4">
-                        <h5 class="card-title usernameH5" id="hd4"></h5>&nbsp;
+                        <i id="pres4"></i>
+                        <h5 class="card-title usernameH5 flex-grow-1" id="hd4"></h5>&nbsp;
                         <i id="img4"></i>
                     </div>
                     <p class="card-text bubbleContent" id="4"></p>&nbsp;
@@ -75,7 +80,8 @@
             <div class="card h-100">
                 <div class="card-body" style="background-color:lightskyblue">
                     <div class="d-flex flex-row justify-content-between" id="header5">
-                        <h5 class="card-title usernameH5" id="hd5"></h5>&nbsp;
+                        <i id="pres5"></i>
+                        <h5 class="card-title usernameH5 flex-grow-1" id="hd5"></h5>&nbsp;
                         <i id="img5"></i>
                     </div>
                     <p class="card-text bubbleContent" id="5"></p>&nbsp;
@@ -88,7 +94,8 @@
             <div class="card h-100">
                 <div class="card-body" style="background-color:plum">
                     <div class="d-flex flex-row justify-content-between" id="header6">
-                        <h5 class="card-title usernameH5" id="hd6"></h5>&nbsp;
+                        <i id="pres6"></i>
+                        <h5 class="card-title usernameH5 flex-grow-1" id="hd6"></h5>&nbsp;
                         <i id="img6"></i>
                     </div>
                     <p class="card-text bubbleContent" id="6"></p>&nbsp;
@@ -99,7 +106,8 @@
             <div class="card h-100">
                 <div class="card-body" style="background-color:lightslategray">
                     <div class="d-flex flex-row justify-content-between" id="header7">
-                        <h5 class="card-title usernameH5" id="hd7"></h5>&nbsp;
+                        <i id="pres7"></i>
+                        <h5 class="card-title usernameH5 flex-grow-1" id="hd7"></h5>&nbsp;
                         <i id="img7"></i>
                     </div>
                     <p class="card-text bubbleContent" id="7"></p>&nbsp;
@@ -110,7 +118,8 @@
             <div class="card h-100">
                 <div class="card-body" style="background-color:hotpink">
                     <div class="d-flex flex-row justify-content-between" id="header8">
-                        <h5 class="card-title usernameH5" id="hd8"></h5>&nbsp;
+                        <i id="pres8"></i>
+                        <h5 class="card-title usernameH5 flex-grow-1" id="hd8"></h5>&nbsp;
                         <i id="img8"></i>
                     </div>
                     <p class="card-text bubbleContent" id="8"></p>&nbsp;
@@ -132,6 +141,11 @@
         </div>  
     </div>
 </div>
+<!-- deleteMsgForm -->
+<form action="/index/deleteMsg" method="POST" class="d-none" id="deleteMsgForm">
+    <input type="text" name="roomId" id="deleteMsgRoom">
+    <input type="text" name="userId" value=<%- name %>>
+</form>
 <!-- New chat log user form -->
 <form action="/index/chatlog" method="POST" class="d-none" id="chatlogForm">
     <input type="text" name="userId" value=<%= name %>>
@@ -146,8 +160,7 @@
 <!-- Message right click -->
 <div class="dropdown-menu dropdown-menu-sm" id="context-menu-2">
     <button class="dropdown-item" href="#" id="quote">Quote message</button>
-    <button class="dropdown-item" href="#" id="edit">Edit message</button>
-    <button class="dropdown-item" href="#" id="delete">Delete message</button>
+    <button class="dropdown-item" type="submit" form="deleteMsgForm" id="delete" name="message">Delete message</button>
 </div>
 <!-- Vertical ellipsis left click -->
 <div class="dropdown-menu dropdown-menu-sm" id="context-menu-3">
@@ -155,8 +168,7 @@
     <button class="dropdown-item" href="#" id="dropdownFriend">Start a DM</button>
     <button class="dropdown-item" href="#" id="dropdownBlock">Block</button>
     <button class="dropdown-item" href="#" id="dropdownQuote">Quote message</button>
-    <button class="dropdown-item" href="#" id="dropdownEdit">Edit message</button>
-    <button class="dropdown-item" href="#" id="dropdownDelete">Delete message</button>
+    <button class="dropdown-item" type="submit" form="deleteMsgForm" id="dropdownDelete" name="message">Delete message</button>
 </div>
 <!-- External scripts -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>

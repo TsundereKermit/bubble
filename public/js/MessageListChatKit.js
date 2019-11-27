@@ -31,6 +31,7 @@ chatManager
     //Default room
     if (roomId === "jPBGwdGQli") {
       roomId = currentUser.rooms[0].id;
+      document.getElementById("deleteMsgRoom").value = roomId;
     }
     currentUser.customData.perm.forEach(element => {
       if (element === roomId) {
@@ -87,12 +88,19 @@ chatManager
                     var cardId = i.toString();
                     var cardUserId = "hd" + cardId;
                     var imgId = "img" + cardId;
+                    var presId = "pres" + cardId;
                     //Add the setting button
-                    var settingsImg = document.getElementById(imgId);
-                    settingsImg.setAttribute("class", "fas fa-ellipsis-v");
+                    document.getElementById(imgId).setAttribute("class", "fas fa-ellipsis-v");
+                    document.getElementById(presId).setAttribute("class", "fas fa-circle");
+                    if (userArray[i].presence.state === "online") {
+                      document.getElementById(presId).setAttribute("style", "color:green");
+                    } else {
+                      document.getElementById(presId).setAttribute("style", "color:gray");
+                    }
                     //Changes the card components
                     document.getElementById(cardId).innerHTML = lastMessage;
                     document.getElementById(cardUserId).innerHTML = cardUser.id;
+                    document.getElementById(cardUserId).classList.add(cardUser.id);
                     messageAppended = true;
                   } else if (j === messages.length - 1) { //Last failed term or no messages has been sent
                     //If a message is appended before, the defualt noMessage string will not be appended
@@ -105,9 +113,15 @@ chatManager
                     var cardId = i.toString();
                     var cardUserId = "hd" + cardId;
                     var imgId = "img" + cardId;
+                    var presId = "pres" + cardId;
                     //Add the setting button
-                    var settingsImg = document.getElementById(imgId);
-                    settingsImg.setAttribute("class", "fas fa-ellipsis-v");
+                    document.getElementById(imgId).setAttribute("class", "fas fa-ellipsis-v");
+                    document.getElementById(presId).setAttribute("class", "fas fa-circle");
+                    if (userArray[i].presence.state === "online") {
+                      document.getElementById(presId).setAttribute("style", "color:green");
+                    } else {
+                      document.getElementById(presId).setAttribute("style", "color:gray");
+                    }
                     //Changes the card components
                     document.getElementById(cardId).innerHTML = lastMessage;
                     document.getElementById(cardUserId).innerHTML = cardUser.id;
@@ -118,6 +132,14 @@ chatManager
             .catch(err => {
               console.error(`Error fetching messages: ${err}`);
             });
+        },
+        onUserStartedTyping: user => {
+          console.log("User is typing...");
+          document.getElementById(user.id).innerHTML = user.id + " (typing...)";
+        },
+        onUserStoppedTyping: user => {
+          console.log("User stopped typing");
+          document.getElementById(user.id).innerHTML = user.id;
         }
       }
     });

@@ -230,4 +230,35 @@ router.post("/chatlog", (req, res) => {
     });
 });
 
+router.post("/deleteMsg", (req, res) => {
+    //Form data
+    const { roomId, userId, message } = req.body;
+
+    chatkit.fetchMultipartMessages({
+        roomId: roomId,
+        limit: 100,
+    })
+    .then(messages => {
+        for (let m of messages) {
+            if (m.parts[0].content === message) {
+                chatkit.deleteMessage({
+                    roomId: roomId,
+                    messageId: m.id
+                })
+                .then(() => console.log('Message ' + m.parts[0].content + " with id: " + m.id + " has been deleted."))
+                .catch(err => console.error(err));
+                break;
+            }
+        }
+    })
+
+    //Render the new room
+    res.render('index', { 
+        name: userId, 
+        title: 'Bubble',
+        roomId: roomId,
+        logId: userId
+    });
+})
+
 module.exports = router;

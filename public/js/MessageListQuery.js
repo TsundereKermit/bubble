@@ -97,17 +97,15 @@ $(document).ready(() => {
     logText = document.getElementById(userNumber).innerHTML;
     if (userIsAdmin !== true && logUsername !== username) { //Not admin nor bubble owner
       $("#delete").show();
-      $("#edit").show();
       $("#delete").hide();
-      $("#edit").hide();
     } else if (userIsAdmin !== true && logUsername === username) { //Not admin but bubble owner
       $("#delete").show();
-      $("#edit").show();
       $("#delete").hide();
     } else { //Is admin
       $("#delete").show();
       $("#edit").show();
     }
+    $("#delete").val(logText);
     $("#context-menu").hide();
     $("#context-menu-3").hide();
     $("#context-menu-2")
@@ -129,9 +127,6 @@ $(document).ready(() => {
     switch (target) {
       case "quote": 
         console.log("Quoting message: " + logText);
-        break;
-      case "edit":
-        console.log("Edit message: " + logText);
         break;
       case "delete":
         console.log("Delete message: " + logText);
@@ -158,17 +153,14 @@ $(document).ready(() => {
     logButton.value = logUsername;
     if (userIsAdmin !== true && logUsername !== username) { //Not admin nor bubble owner
       $("#dropdownDelete").show();
-      $("#dropdownEdit").show();
       $("#dropdownDelete").hide();
-      $("#dropdownEdit").hide();
     } else if (userIsAdmin !== true && logUsername === username) { //Not admin but bubble owner
       $("#dropdownDelete").show();
-      $("#dropdownEdit").show();
       $("#dropdownDelete").hide();
     } else { //Is admin
       $("#dropdownDelete").show();
-      $("#dropdownEdit").show();
     }
+    $("#dropdownDelete").val(logText);
     var top = e.pageY;
     var left = e.pageX;
     $("#context-menu").hide();
@@ -199,9 +191,6 @@ $(document).ready(() => {
         break;
       case "dropdownQuote":
         console.log("Quote: " + logText);
-        break;
-      case "dropdownEdit":
-        console.log("Edit: " + logText);
         break;
       case "dropdownDelete":
         console.log("Delete: " + logText);

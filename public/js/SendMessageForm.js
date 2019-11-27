@@ -8,6 +8,10 @@ chatManager
   //Connect to chatkit servers
   .connect()
   .then(currentUser => {
+    //Default room
+    if (roomId === "jPBGwdGQli") {
+      roomId = currentUser.rooms[0].id;
+    }
     const form = document.getElementById("message-form");
     //When the message input is detected, a simple mesage is sent to the chatkit servers
     form.addEventListener("submit", e => {
@@ -23,6 +27,15 @@ chatManager
         .catch(err => console.error(err));
       //Clear input form
       input.value = "";
+    });
+    $("#message-text").on("keyup", () => {
+      currentUser.isTypingIn({ 
+        roomId: roomId 
+      })
+      .then(() => {
+        console.log(currentUser.name + " is typing...");
+      })
+      .catch(err => console.error(err));
     });
   })
   .catch(error => {
