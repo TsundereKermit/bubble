@@ -245,12 +245,13 @@ router.post("/deleteMsg", (req, res) => {
                     roomId: roomId,
                     messageId: m.id
                 })
-                .then(() => console.log('Message ' + m.parts[0].content + " with id: " + m.id + " has been deleted."))
+                .then()
                 .catch(err => console.error(err));
                 break;
             }
         }
     })
+    .catch(err => console.error(err));
 
     //Render the new room
     res.render('index', { 

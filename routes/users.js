@@ -93,7 +93,7 @@ router.post('/register', (req, res) => {
                 }))
             }
         })
-        .catch();
+        .catch(err => console.error(err));
     }
 });
 

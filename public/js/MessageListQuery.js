@@ -75,7 +75,7 @@ $(document).ready(() => {
         console.log("Blocking user: " + logUsername);
         break;
       default: 
-        console.error("One singular yike.");
+        console.error("An error has occured...");
         break;
     }
     //Hides menu after button click
@@ -132,7 +132,7 @@ $(document).ready(() => {
         console.log("Delete message: " + logText);
         break;
       default: 
-        console.error("One singular yike.");
+        console.error("An error has occured...");
         break;
     }
     //Hides the menu after button click
@@ -202,7 +202,7 @@ $(document).ready(() => {
         console.log("To be implemented...");
         break;
       default:
-        console.error("One singular yike.");
+        console.error("An error has occured...");
         break;
     }
     //Hide menu after button click
