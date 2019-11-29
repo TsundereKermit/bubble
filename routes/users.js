@@ -73,10 +73,9 @@ router.post('/register', (req, res) => {
                     id: name,
                     name: name,
                 })
-                .then(() => {
-                    console.log('User created successfully');
-                }).catch((err) => {
-                    console.log(err);
+                .then(() => {})
+                .catch((err) => {
+                    console.error(err);
                 });
                 
                 //A randomly generated 10-character salt is appended to the password and hashed
@@ -90,11 +89,11 @@ router.post('/register', (req, res) => {
                         req.flash('success_msg', 'You are now registered and can log in');
                         res.redirect('/users/login');
                     })
-                    .catch(err => console.log(err));
+                    .catch(err => console.error(err));
                 }))
             }
         })
-        .catch();
+        .catch(err => console.error(err));
     }
 });
 

@@ -40,6 +40,12 @@ $(document).ready(() => {
     targetId = e.target.id;
     var top = e.pageY;
     var left = e.pageX;
+    //Gets username
+    var userNumber = targetId.charAt(targetId.length - 1);
+    logUsername = document.getElementById("hd" + userNumber).innerHTML;
+    var logButton = document.getElementById("logContextBtn");
+    logButton.innerHTML = "ChatLog (" + logUsername + ")";
+    logButton.value = logUsername;
     $("#context-menu-2").hide();
     $("#context-menu-3").hide();
     $("#context-menu")
@@ -57,9 +63,6 @@ $(document).ready(() => {
   });
   $("#context-menu button").on("click", e => {
     var target = e.target.id;
-    //Gets username
-    var userNumber = targetId.charAt(targetId.length - 1);
-    logUsername = document.getElementById("hd" + userNumber).innerHTML;
     //Handles button click events
     switch (target) {
       case "log":
@@ -72,7 +75,8 @@ $(document).ready(() => {
         console.log("Blocking user: " + logUsername);
         break;
       default: 
-        console.error("One singular yike.");
+        console.error("An error has occured...");
+        break;
     }
     //Hides menu after button click
     $(this)
@@ -87,6 +91,21 @@ $(document).ready(() => {
     targetId = e.target.id;
     var top = e.pageY;
     var left = e.pageX;
+    //Gets message text
+    var userNumber = targetId.charAt(targetId.length - 1);
+    logUsername = document.getElementById("hd" + userNumber).innerHTML;
+    logText = document.getElementById(userNumber).innerHTML;
+    if (userIsAdmin !== true && logUsername !== username) { //Not admin nor bubble owner
+      $("#delete").show();
+      $("#delete").hide();
+    } else if (userIsAdmin !== true && logUsername === username) { //Not admin but bubble owner
+      $("#delete").show();
+      $("#delete").hide();
+    } else { //Is admin
+      $("#delete").show();
+      $("#edit").show();
+    }
+    $("#delete").val(logText);
     $("#context-menu").hide();
     $("#context-menu-3").hide();
     $("#context-menu-2")
@@ -104,22 +123,17 @@ $(document).ready(() => {
   });
   $("#context-menu-2 button").on("click", e => {
     var target = e.target.id;
-    //Gets message text
-    var userNumber = targetId.charAt(targetId.length - 1);
-    logText = document.getElementById(userNumber).innerHTML;
     //Handles button click events
     switch (target) {
       case "quote": 
         console.log("Quoting message: " + logText);
         break;
-      case "edit":
-        console.log("Edit message: " + logText);
-        break;
       case "delete":
         console.log("Delete message: " + logText);
         break;
       default: 
-        console.error("One singular yike.");
+        console.error("An error has occured...");
+        break;
     }
     //Hides the menu after button click
     $(this)
@@ -130,7 +144,23 @@ $(document).ready(() => {
 
   $("[id^='img']").click(e => {
     //Gets target ID
-    targetId = e.target.id;
+    targetId = e.target.id;//Gets message text
+    var userNumber = targetId.charAt(targetId.length - 1);
+    logUsername = document.getElementById("hd" + userNumber).innerHTML;
+    logText = document.getElementById(userNumber).innerHTML;
+    var logButton = document.getElementById("dropdownLog");
+    logButton.innerHTML = "ChatLog (" + logUsername + ")";
+    logButton.value = logUsername;
+    if (userIsAdmin !== true && logUsername !== username) { //Not admin nor bubble owner
+      $("#dropdownDelete").show();
+      $("#dropdownDelete").hide();
+    } else if (userIsAdmin !== true && logUsername === username) { //Not admin but bubble owner
+      $("#dropdownDelete").show();
+      $("#dropdownDelete").hide();
+    } else { //Is admin
+      $("#dropdownDelete").show();
+    }
+    $("#dropdownDelete").val(logText);
     var top = e.pageY;
     var left = e.pageX;
     $("#context-menu").hide();
@@ -151,10 +181,6 @@ $(document).ready(() => {
   //Handles onclick events inside the contextmenu
   $("#context-menu-3 button").on("click", e => {
     var target = e.target.id;
-    //Get username and message
-    var userNumber = targetId.charAt(targetId.length - 1);
-    logUsername = document.getElementById("hd" + userNumber).innerHTML;
-    logText = document.getElementById(userNumber).innerHTML;
     //Handles button click events
     switch (target) {
       case "dropdownLog":
@@ -166,18 +192,18 @@ $(document).ready(() => {
       case "dropdownQuote":
         console.log("Quote: " + logText);
         break;
-      /**
-       * //TODO Admin/sender privileges
-       * case: "dropdownEdit":
-       * case: "dropdownDelete":
-       * 
-       * //TODO Block friends (not sure to implement this)
-       */
+      case "dropdownDelete":
+        console.log("Delete: " + logText);
+        break;
+      case "dropdownBlock": 
+        console.log("Block: " + logUsername);
+        break;
       case "":
         console.log("To be implemented...");
         break;
       default:
-        console.error("One singular yike.");
+        console.error("An error has occured...");
+        break;
     }
     //Hide menu after button click
     $(this)

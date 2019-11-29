@@ -4,6 +4,9 @@ var username = document.getElementById("name").textContent;
 //Gets the ChatKit roomId
 var roomId = document.getElementById("roomId").textContent;
 
+//Gets the ChatKit roomId
+var logId = document.getElementById("logId").textContent;
+
 /**
  * Experimental
  * We are using our own token provider instead of ChatKit's native token provider right now, the native one
@@ -21,14 +24,20 @@ const chatManager = new Chatkit.ChatManager({
   tokenProvider: tokenProvider
 });
 
+var userIsAdmin = false;
 chatManager
   .connect()
   .then(currentUser => {
     //Default room
     if (roomId === "jPBGwdGQli") {
       roomId = currentUser.rooms[0].id;
+      document.getElementById("deleteMsgRoom").value = roomId;
     }
-    var userArray = [];
+    currentUser.customData.perm.forEach(element => {
+      if (element === roomId) {
+        userIsAdmin = true;
+      }
+    });
     //Access room messages and users
     currentUser.subscribeToRoomMultipart({
       roomId: roomId,
@@ -37,7 +46,7 @@ chatManager
           //Chat log mode
           const ul = document.getElementById("logList");
           //Adds the message to the log if it belongs to the user
-          if (message.sender.id === currentUser.id) {
+          if (message.sender.id === logId) {
             var li = document.createElement("li");
             li.appendChild(
               document.createTextNode(message.parts[0].payload.content)
@@ -45,7 +54,7 @@ chatManager
             ul.appendChild(li);
           }
           const h5 = document.getElementById("titId");
-          h5.innerHTML = currentUser.name;
+          h5.innerHTML = logId;
           //Bubble mode
           //Gets the most recent 100 messages ordered from newest to oldest
           currentUser
@@ -79,12 +88,19 @@ chatManager
                     var cardId = i.toString();
                     var cardUserId = "hd" + cardId;
                     var imgId = "img" + cardId;
+                    var presId = "pres" + cardId;
                     //Add the setting button
-                    var settingsImg = document.getElementById(imgId);
-                    settingsImg.setAttribute("class", "fas fa-ellipsis-v");
+                    document.getElementById(imgId).setAttribute("class", "fas fa-ellipsis-v");
+                    document.getElementById(presId).setAttribute("class", "fas fa-circle");
+                    if (userArray[i].presence.state === "online") {
+                      document.getElementById(presId).setAttribute("style", "color:green");
+                    } else {
+                      document.getElementById(presId).setAttribute("style", "color:gray");
+                    }
                     //Changes the card components
                     document.getElementById(cardId).innerHTML = lastMessage;
                     document.getElementById(cardUserId).innerHTML = cardUser.id;
+                    document.getElementById(cardUserId).classList.add(cardUser.id);
                     messageAppended = true;
                   } else if (j === messages.length - 1) { //Last failed term or no messages has been sent
                     //If a message is appended before, the defualt noMessage string will not be appended
@@ -97,9 +113,15 @@ chatManager
                     var cardId = i.toString();
                     var cardUserId = "hd" + cardId;
                     var imgId = "img" + cardId;
+                    var presId = "pres" + cardId;
                     //Add the setting button
-                    var settingsImg = document.getElementById(imgId);
-                    settingsImg.setAttribute("class", "fas fa-ellipsis-v");
+                    document.getElementById(imgId).setAttribute("class", "fas fa-ellipsis-v");
+                    document.getElementById(presId).setAttribute("class", "fas fa-circle");
+                    if (userArray[i].presence.state === "online") {
+                      document.getElementById(presId).setAttribute("style", "color:green");
+                    } else {
+                      document.getElementById(presId).setAttribute("style", "color:gray");
+                    }
                     //Changes the card components
                     document.getElementById(cardId).innerHTML = lastMessage;
                     document.getElementById(cardUserId).innerHTML = cardUser.id;
@@ -108,8 +130,16 @@ chatManager
               }
             })
             .catch(err => {
-              console.log(`Error fetching messages: ${err}`);
+              console.error(`Error fetching messages: ${err}`);
             });
+        },
+        onUserStartedTyping: user => {
+          console.log("User is typing...");
+          document.getElementById(user.id).innerHTML = user.id + " (typing...)";
+        },
+        onUserStoppedTyping: user => {
+          console.log("User stopped typing");
+          document.getElementById(user.id).innerHTML = user.id;
         }
       }
     });

@@ -1,22 +1,17 @@
-<!-- These are the success/warning messages on login/register pages -->
+<!-- Success/warning messages on login/register pages -->
 <% if(typeof errors != 'undefined') { %>
-    <div class="modal" tabindex="-1" role="dialog" id="errorModal">
+    <div class="modal d-block" tabindex="-1" role="dialog" id="errorModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Placeholder</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title">Notice</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modalCloseBtn">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <% errors.forEach(function(error) { %>
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <%= error.msg %>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                        <div><%= error.msg %></div>
                     <% }); %>
                 </div>
             </div>
@@ -50,3 +45,6 @@
         </button>
     </div>
 <% } %>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="/js/Messages.js"></script>
