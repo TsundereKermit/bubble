@@ -19,7 +19,7 @@ router.get('/', (req, res) => res.render('welcome', {title: 'Welcome to Bubble'}
 router.get('/index', (req, res) => 
     res.render('index', {
         //name: req.user.name,
-        name: "TsundereKermit",
+        name: "Ace",
         title: 'Bubble', 
         roomId: 'jPBGwdGQli'
     }));
@@ -29,29 +29,75 @@ router.post('/addFriend', (req, res) => {
     //Form data
     const { inputUser, friendId } = req.body;
     let errors = []
+    var existingUser = false;
+    var takenRoom = false;
 
     //Empty form
     if (!friendId) {
         errors.push({ msg: 'Please fill in all fields' })
     }
-
+     
     //Refreshes the page if an empty form is filled
     if (errors.length > 0) {
         res.render('index', { name: inputUser, errors, title: 'Bubble' })
     } else {
-        //Creates the room based on submitted data
-        chatkit.createRoom({
-            creatorId: inputUser,
-            name: friendId,
-            private: true,
-        })
-        .then(() => {
-            console.log('DM with ' + friendId + ' created successfully');
-        })
-        .catch((err) => {
-            console.log(err);
-        });
 
+        chatkit.getUsers()
+            .then(user => {
+                var usernames = [];
+                user.forEach(element => {
+                    usernames.push(element.id);
+                })
+                for(i = 0; i < usernames.length; i++) {
+                    if(usernames[i] === friendId) {
+                        existingUser = true;
+                    }else{
+                        existingUser = false;
+                        errors.push({ msg: 'This user does not exist'})
+                    }
+                }
+                console.log(user);
+                console.log(usernames);
+            }).catch((err) => {
+                console.log(err);
+            });
+
+        chatkit.getRooms()
+            .then(room => {
+                var rooms = [];
+                room.forEach(element => {
+                    rooms.push(element.name);
+                })
+                for(j = 0; j < rooms.length; j++){
+                    if(rooms[j] === friendId){
+                        takenRoom = true;
+                        errors.push({ msg: 'You already have a dm with this user.'})
+                    }else{
+                        takenRoom = false;
+                    }
+                }
+                console.log(room);
+                console.log(rooms);
+            }).catch((err) => {
+                console.log(err);
+            });
+
+        if(existingUser === true && takenRoom === false){
+            //Creates the room based on submitted data
+            chatkit.createRoom({
+                creatorId: inputUser,
+                name: friendId,
+                //private: true,
+            })
+            .then(() => {
+                console.log('DM with ' + friendId + ' created successfully');
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        }
+    } 
+        
         //Renders the index page
         res.render('index', { 
             name: inputUser, 
@@ -59,7 +105,7 @@ router.post('/addFriend', (req, res) => {
             roomId: 'jPBGwdGQli' 
         });
     }
-});
+);
 
 //newRoom form is submitted
 router.post('/newRoom', (req, res) => {
