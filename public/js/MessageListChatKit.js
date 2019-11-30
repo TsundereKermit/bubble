@@ -48,22 +48,46 @@ chatManager
           //Adds the message to the log if it belongs to the user
           if (message.sender.id === logId) {
             var li = document.createElement("li");
-            li.appendChild(
-              document.createTextNode(message.parts[0].payload.content)
-            );
+            var div = document.createElement("div");
+            div.innerHTML = message.parts[0].payload.content;
+            div.setAttribute("class", "logContent");
+            li.appendChild(div);
             ul.appendChild(li);
           }
           const h5 = document.getElementById("titId");
           h5.innerHTML = logId;
-          //Bubble mode
-          //Gets the most recent 100 messages ordered from newest to oldest
+
           currentUser
             .fetchMultipartMessages({
               roomId: roomId,
-              direction: 'older',
+              direction: "older",
               limit: 100
             })
             .then(messages => {
+              /*
+              //Chat log mode
+              var ul = document.createElement("ul");
+              ul.setAttribute("padding", "0");
+              ul.setAttribute("list-style-type", "none");
+              //Adds the message to the log if it belongs to the user
+              messages.forEach(element => {
+                if (element.senderId === logId) {
+                  var li = document.createElement("li");
+                  var div = document.createElement("div");
+                  div.innerHTML = message.parts[0].payload.content;
+                  div.setAttribute("class", "logContent");
+                  li.appendChild(div);
+                  ul.appendChild(li);
+                }
+                console.log(element);
+              });
+              document.getElementById("logP").firstChild.replaceWith(ul);
+              const h5 = document.getElementById("titId");
+              h5.innerHTML = logId;
+              */
+
+              //Bubble mode
+              //Gets the most recent 100 messages ordered from newest to oldest
               var currentRooms = currentUser.rooms;
               var thisRoom;
               //Get the room that the MessageList should display based on roomId
@@ -81,7 +105,8 @@ chatManager
                 const cardUser = userArray[i];
                 //Loops for the messages
                 for (let j = 0; j < messages.length; j++) {
-                  if (messages[j].sender.id === cardUser.id) { //Other passed terms
+                  if (messages[j].sender.id === cardUser.id) {
+                    //Other passed terms
                     //Gets the text portion of the most recent message
                     lastMessage = messages[j].parts[0].payload.content;
                     //Get the card component ids
@@ -90,19 +115,30 @@ chatManager
                     var imgId = "img" + cardId;
                     var presId = "pres" + cardId;
                     //Add the setting button
-                    document.getElementById(imgId).setAttribute("class", "fas fa-ellipsis-v");
-                    document.getElementById(presId).setAttribute("class", "fas fa-circle");
+                    document
+                      .getElementById(imgId)
+                      .setAttribute("class", "fas fa-ellipsis-v");
+                    document
+                      .getElementById(presId)
+                      .setAttribute("class", "fas fa-circle");
                     if (userArray[i].presence.state === "online") {
-                      document.getElementById(presId).setAttribute("style", "color:green");
+                      document
+                        .getElementById(presId)
+                        .setAttribute("style", "color:green");
                     } else {
-                      document.getElementById(presId).setAttribute("style", "color:gray");
+                      document
+                        .getElementById(presId)
+                        .setAttribute("style", "color:gray");
                     }
                     //Changes the card components
                     document.getElementById(cardId).innerHTML = lastMessage;
                     document.getElementById(cardUserId).innerHTML = cardUser.id;
-                    document.getElementById(cardUserId).classList.add(cardUser.id);
+                    document
+                      .getElementById(cardUserId)
+                      .classList.add(cardUser.id);
                     messageAppended = true;
-                  } else if (j === messages.length - 1) { //Last failed term or no messages has been sent
+                  } else if (j === messages.length - 1) {
+                    //Last failed term or no messages has been sent
                     //If a message is appended before, the defualt noMessage string will not be appended
                     if (messageAppended === true) {
                       break;
@@ -115,12 +151,20 @@ chatManager
                     var imgId = "img" + cardId;
                     var presId = "pres" + cardId;
                     //Add the setting button
-                    document.getElementById(imgId).setAttribute("class", "fas fa-ellipsis-v");
-                    document.getElementById(presId).setAttribute("class", "fas fa-circle");
+                    document
+                      .getElementById(imgId)
+                      .setAttribute("class", "fas fa-ellipsis-v");
+                    document
+                      .getElementById(presId)
+                      .setAttribute("class", "fas fa-circle");
                     if (userArray[i].presence.state === "online") {
-                      document.getElementById(presId).setAttribute("style", "color:green");
+                      document
+                        .getElementById(presId)
+                        .setAttribute("style", "color:green");
                     } else {
-                      document.getElementById(presId).setAttribute("style", "color:gray");
+                      document
+                        .getElementById(presId)
+                        .setAttribute("style", "color:gray");
                     }
                     //Changes the card components
                     document.getElementById(cardId).innerHTML = lastMessage;

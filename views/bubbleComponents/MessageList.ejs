@@ -130,11 +130,11 @@
 </div>
 <!-- Chat Log mode -->
 <div id="log">
-    <div class="card px-3 vh-100" id="logCard">
-        <div class="card-body">
+    <div class="card pl-3 vh-100 pr-0" id="logCard">
+        <div class="card-body overflow-auto pl-0 pr-0">
             <h5 class="card-title" id="titId"></h5>
-            <div id="logBody">
-                <p class="card-text">
+            <div id="logBody" class="overflow-auto">
+                <p class="card-text" id="logP">
                     <ul id="logList" style="list-style-type: none;padding:0;"></ul>
                 </p>
             </div>
@@ -169,6 +169,11 @@
     <button class="dropdown-item" href="#" id="dropdownBlock">Block</button>
     <button class="dropdown-item" href="#" id="dropdownQuote">Quote message</button>
     <button class="dropdown-item" type="submit" form="deleteMsgForm" id="dropdownDelete" name="message">Delete message</button>
+</div>
+<!-- Chat log right click -->
+<div class="dropdown-menu dropdown-menu-sm" id="context-menu-4">
+    <button class="dropdown-item" href="#" id="logRClickQuote">Quote message</button>
+    <button class="dropdown-item" type="submit" form="deleteMsgForm" id="logRClickDelete" name="message">Delete message</button>
 </div>
 <!-- External scripts -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
