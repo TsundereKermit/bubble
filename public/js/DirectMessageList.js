@@ -2,7 +2,7 @@
 var username = document.getElementById("name").textContent;
 
 //Gets the ChatKit roomId
-var roomId = document.getElementById("dmId").textContent;
+var dmId = document.getElementById("dmId").textContent;
 
 chatManager
   .connect()
