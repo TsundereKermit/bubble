@@ -42,12 +42,6 @@ router.get("/index", (req, res) => {
     //Render the index page
     res.render("index", {
         //name: req.user.name,
-<<<<<<< HEAD
-        name: "Ace",
-        title: 'Bubble', 
-        roomId: 'jPBGwdGQli'
-    }));
-=======
         name: "TsundereKermit",
         title: "Bubble",
         roomId: "jPBGwdGQli", 
@@ -55,7 +49,6 @@ router.get("/index", (req, res) => {
         logId: 'TsundereKermit'
     });
 });
->>>>>>> 08cd4e321daf6d5bcbcda055cb1d92b3178b3ec1
 
 //addFriend form is submitted
 router.post('/addFriend', (req, res) => {
@@ -74,21 +67,6 @@ router.post('/addFriend', (req, res) => {
     if (errors.length > 0) {
         res.render('index', { name: inputUser, errors, title: 'Bubble' })
     } else {
-<<<<<<< HEAD
-=======
-        //Creates the room based on submitted data
-        chatkit.createRoom({
-            creatorId: inputUser,
-            name: friendId,
-            private: true,
-        })
-        .then(() => {
-            console.log('DM with ' + friendId + ' created successfully');
-        })
-        .catch((err) => {
-            console.error(err);
-        });
->>>>>>> 08cd4e321daf6d5bcbcda055cb1d92b3178b3ec1
 
         chatkit.getUsers()
             .then(user => {

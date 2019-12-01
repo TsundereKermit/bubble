@@ -38,144 +38,136 @@ chatManager
         userIsAdmin = true;
       }
     });
+    currentUser.fetchMultipartMessages({
+        roomId: roomId,
+        direction: "older",
+        limit: 100
+      })
+      .then(messages => {
+        //Chat log mode
+        const ul = document.getElementById("logList");
+        //Adds the message to the log if it belongs to the user
+        messages.forEach(element => {
+          if (element.senderId === logId) {
+            var li = document.createElement("li");
+            var div = document.createElement("div");
+            div.innerHTML = element.parts[0].payload.content;
+            div.setAttribute("class", "logContent");
+            li.appendChild(div);
+            ul.appendChild(li);
+          }
+        });
+        const h5 = document.getElementById("titId");
+        h5.innerHTML = logId;
+
+        //Bubble mode
+        //Gets the most recent 100 messages ordered from newest to oldest
+        var currentRooms = currentUser.rooms;
+        var thisRoom;
+        //Get the room that the MessageList should display based on roomId
+        currentRooms.forEach(element => {
+          if (element.id === roomId) {
+            thisRoom = element;
+          }
+        });
+        //Gets an array of all users in the room
+        var userArray = thisRoom.users;
+        //Setup boolean for if/else
+        var messageAppended = false;
+        //Loops through all the users to get content for each card
+        for (let i = 0; i < userArray.length; i++) {
+          const cardUser = userArray[i];
+          //Loops for the messages
+          for (let j = 0; j < messages.length; j++) {
+            if (messages[j].sender.id === cardUser.id) {
+              //Other passed terms
+              //Gets the text portion of the most recent message
+              lastMessage = messages[j].parts[0].payload.content;
+              //Get the card component ids
+              var cardId = i.toString();
+              var cardUserId = "hd" + cardId;
+              var imgId = "img" + cardId;
+              var presId = "pres" + cardId;
+              //Add the setting button
+              document
+                .getElementById(imgId)
+                .setAttribute("class", "fas fa-ellipsis-v");
+              document
+                .getElementById(presId)
+                .setAttribute("class", "fas fa-circle");
+              if (userArray[i].presence.state === "online") {
+                document
+                  .getElementById(presId)
+                  .setAttribute("style", "color:green");
+              } else {
+                document
+                  .getElementById(presId)
+                  .setAttribute("style", "color:gray");
+              }
+              //Changes the card components
+              document.getElementById(cardId).innerHTML = lastMessage;
+              document.getElementById(cardUserId).innerHTML = cardUser.id;
+              document.getElementById(cardUserId).classList.add(cardUser.id);
+              messageAppended = true;
+            } else if (j === messages.length - 1) {
+              //Last failed term or no messages has been sent
+              //If a message is appended before, the defualt noMessage string will not be appended
+              if (messageAppended === true) {
+                break;
+              } else {
+                lastMessage = `${cardUser.name} has not sent a message in this room recently`;
+              }
+              //Get the card component ids
+              var cardId = i.toString();
+              var cardUserId = "hd" + cardId;
+              var imgId = "img" + cardId;
+              var presId = "pres" + cardId;
+              //Add the setting button
+              document
+                .getElementById(imgId)
+                .setAttribute("class", "fas fa-ellipsis-v");
+              document
+                .getElementById(presId)
+                .setAttribute("class", "fas fa-circle");
+              if (userArray[i].presence.state === "online") {
+                document
+                  .getElementById(presId)
+                  .setAttribute("style", "color:green");
+              } else {
+                document
+                  .getElementById(presId)
+                  .setAttribute("style", "color:gray");
+              }
+              //Changes the card components
+              document.getElementById(cardId).innerHTML = lastMessage;
+              document.getElementById(cardUserId).innerHTML = cardUser.id;
+            }
+          }
+        }
+      })
+      .catch(err => {
+        console.error(`Error fetching messages: ${err}`);
+      });
     //Access room messages and users
     currentUser.subscribeToRoomMultipart({
       roomId: roomId,
       hooks: {
         onMessage: message => {
-          //Chat log mode
-          const ul = document.getElementById("logList");
-          //Adds the message to the log if it belongs to the user
-          if (message.sender.id === logId) {
-            var li = document.createElement("li");
-            var div = document.createElement("div");
-            div.innerHTML = message.parts[0].payload.content;
-            div.setAttribute("class", "logContent");
-            li.appendChild(div);
-            ul.appendChild(li);
-          }
-          const h5 = document.getElementById("titId");
-          h5.innerHTML = logId;
-
-          currentUser
-            .fetchMultipartMessages({
-              roomId: roomId,
-              direction: "older",
-              limit: 100
-            })
-            .then(messages => {
-              /*
-              //Chat log mode
-              var ul = document.createElement("ul");
-              ul.setAttribute("padding", "0");
-              ul.setAttribute("list-style-type", "none");
-              //Adds the message to the log if it belongs to the user
-              messages.forEach(element => {
-                if (element.senderId === logId) {
-                  var li = document.createElement("li");
-                  var div = document.createElement("div");
-                  div.innerHTML = message.parts[0].payload.content;
-                  div.setAttribute("class", "logContent");
-                  li.appendChild(div);
-                  ul.appendChild(li);
-                }
-                console.log(element);
-              });
-              document.getElementById("logP").firstChild.replaceWith(ul);
-              const h5 = document.getElementById("titId");
-              h5.innerHTML = logId;
-              */
-
-              //Bubble mode
-              //Gets the most recent 100 messages ordered from newest to oldest
-              var currentRooms = currentUser.rooms;
-              var thisRoom;
-              //Get the room that the MessageList should display based on roomId
-              currentRooms.forEach(element => {
-                if (element.id === roomId) {
-                  thisRoom = element;
-                }
-              });
-              //Gets an array of all users in the room
-              var userArray = thisRoom.users;
-              //Setup boolean for if/else
-              var messageAppended = false;
-              //Loops through all the users to get content for each card
-              for (let i = 0; i < userArray.length; i++) {
-                const cardUser = userArray[i];
-                //Loops for the messages
-                for (let j = 0; j < messages.length; j++) {
-                  if (messages[j].sender.id === cardUser.id) {
-                    //Other passed terms
-                    //Gets the text portion of the most recent message
-                    lastMessage = messages[j].parts[0].payload.content;
-                    //Get the card component ids
-                    var cardId = i.toString();
-                    var cardUserId = "hd" + cardId;
-                    var imgId = "img" + cardId;
-                    var presId = "pres" + cardId;
-                    //Add the setting button
-                    document
-                      .getElementById(imgId)
-                      .setAttribute("class", "fas fa-ellipsis-v");
-                    document
-                      .getElementById(presId)
-                      .setAttribute("class", "fas fa-circle");
-                    if (userArray[i].presence.state === "online") {
-                      document
-                        .getElementById(presId)
-                        .setAttribute("style", "color:green");
-                    } else {
-                      document
-                        .getElementById(presId)
-                        .setAttribute("style", "color:gray");
-                    }
-                    //Changes the card components
-                    document.getElementById(cardId).innerHTML = lastMessage;
-                    document.getElementById(cardUserId).innerHTML = cardUser.id;
-                    document
-                      .getElementById(cardUserId)
-                      .classList.add(cardUser.id);
-                    messageAppended = true;
-                  } else if (j === messages.length - 1) {
-                    //Last failed term or no messages has been sent
-                    //If a message is appended before, the defualt noMessage string will not be appended
-                    if (messageAppended === true) {
-                      break;
-                    } else {
-                      lastMessage = `${cardUser.name} has not sent a message in this room recently`;
-                    }
-                    //Get the card component ids
-                    var cardId = i.toString();
-                    var cardUserId = "hd" + cardId;
-                    var imgId = "img" + cardId;
-                    var presId = "pres" + cardId;
-                    //Add the setting button
-                    document
-                      .getElementById(imgId)
-                      .setAttribute("class", "fas fa-ellipsis-v");
-                    document
-                      .getElementById(presId)
-                      .setAttribute("class", "fas fa-circle");
-                    if (userArray[i].presence.state === "online") {
-                      document
-                        .getElementById(presId)
-                        .setAttribute("style", "color:green");
-                    } else {
-                      document
-                        .getElementById(presId)
-                        .setAttribute("style", "color:gray");
-                    }
-                    //Changes the card components
-                    document.getElementById(cardId).innerHTML = lastMessage;
-                    document.getElementById(cardUserId).innerHTML = cardUser.id;
-                  }
-                }
+          for (let i = 0; i < 9; i++) {
+            var onMessageHeader = document.getElementById("hd" + i.toString());
+            if (onMessageHeader.innerHTML === message.senderId) {
+              document.getElementById(i.toString()).innerHTML = message.parts[0].payload.content;
+              if (message.senderId === logId) {
+                const ul = document.getElementById("logList");
+                var li = document.createElement("li");
+                var div = document.createElement("div");
+                div.innerHTML = message.parts[0].payload.content;
+                div.setAttribute("class", "logContent");
+                li.appendChild(div);
+                ul.appendChild(li);
               }
-            })
-            .catch(err => {
-              console.error(`Error fetching messages: ${err}`);
-            });
+            }
+          }
         },
         onUserStartedTyping: user => {
           console.log("User is typing...");
@@ -185,7 +177,8 @@ chatManager
           console.log("User stopped typing");
           document.getElementById(user.id).innerHTML = user.id;
         }
-      }
+      },
+      messageLimit: 0
     });
   })
   .catch(error => {

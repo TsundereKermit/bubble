@@ -30,8 +30,8 @@ input[id^="img"] {
     padding:0;
 };
 
-#logBody {
-    overflow-y:scroll; 
+#logP {
+    overflow-y:auto; 
     display:flex; 
     flex-direction:column-reverse;
 };
