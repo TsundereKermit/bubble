@@ -43,6 +43,7 @@ $(document).ready(() => {
     //Gets username
     var userNumber = targetId.charAt(targetId.length - 1);
     logUsername = document.getElementById("hd" + userNumber).innerHTML;
+    //Changes chatlog button to suit the username clicked
     var logButton = document.getElementById("logContextBtn");
     logButton.innerHTML = "ChatLog (" + logUsername + ")";
     logButton.value = logUsername;
@@ -94,6 +95,7 @@ $(document).ready(() => {
     var userNumber = targetId.charAt(targetId.length - 1);
     logUsername = document.getElementById("hd" + userNumber).innerHTML;
     logText = document.getElementById(userNumber).innerHTML;
+    //Admin privileges
     if (!userIsAdmin && logUsername !== username) { //Not admin nor bubble owner
       $("#delete").show();
       $("#delete").hide();
@@ -146,9 +148,11 @@ $(document).ready(() => {
     var userNumber = targetId.charAt(targetId.length - 1);
     logUsername = document.getElementById("hd" + userNumber).innerHTML;
     logText = document.getElementById(userNumber).innerHTML;
+    //Changes log button based on username clicked
     var logButton = document.getElementById("dropdownLog");
     logButton.innerHTML = "ChatLog (" + logUsername + ")";
     logButton.value = logUsername;
+    //Admin privileges
     if (!userIsAdmin && logUsername !== username) { //Not admin nor bubble owner
       $("#dropdownDelete").show();
       $("#dropdownDelete").hide();

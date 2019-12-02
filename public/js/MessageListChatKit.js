@@ -33,11 +33,13 @@ chatManager
       roomId = currentUser.rooms[0].id;
       document.getElementById("deleteMsgRoom").value = roomId;
     }
+    //Check for user privileges
     currentUser.customData.perm.forEach(element => {
       if (element === roomId) {
         userIsAdmin = true;
       }
     });
+    //Get messages in roomId
     currentUser.fetchMultipartMessages({
         roomId: roomId,
         direction: "older",
@@ -61,7 +63,6 @@ chatManager
         h5.innerHTML = logId;
 
         //Bubble mode
-        //Gets the most recent 100 messages ordered from newest to oldest
         var currentRooms = currentUser.rooms;
         var thisRoom;
         //Get the room that the MessageList should display based on roomId
@@ -95,6 +96,7 @@ chatManager
               document
                 .getElementById(presId)
                 .setAttribute("class", "fas fa-circle");
+              //Check for user presence
               if (userArray[i].presence.state === "online") {
                 document
                   .getElementById(presId)
@@ -129,6 +131,7 @@ chatManager
               document
                 .getElementById(presId)
                 .setAttribute("class", "fas fa-circle");
+              //Check for user presence
               if (userArray[i].presence.state === "online") {
                 document
                   .getElementById(presId)
@@ -152,11 +155,14 @@ chatManager
     currentUser.subscribeToRoomMultipart({
       roomId: roomId,
       hooks: {
+        //New message
         onMessage: message => {
           for (let i = 0; i < 9; i++) {
+            //Replace bubble with new message
             var onMessageHeader = document.getElementById("hd" + i.toString());
             if (onMessageHeader.innerHTML === message.senderId) {
               document.getElementById(i.toString()).innerHTML = message.parts[0].payload.content;
+              //Add new message to log if appropriate
               if (message.senderId === logId) {
                 const ul = document.getElementById("logList");
                 var li = document.createElement("li");
@@ -169,6 +175,7 @@ chatManager
             }
           }
         },
+        //Typing indicators
         onUserStartedTyping: user => {
           console.log("User is typing...");
           document.getElementById(user.id).innerHTML = user.id + " (typing...)";
