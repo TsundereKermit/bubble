@@ -174,15 +174,6 @@ chatManager
               }
             }
           }
-        },
-        //Typing indicators
-        onUserStartedTyping: user => {
-          console.log("User is typing...");
-          document.getElementById(user.id).innerHTML = user.id + " (typing...)";
-        },
-        onUserStoppedTyping: user => {
-          console.log("User stopped typing");
-          document.getElementById(user.id).innerHTML = user.id;
         }
       },
       messageLimit: 0
