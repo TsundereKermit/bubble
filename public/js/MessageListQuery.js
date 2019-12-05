@@ -213,7 +213,7 @@ $(document).ready(() => {
   });
 
   //Log text right click
-  $(".logContent").contextmenu(e => {
+  $(".logCardBody").contextmenu(e => {
     console.log("log");
     var top = e.pageY;
     var left = e.pageX;

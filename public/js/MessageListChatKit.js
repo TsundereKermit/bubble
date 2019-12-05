@@ -93,6 +93,7 @@ chatManager
               document
                 .getElementById(imgId)
                 .setAttribute("class", "fas fa-ellipsis-v");
+              /*
               document
                 .getElementById(presId)
                 .setAttribute("class", "fas fa-circle");
@@ -106,6 +107,7 @@ chatManager
                   .getElementById(presId)
                   .setAttribute("style", "color:gray");
               }
+              */
               //Changes the card components
               document.getElementById(cardId).innerHTML = lastMessage;
               document.getElementById(cardUserId).innerHTML = cardUser.id;
@@ -128,6 +130,7 @@ chatManager
               document
                 .getElementById(imgId)
                 .setAttribute("class", "fas fa-ellipsis-v");
+              /*
               document
                 .getElementById(presId)
                 .setAttribute("class", "fas fa-circle");
@@ -141,6 +144,7 @@ chatManager
                   .getElementById(presId)
                   .setAttribute("style", "color:gray");
               }
+              */
               //Changes the card components
               document.getElementById(cardId).innerHTML = lastMessage;
               document.getElementById(cardUserId).innerHTML = cardUser.id;
