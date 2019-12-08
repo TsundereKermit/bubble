@@ -28,15 +28,6 @@ chatManager
       //Clear input form
       input.value = "";
     });
-    $("#message-text").on("keyup", () => {
-      currentUser.isTypingIn({ 
-        roomId: roomId 
-      })
-      .then(() => {
-        console.log(currentUser.name + " is typing...");
-      })
-      .catch(err => console.error(err));
-    });
   })
   .catch(error => {
     console.error("error:", error);

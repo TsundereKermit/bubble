@@ -18,7 +18,9 @@
             <div class="card h-100">
                 <div class="card-body" style="background-color:lightcoral">
                     <div class="d-flex flex-row justify-content-between" id="header0">
-                        <i id="pres0"></i>
+                        <!--
+                            <i id="pres0"></i>
+                        -->
                         <h5 class="card-title usernameH5 flex-grow-1" id="hd0"></h5>&nbsp;
                         <i id="img0"></i>
                     </div>
@@ -30,7 +32,9 @@
             <div class="card h-100">
                 <div class="card-body" style="background-color:lightsalmon">
                     <div class="d-flex flex-row justify-content-between" id="header1">
-                        <i id="pres1"></i>
+                        <!--
+                            <i id="pres1"></i>
+                        -->
                         <h5 class="card-title usernameH5 flex-grow-1" id="hd1"></h5>&nbsp;
                         <i id="img1"></i>
                     </div>
@@ -42,7 +46,9 @@
             <div class="card h-100">
                 <div class="card-body" style="background-color:lightgoldenrodyellow">
                     <div class="d-flex flex-row justify-content-between" id="header2">
-                        <i id="pres2"></i>
+                        <!--
+                            <i id="pres2"></i>
+                        -->
                         <h5 class="card-title usernameH5 flex-grow-1" id="hd2"></h5>&nbsp;
                         <i id="img2"></i>
                     </div>
@@ -56,7 +62,9 @@
             <div class="card h-100">
                 <div class="card-body" style="background-color:lightgreen">
                     <div class="d-flex flex-row justify-content-between" id="header3">
-                        <i id="pres3"></i>
+                        <!--
+                            <i id="pres3"></i>
+                        -->
                         <h5 class="card-title usernameH5 flex-grow-1" id="hd3"></h5>&nbsp;
                         <i id="img3"></i>
                     </div>
@@ -68,7 +76,9 @@
             <div class="card h-100">
                 <div class="card-body" style="background-color:lightseagreen">
                     <div class="d-flex flex-row justify-content-between" id="header4">
-                        <i id="pres4"></i>
+                        <!--
+                            <i id="pres4"></i>
+                        -->
                         <h5 class="card-title usernameH5 flex-grow-1" id="hd4"></h5>&nbsp;
                         <i id="img4"></i>
                     </div>
@@ -80,7 +90,9 @@
             <div class="card h-100">
                 <div class="card-body" style="background-color:lightskyblue">
                     <div class="d-flex flex-row justify-content-between" id="header5">
-                        <i id="pres5"></i>
+                        <!--
+                            <i id="pres5"></i>
+                        -->
                         <h5 class="card-title usernameH5 flex-grow-1" id="hd5"></h5>&nbsp;
                         <i id="img5"></i>
                     </div>
@@ -94,7 +106,9 @@
             <div class="card h-100">
                 <div class="card-body" style="background-color:plum">
                     <div class="d-flex flex-row justify-content-between" id="header6">
-                        <i id="pres6"></i>
+                        <!--
+                            <i id="pres6"></i>
+                        -->
                         <h5 class="card-title usernameH5 flex-grow-1" id="hd6"></h5>&nbsp;
                         <i id="img6"></i>
                     </div>
@@ -106,7 +120,9 @@
             <div class="card h-100">
                 <div class="card-body" style="background-color:lightslategray">
                     <div class="d-flex flex-row justify-content-between" id="header7">
-                        <i id="pres7"></i>
+                        <!--
+                            <i id="pres7"></i>
+                        -->
                         <h5 class="card-title usernameH5 flex-grow-1" id="hd7"></h5>&nbsp;
                         <i id="img7"></i>
                     </div>
@@ -118,7 +134,9 @@
             <div class="card h-100">
                 <div class="card-body" style="background-color:hotpink">
                     <div class="d-flex flex-row justify-content-between" id="header8">
-                        <i id="pres8"></i>
+                        <!--
+                            <i id="pres8"></i>
+                        -->
                         <h5 class="card-title usernameH5 flex-grow-1" id="hd8"></h5>&nbsp;
                         <i id="img8"></i>
                     </div>
@@ -130,13 +148,11 @@
 </div>
 <!-- Chat Log mode -->
 <div id="log">
-    <div class="card px-3 vh-100" id="logCard">
-        <div class="card-body">
-            <h5 class="card-title" id="titId"></h5>
-            <div id="logBody">
-                <p class="card-text">
-                    <ul id="logList" style="list-style-type: none;padding:0;"></ul>
-                </p>
+    <div class="card pl-3 vh-100 pr-0" id="logCard" style="padding-bottom:70px">
+        <h5 class="card-title" id="titId"></h5>
+        <div class="card-body pl-0 pr-0 h-100 logCardBody" style="overflow-y:auto;display:flex;flex-direction:column-reverse">
+            <div class="card-text h-auto" id="logP">
+                <ul id="logList" style="list-style-type: none;padding:0;"></ul>
             </div>
         </div>  
     </div>
@@ -169,6 +185,11 @@
     <button class="dropdown-item" href="#" id="dropdownBlock">Block</button>
     <button class="dropdown-item" href="#" id="dropdownQuote">Quote message</button>
     <button class="dropdown-item" type="submit" form="deleteMsgForm" id="dropdownDelete" name="message">Delete message</button>
+</div>
+<!-- Chat log right click -->
+<div class="dropdown-menu dropdown-menu-sm" id="context-menu-4">
+    <button class="dropdown-item" href="#" id="logRClickQuote">Quote message</button>
+    <button class="dropdown-item" type="submit" form="deleteMsgForm" id="logRClickDelete" name="message">Delete message</button>
 </div>
 <!-- External scripts -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>

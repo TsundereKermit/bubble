@@ -35,7 +35,7 @@ $(document).ready(() => {
   var logUsername;
   var logText;
   //Username right click
-  $(".usernameH5").on("contextmenu", e => {
+  $(".usernameH5").contextmenu(e => {
     //Gets target ID
     targetId = e.target.id;
     var top = e.pageY;
@@ -43,6 +43,7 @@ $(document).ready(() => {
     //Gets username
     var userNumber = targetId.charAt(targetId.length - 1);
     logUsername = document.getElementById("hd" + userNumber).innerHTML;
+    //Changes chatlog button to suit the username clicked
     var logButton = document.getElementById("logContextBtn");
     logButton.innerHTML = "ChatLog (" + logUsername + ")";
     logButton.value = logUsername;
@@ -66,7 +67,6 @@ $(document).ready(() => {
     //Handles button click events
     switch (target) {
       case "log":
-        console.log("Display chat log of user: " + logUsername);
         break;
       case "friend":
         console.log("Adding friend with username: " + logUsername);
@@ -86,7 +86,7 @@ $(document).ready(() => {
   });
 
   //Bubble text right click
-  $(".bubbleContent").on("contextmenu", e => {
+  $(".bubbleContent").contextmenu(e => {
     //Get target ID
     targetId = e.target.id;
     var top = e.pageY;
@@ -95,10 +95,11 @@ $(document).ready(() => {
     var userNumber = targetId.charAt(targetId.length - 1);
     logUsername = document.getElementById("hd" + userNumber).innerHTML;
     logText = document.getElementById(userNumber).innerHTML;
-    if (userIsAdmin !== true && logUsername !== username) { //Not admin nor bubble owner
+    //Admin privileges
+    if (!userIsAdmin && logUsername !== username) { //Not admin nor bubble owner
       $("#delete").show();
       $("#delete").hide();
-    } else if (userIsAdmin !== true && logUsername === username) { //Not admin but bubble owner
+    } else if (!userIsAdmin && logUsername === username) { //Not admin but bubble owner
       $("#delete").show();
       $("#delete").hide();
     } else { //Is admin
@@ -129,7 +130,6 @@ $(document).ready(() => {
         console.log("Quoting message: " + logText);
         break;
       case "delete":
-        console.log("Delete message: " + logText);
         break;
       default: 
         console.error("An error has occured...");
@@ -148,13 +148,15 @@ $(document).ready(() => {
     var userNumber = targetId.charAt(targetId.length - 1);
     logUsername = document.getElementById("hd" + userNumber).innerHTML;
     logText = document.getElementById(userNumber).innerHTML;
+    //Changes log button based on username clicked
     var logButton = document.getElementById("dropdownLog");
     logButton.innerHTML = "ChatLog (" + logUsername + ")";
     logButton.value = logUsername;
-    if (userIsAdmin !== true && logUsername !== username) { //Not admin nor bubble owner
+    //Admin privileges
+    if (!userIsAdmin && logUsername !== username) { //Not admin nor bubble owner
       $("#dropdownDelete").show();
       $("#dropdownDelete").hide();
-    } else if (userIsAdmin !== true && logUsername === username) { //Not admin but bubble owner
+    } else if (!userIsAdmin && logUsername === username) { //Not admin but bubble owner
       $("#dropdownDelete").show();
       $("#dropdownDelete").hide();
     } else { //Is admin
@@ -184,7 +186,6 @@ $(document).ready(() => {
     //Handles button click events
     switch (target) {
       case "dropdownLog":
-        console.log("Chatlog for user: " + logUsername);
         break;
       case "dropdownFriend":
         console.log("Adding friend: " + logUsername);
@@ -193,7 +194,6 @@ $(document).ready(() => {
         console.log("Quote: " + logText);
         break;
       case "dropdownDelete":
-        console.log("Delete: " + logText);
         break;
       case "dropdownBlock": 
         console.log("Block: " + logUsername);
@@ -206,6 +206,45 @@ $(document).ready(() => {
         break;
     }
     //Hide menu after button click
+    $(this)
+      .parent()
+      .removeClass("show")
+      .hide();
+  });
+
+  //Log text right click
+  $(".logCardBody").contextmenu(e => {
+    console.log("log");
+    var top = e.pageY;
+    var left = e.pageX;
+    logText = e.target.innerHTML;
+    logUsername = document.getElementById("titId").innerHTML;
+    if (!userIsAdmin && logUsername !== username) { //Not admin nor bubble owner
+      $("#logRClickDelete").show();
+      $("#logRClickDelete").hide();
+    } else if (!userIsAdmin && logUsername === username) { //Not admin but bubble owner
+      $("#logRClickDelete").show();
+      $("#logRClickDelete").hide();
+    } else { //Is admin
+      $("#logRClickDelete").show();
+      $("#logRClickEdit").show();
+    }
+    $("#logRClickDelete").val(logText);
+    $("#context-menu-4")
+      .css({
+        display: "block",
+        top: top,
+        left: left
+      })
+      .addClass("show");
+    return false; //blocks default Webbrowser right click menu
+  });
+  //Hide contextmenu when body is clicked
+  $("body").click(() => {
+    $("#context-menu-4").hide();
+  });
+  $("#context-menu-4 button").on("click", e => {
+    //Hides the menu after button click
     $(this)
       .parent()
       .removeClass("show")
