@@ -101,7 +101,6 @@ $(document).ready(() => {
       $("#delete").hide();
     } else if (!userIsAdmin && logUsername === username) { //Not admin but bubble owner
       $("#delete").show();
-      $("#delete").hide();
     } else { //Is admin
       $("#delete").show();
       $("#edit").show();
@@ -158,7 +157,6 @@ $(document).ready(() => {
       $("#dropdownDelete").hide();
     } else if (!userIsAdmin && logUsername === username) { //Not admin but bubble owner
       $("#dropdownDelete").show();
-      $("#dropdownDelete").hide();
     } else { //Is admin
       $("#dropdownDelete").show();
     }
@@ -224,7 +222,6 @@ $(document).ready(() => {
       $("#logRClickDelete").hide();
     } else if (!userIsAdmin && logUsername === username) { //Not admin but bubble owner
       $("#logRClickDelete").show();
-      $("#logRClickDelete").hide();
     } else { //Is admin
       $("#logRClickDelete").show();
       $("#logRClickEdit").show();
