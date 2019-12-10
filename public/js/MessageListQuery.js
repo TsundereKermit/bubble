@@ -247,21 +247,4 @@ $(document).ready(() => {
       .removeClass("show")
       .hide();
   });
-
-  $("#logScrollDetect").scroll(() => {
-    var listItems = $("#logList li");
-    listItems.each((idx, li) => {
-      isInViewport(li.firstChild);
-    })
-  })
-  function isInViewport (element) {
-    var viewportTop = $(window).scrollTop();
-    var viewportBottom = viewportTop + $(window).height();
-    var elementTop = $(element).offset.top;
-    var elementBottom = $(element).offset.top + $(element).outerHeight();
-    console.log("Viewport top: " + viewportTop);
-    console.log("Viewport bottom: " + viewportBottom);
-    console.log("Element top: " + elementTop);
-    console.log("Element bottom: " + elementBottom);
-  }
 });
