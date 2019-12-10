@@ -42,15 +42,11 @@ router.get("/index", (req, res) => {
     //Render the index page
     res.render("index", {
         //name: req.user.name,
-<<<<<<< HEAD
-        name: "Ace",
-=======
         name: "TsundereKermit",
->>>>>>> 4fcdcc200aac31b8f1abda9b6029279e3b71560d
         title: "Bubble",
         roomId: "jPBGwdGQli", 
         //logId: req.user.name
-        logId: 'Ace'
+        logId: 'TsundereKermit'
     });
 });
 
@@ -126,20 +122,8 @@ router.post('/addFriend', (req, res) => {
 
     //Refreshes the page if an empty form is filled
     if (errors.length > 0) {
-<<<<<<< HEAD
-        res.render('index', { 
-            name: inputUser, 
-            errors, 
-            title: 'Bubble', 
-            roomId: 'jPBGwdGQli', 
-            logId: inputUser
-        })
-    }
-       
-=======
         res.render('index', { name: inputUser, errors, title: 'Bubble' })
     } else {
-
         chatkit.getUsers()
             .then(user => {
                 var usernames = [];
@@ -196,7 +180,6 @@ router.post('/addFriend', (req, res) => {
         }
     } 
         
->>>>>>> 4fcdcc200aac31b8f1abda9b6029279e3b71560d
         //Renders the index page
         res.render('index', { 
             name: inputUser, 
