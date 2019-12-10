@@ -183,45 +183,23 @@ chatManager
       messageLimit: 0
     });
 
-    //Send read cursor on load
-    var listItems = $("#logList li");
-    listItems.toArray().forEach(element => {
-      var elementTop = element.offsetTop + 64;
-      var elementBottom = element.offsetTop + element.offsetHeight + 64;
-      isInViewport(element, elementTop, elementBottom);
-    });
-    //Send read cursor on scroll (The user might not always be at the bottom when more messages are sent)
-    $("#logScrollDetect").scroll(() => {
-      var listItems = $("#logList li");
-      listItems.toArray().forEach(element => {
-        var elementTop = element.offsetTop + 64;
-        var elementBottom = element.offsetTop + element.offsetHeight + 64;
-        isInViewport(element, elementTop, elementBottom);
-      });
-    })
-    //Check if div is in viewport and sends the cursor
-    function isInViewport (li, top, bot) {
-      var viewportTop = $(window).scrollTop();
-      var viewportBottom = viewportTop + $(window).height();
-      var message = li.firstChild.innerHTML;
-      if (top > viewportTop && bot < viewportBottom) {
-        currentUser.fetchMultipartMessages({
-          roomId: roomId,
-          limit: 100
-        })
-        .then(messages => {
-          //Find the message and sends a cursor based on message
-          for (let m of messages) {
-            if (m.parts[0].payload.content === message) {
-              currentUser.setReadCursor({
-                roomId: roomId,
-                position: m.id
-              });
-            }
-          }
-        })
-        .catch(err => console.error(err));
-      }
+    if($("#log").is(":visible")) {
+      currentUser.fetchMultipartMessages({
+        roomId: roomId,
+        limit: 1
+      })
+      .then(messages => {
+        //Find the message and sends a cursor based on message
+        for (let m of messages) {
+          currentUser.setReadCursor({
+            roomId: roomId,
+            position: m.id
+          })
+          .then()
+          .catch(err => console.error(err))
+        }
+      })
+      .catch(err => console.error(err));
     }
   })
   .catch(error => {
