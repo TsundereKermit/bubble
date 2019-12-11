@@ -364,4 +364,21 @@ router.post("/deleteMsg", (req, res) => {
     });
 })
 
+router.post("/quoteMsg", (req, res) => {
+    //Form data
+    const { roomId, userId, message } = req.body;
+
+    console.log(roomId + " " + userId + " " + message);
+    /*
+        res.render('index', { 
+        name: userId, 
+        title: 'Bubble',
+        roomId: roomId,
+        logId: userId
+        quoteMsg: message
+        add the quoteMsg to everything else?
+    });
+    */
+});
+
 module.exports = router;

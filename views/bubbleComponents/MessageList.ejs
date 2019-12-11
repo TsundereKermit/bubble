@@ -162,6 +162,11 @@
     <input type="text" name="roomId" id="deleteMsgRoom">
     <input type="text" name="userId" value=<%- name %>>
 </form>
+<!-- quoteMsgForm -->
+<form action="/index/quoteMsg" method="POST" class="d-none" id="quoteMsgForm">
+    <input type="text" name="roomId" id="quoteMsgRoom">
+    <input type="text" name="userId" value=<%- name %>>
+</form>
 <!-- New chat log user form -->
 <form action="/index/chatlog" method="POST" class="d-none" id="chatlogForm">
     <input type="text" name="userId" value=<%= name %>>
@@ -175,7 +180,7 @@
 </div>
 <!-- Message right click -->
 <div class="dropdown-menu dropdown-menu-sm" id="context-menu-2">
-    <button class="dropdown-item" href="#" id="quote">Quote message</button>
+    <button class="dropdown-item" type="submit" form="quoteMsgForm" id="quote" name="message">Quote message</button>
     <button class="dropdown-item" type="submit" form="deleteMsgForm" id="delete" name="message">Delete message</button>
 </div>
 <!-- Vertical ellipsis left click -->
@@ -183,12 +188,12 @@
     <button class="dropdown-item" id="dropdownLog" name="logChangeName" type="submit" form="chatlogForm">ChatLog</button>
     <button class="dropdown-item" href="#" id="dropdownFriend">Start a DM</button>
     <button class="dropdown-item" href="#" id="dropdownBlock">Block</button>
-    <button class="dropdown-item" href="#" id="dropdownQuote">Quote message</button>
+    <button class="dropdown-item" type="submit" form="quoteMsgForm" id="dropdownQuote" name="message">Quote message</button>
     <button class="dropdown-item" type="submit" form="deleteMsgForm" id="dropdownDelete" name="message">Delete message</button>
 </div>
 <!-- Chat log right click -->
 <div class="dropdown-menu dropdown-menu-sm" id="context-menu-4">
-    <button class="dropdown-item" href="#" id="logRClickQuote">Quote message</button>
+    <button class="dropdown-item" type="submit" form="quoteMsgForm" id="logRClickQuote" name="message">Quote message</button>
     <button class="dropdown-item" type="submit" form="deleteMsgForm" id="logRClickDelete" name="message">Delete message</button>
 </div>
 <!-- External scripts -->

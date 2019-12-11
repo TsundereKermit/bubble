@@ -106,6 +106,7 @@ $(document).ready(() => {
       $("#edit").show();
     }
     $("#delete").val(logText);
+    $("#quote").val(logText);
     $("#context-menu").hide();
     $("#context-menu-3").hide();
     $("#context-menu-2")
@@ -161,6 +162,7 @@ $(document).ready(() => {
       $("#dropdownDelete").show();
     }
     $("#dropdownDelete").val(logText);
+    $("#dropdownQuote").val(logText);
     var top = e.pageY;
     var left = e.pageX;
     $("#context-menu").hide();
@@ -212,10 +214,10 @@ $(document).ready(() => {
 
   //Log text right click
   $(".logCardBody").contextmenu(e => {
-    console.log("log");
     var top = e.pageY;
     var left = e.pageX;
     logText = e.target.innerHTML;
+    console.log(logText);
     logUsername = document.getElementById("titId").innerHTML;
     if (!userIsAdmin && logUsername !== username) { //Not admin nor bubble owner
       $("#logRClickDelete").show();
@@ -227,6 +229,7 @@ $(document).ready(() => {
       $("#logRClickEdit").show();
     }
     $("#logRClickDelete").val(logText);
+    $("#logRClickQuote").val(logText);
     $("#context-menu-4")
       .css({
         display: "block",

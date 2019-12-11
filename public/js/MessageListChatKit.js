@@ -32,6 +32,10 @@ chatManager
     if (roomId === "jPBGwdGQli") {
       roomId = currentUser.rooms[0].id;
       document.getElementById("deleteMsgRoom").value = roomId;
+      document.getElementById("quoteMsgRoom").value = roomId;
+    } else { //Not 1st room
+      document.getElementById("deleteMsgRoom").value = roomId;
+      document.getElementById("quoteMsgRoom").value = roomId;
     }
     //Check for user privileges
     currentUser.customData.perm.forEach(element => {
@@ -183,6 +187,7 @@ chatManager
       messageLimit: 0
     });
 
+    /*
     if($("#log").is(":visible")) {
       currentUser.fetchMultipartMessages({
         roomId: roomId,
@@ -201,6 +206,7 @@ chatManager
       })
       .catch(err => console.error(err));
     }
+    */
   })
   .catch(error => {
     console.error("error:", error);
