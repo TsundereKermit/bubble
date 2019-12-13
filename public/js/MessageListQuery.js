@@ -1,5 +1,6 @@
 //DOM Manipulation
 $(document).ready(() => {
+  var msgVal;
   //Set the height of each bubble
   var viewportHeight = $(window).height();
   var bubbleHeight = (viewportHeight - 70) / 3;
@@ -72,10 +73,10 @@ $(document).ready(() => {
       case "friend":
         console.log("Adding friend with username: " + logUsername);
         break;
-      case "block": 
+      case "block":
         console.log("Blocking user: " + logUsername);
         break;
-      default: 
+      default:
         console.error("An error has occured...");
         break;
     }
@@ -97,12 +98,15 @@ $(document).ready(() => {
     logUsername = document.getElementById("hd" + userNumber).innerHTML;
     logText = document.getElementById(userNumber).innerHTML;
     //Admin privileges
-    if (!userIsAdmin && logUsername !== username) { //Not admin nor bubble owner
+    if (!userIsAdmin && logUsername !== username) {
+      //Not admin nor bubble owner
       $("#delete").show();
       $("#delete").hide();
-    } else if (!userIsAdmin && logUsername === username) { //Not admin but bubble owner
+    } else if (!userIsAdmin && logUsername === username) {
+      //Not admin but bubble owner
       $("#delete").show();
-    } else { //Is admin
+    } else {
+      //Is admin
       $("#delete").show();
       $("#edit").show();
     }
@@ -127,15 +131,28 @@ $(document).ready(() => {
     var target = e.target.id;
     //Handles button click events
     switch (target) {
-      case "quote": 
-        $("#message-text").val("QMsg" + logText.length + "QEnd" + logText);
+      case "quote":
+        msgVal = "QMsg" + logText.length + "QEnd" + logText;
+        $("#message-text").val(msgVal);
         break;
       case "delete":
         break;
-      default: 
+      default:
         console.error("An error has occured...");
         break;
     }
+    $("#message-text").keydown(e => {
+      if (e.keyCode === 8) {
+        if (
+          $("#message-text")
+            .val()
+            .substr(0, $("#message-text").val().length - 1)
+            .indexOf(msgVal) === -1
+        ) {
+          $("#message-text").val("");
+        }
+      }
+    });
     //Hides the menu after button click
     $(this)
       .parent()
@@ -145,7 +162,7 @@ $(document).ready(() => {
 
   $("[id^='img']").click(e => {
     //Gets target ID
-    targetId = e.target.id;//Gets message text
+    targetId = e.target.id; //Gets message text
     var userNumber = targetId.charAt(targetId.length - 1);
     logUsername = document.getElementById("hd" + userNumber).innerHTML;
     logText = document.getElementById(userNumber).innerHTML;
@@ -154,12 +171,15 @@ $(document).ready(() => {
     logButton.innerHTML = "ChatLog (" + logUsername + ")";
     logButton.value = logUsername;
     //Admin privileges
-    if (!userIsAdmin && logUsername !== username) { //Not admin nor bubble owner
+    if (!userIsAdmin && logUsername !== username) {
+      //Not admin nor bubble owner
       $("#dropdownDelete").show();
       $("#dropdownDelete").hide();
-    } else if (!userIsAdmin && logUsername === username) { //Not admin but bubble owner
+    } else if (!userIsAdmin && logUsername === username) {
+      //Not admin but bubble owner
       $("#dropdownDelete").show();
-    } else { //Is admin
+    } else {
+      //Is admin
       $("#dropdownDelete").show();
     }
     $("#dropdownDelete").val(logText);
@@ -192,11 +212,12 @@ $(document).ready(() => {
         console.log("Adding friend: " + logUsername);
         break;
       case "dropdownQuote":
-        console.log("Quote: " + logText);
+        msgVal = "QMsg" + logText.length + "QEnd" + logText;
+        $("#message-text").val(msgVal);
         break;
       case "dropdownDelete":
         break;
-      case "dropdownBlock": 
+      case "dropdownBlock":
         console.log("Block: " + logUsername);
         break;
       case "":
@@ -206,6 +227,18 @@ $(document).ready(() => {
         console.error("An error has occured...");
         break;
     }
+    $("#message-text").keydown(e => {
+      if (e.keyCode === 8) {
+        if (
+          $("#message-text")
+            .val()
+            .substr(0, $("#message-text").val().length - 1)
+            .indexOf(msgVal) === -1
+        ) {
+          $("#message-text").val("");
+        }
+      }
+    });
     //Hide menu after button click
     $(this)
       .parent()
@@ -220,12 +253,15 @@ $(document).ready(() => {
     logText = e.target.innerHTML;
     console.log(logText);
     logUsername = document.getElementById("titId").innerHTML;
-    if (!userIsAdmin && logUsername !== username) { //Not admin nor bubble owner
+    if (!userIsAdmin && logUsername !== username) {
+      //Not admin nor bubble owner
       $("#logRClickDelete").show();
       $("#logRClickDelete").hide();
-    } else if (!userIsAdmin && logUsername === username) { //Not admin but bubble owner
+    } else if (!userIsAdmin && logUsername === username) {
+      //Not admin but bubble owner
       $("#logRClickDelete").show();
-    } else { //Is admin
+    } else {
+      //Is admin
       $("#logRClickDelete").show();
       $("#logRClickEdit").show();
     }
@@ -245,6 +281,31 @@ $(document).ready(() => {
     $("#context-menu-4").hide();
   });
   $("#context-menu-4 button").on("click", e => {
+    var target = e.target.id;
+    //Handles button click events
+    switch (target) {
+      case "logRClickQuote":
+        msgVal = "QMsg" + logText.length + "QEnd" + logText;
+        $("#message-text").val(msgVal);
+        break;
+      case "logRClickDelete":
+        break;
+      default:
+        console.error("An error has occured...");
+        break;
+    }
+    $("#message-text").keydown(e => {
+      if (e.keyCode === 8) {
+        if (
+          $("#message-text")
+            .val()
+            .substr(0, $("#message-text").val().length - 1)
+            .indexOf(msgVal) === -1
+        ) {
+          $("#message-text").val("");
+        }
+      }
+    });
     //Hides the menu after button click
     $(this)
       .parent()
