@@ -1,3 +1,4 @@
+//DOM Manipulation
 $(document).ready(() => {
   //Set the height of each bubble
   var viewportHeight = $(window).height();

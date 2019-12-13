@@ -28,6 +28,7 @@ var userIsAdmin = false;
 chatManager
   .connect()
   .then(currentUser => {
+
     //Default room
     if (roomId === "jPBGwdGQli") {
       roomId = currentUser.rooms[0].id;
@@ -37,12 +38,14 @@ chatManager
       document.getElementById("deleteMsgRoom").value = roomId;
       document.getElementById("quoteMsgRoom").value = roomId;
     }
+
     //Check for user privileges
     currentUser.customData.perm.forEach(element => {
       if (element === roomId) {
         userIsAdmin = true;
       }
     });
+
     //Get messages in roomId
     currentUser.fetchMultipartMessages({
         roomId: roomId,
@@ -50,6 +53,7 @@ chatManager
         limit: 100
       })
       .then(messages => {
+
         //Chat log mode
         const ul = document.getElementById("logList");
         //Adds the message to the log if it belongs to the user
@@ -57,51 +61,76 @@ chatManager
           if (element.senderId === logId) {
             var li = document.createElement("li");
             var div = document.createElement("div");
-            div.innerHTML = element.parts[0].payload.content;
+
+            var logMsg = element.parts[0].payload.content;
+            //Check for quoting
+            if (logMsg.indexOf("QMsg") === 0) {
+              //FIXME Temporary solution
+              //Get quoted message and actual message
+              var logLenEnd = logMsg.indexOf("QEnd");
+              var logMessageLength = parseInt(logMsg.substring(4, logLenEnd));
+              logMsg = logMsg.substr(logLenEnd + logMessageLength + 4);
+            }
+            div.innerHTML = logMsg;
+
             div.setAttribute("class", "logContent");
             li.appendChild(div);
             ul.appendChild(li);
           }
         });
+
+        //Set chat log title
         const h5 = document.getElementById("titId");
         h5.innerHTML = logId;
 
         //Bubble mode
         var currentRooms = currentUser.rooms;
         var thisRoom;
+
         //Get the room that the MessageList should display based on roomId
         currentRooms.forEach(element => {
           if (element.id === roomId) {
             thisRoom = element;
           }
         });
+
         //Gets an array of all users in the room
         var userArray = thisRoom.users;
         //Setup boolean for if/else
         var messageAppended = false;
+
         //Loops through all the users to get content for each card
         for (let i = 0; i < userArray.length; i++) {
           const cardUser = userArray[i];
+
           //Loops for the messages
           for (let j = 0; j < messages.length; j++) {
+
+            //Message is sent by user
             if (messages[j].sender.id === cardUser.id) {
-              //Other passed terms
+              
               //Gets the text portion of the most recent message
               lastMessage = messages[j].parts[0].payload.content;
+
               var quotedMessage = "";
               //Parse message for quoting
               //Is quoting a message
               if (lastMessage.indexOf("QMsg") === 0) {
+
                 //Get quoted message and actual message
                 var lenEnd = lastMessage.indexOf("QEnd");
                 var messageLength = parseInt(lastMessage.substring(4, lenEnd));
                 quotedMessage = lastMessage.substr(lenEnd + 4, messageLength);
                 lastMessage = lastMessage.substr(lenEnd + messageLength + 4);
+
+                //Change quote h6 innerHTML
                 var quoteId = "quote" + i.toString();
                 document.getElementById(quoteId).setAttribute("title", quotedMessage);
                 document.getElementById(quoteId).innerHTML = "Quoting a message";
-                //var quoteSender;
+                
+                //I originally wanted to use usernames in the quoting header but this keeps breaking
                 /*
+                var quoteSender;
                 currentUser.fetchMultipartMessages({
                   roomId: roomId,
                   direction: "older",
@@ -123,15 +152,17 @@ chatManager
                 //Reset quoting h6
                 document.getElementById("quote" + i.toString()).innerHTML = "";
               }
+
               //Get the card component ids
               var cardId = i.toString();
               var cardUserId = "hd" + cardId;
               var imgId = "img" + cardId;
               var presId = "pres" + cardId;
+              
               //Add the setting button
-              document
-                .getElementById(imgId)
-                .setAttribute("class", "fas fa-ellipsis-v");
+              document.getElementById(imgId).setAttribute("class", "fas fa-ellipsis-v");
+
+              //Presence tags (WIP)
               /*
               document
                 .getElementById(presId)
@@ -147,12 +178,14 @@ chatManager
                   .setAttribute("style", "color:gray");
               }
               */
+
               //Changes the card components
               document.getElementById(cardId).innerHTML = lastMessage;
               document.getElementById(cardUserId).innerHTML = cardUser.id;
               document.getElementById(cardUserId).classList.add(cardUser.id);
               messageAppended = true;
             } else if (j === messages.length - 1) {
+
               //Last failed term or no messages has been sent
               //If a message is appended before, the defualt noMessage string will not be appended
               if (messageAppended === true) {
@@ -160,15 +193,17 @@ chatManager
               } else {
                 lastMessage = `${cardUser.name} has not sent a message in this room recently`;
               }
+
               //Get the card component ids
               var cardId = i.toString();
               var cardUserId = "hd" + cardId;
               var imgId = "img" + cardId;
               var presId = "pres" + cardId;
+
               //Add the setting button
-              document
-                .getElementById(imgId)
-                .setAttribute("class", "fas fa-ellipsis-v");
+              document.getElementById(imgId).setAttribute("class", "fas fa-ellipsis-v");
+
+              //Presence tags (WIP)
               /*
               document
                 .getElementById(presId)
@@ -184,6 +219,7 @@ chatManager
                   .setAttribute("style", "color:gray");
               }
               */
+
               //Changes the card components
               document.getElementById(cardId).innerHTML = lastMessage;
               document.getElementById(cardUserId).innerHTML = cardUser.id;
@@ -194,32 +230,44 @@ chatManager
       .catch(err => {
         console.error(`Error fetching messages: ${err}`);
       });
+
     //Access room messages and users
     currentUser.subscribeToRoomMultipart({
       roomId: roomId,
       hooks: {
-        //New message
+        //New message received
         onMessage: message => {
+
           for (let i = 0; i < 9; i++) {
             //Replace bubble with new message
             var onMessageHeader = document.getElementById("hd" + i.toString());
+
             if (onMessageHeader.innerHTML === message.senderId) {
               var newMessage = message.parts[0].payload.content;
               document.getElementById(i.toString()).innerHTML = newMessage;
+
               //Reset quote h6
               document.getElementById("quote" + i.toString()).innerHTML = "";
               var newQuoteMsg = "";
+
               //Is quoting a message
               if (newMessage.indexOf("QMsg") === 0) {
+
                 //Get quoted message and actual message
                 var newLenEnd = newMessage.indexOf("QEnd");
                 var newMessageLength = parseInt(newMessage.substring(4, newLenEnd));
                 newQuoteMsg = newMessage.substr(newLenEnd + 4, newMessageLength);
                 var newQuoteId = "quote" + i.toString();
                 newMessage = newMessage.substr(newLenEnd + newMessageLength + 4);
+
+                //Change quote h6 innerHTML
                 document.getElementById(newQuoteId).setAttribute("title", newQuoteMsg);
                 document.getElementById(newQuoteId).innerHTML = "Quoting a message";
+
+                //Change bubble content 
                 document.getElementById(i.toString()).innerHTML = newMessage;
+                
+                //I originally wanted to use usernames in the quoting header but this keeps breaking
                 /*
                 var newQuoteSender;
                 currentUser.fetchMultipartMessages({
@@ -245,7 +293,18 @@ chatManager
                 const ul = document.getElementById("logList");
                 var li = document.createElement("li");
                 var div = document.createElement("div");
-                //div.innerHTML = message.parts[0].payload.content;
+
+                var logInnerHTML = message.parts[0].payload.content;
+                //Check for quoting
+                if (logInnerHTML.indexOf("QMsg") === 0) {
+                  //FIXME Temporary solution
+                  //Get quoted message and actual message
+                  var newLogLenEnd = logInnerHTML.indexOf("QEnd");
+                  var newLogMessageLength = parseInt(logInnerHTML.substring(4, newLogLenEnd));
+                  logInnerHTML = logInnerHTML.substr(newLogLenEnd + newLogMessageLength + 4);
+                }
+                div.innerHTML = logInnerHTML;
+
                 div.setAttribute("class", "logContent");
                 li.appendChild(div);
                 ul.appendChild(li);
@@ -257,6 +316,7 @@ chatManager
       messageLimit: 0
     });
 
+    //TODO this block comment is for DM mode read cursors
     /*
     if($("#log").is(":visible")) {
       currentUser.fetchMultipartMessages({
