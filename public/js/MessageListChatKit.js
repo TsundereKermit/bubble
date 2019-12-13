@@ -88,6 +88,41 @@ chatManager
               //Other passed terms
               //Gets the text portion of the most recent message
               lastMessage = messages[j].parts[0].payload.content;
+              var quotedMessage = "";
+              //Parse message for quoting
+              //Is quoting a message
+              if (lastMessage.indexOf("QMsg") === 0) {
+                //Get quoted message and actual message
+                var lenEnd = lastMessage.indexOf("QEnd");
+                var messageLength = parseInt(lastMessage.substring(4, lenEnd));
+                quotedMessage = lastMessage.substr(lenEnd + 4, messageLength);
+                lastMessage = lastMessage.substr(lenEnd + messageLength + 4);
+                var quoteId = "quote" + i.toString();
+                document.getElementById(quoteId).setAttribute("title", quotedMessage);
+                document.getElementById(quoteId).innerHTML = "Quoting a message";
+                //var quoteSender;
+                /*
+                currentUser.fetchMultipartMessages({
+                  roomId: roomId,
+                  direction: "older",
+                  limit: 100
+                })
+                .then(messages => {
+                  messages.forEach(element => {
+                    if (element.parts[0].payload.content === quotedMessage) {
+                      var quoteId = "quote" + i.toString();
+                      quoteSender = element.senderId;
+                      document.getElementById(quoteId).setAttribute("title", quotedMessage);
+                      document.getElementById(quoteId).innerHTML = "Quoting: " + quoteSender;
+                    }
+                  })
+                })
+                .catch(err => console.error(err));
+                */
+              } else {
+                //Reset quoting h6
+                document.getElementById("quote" + i.toString()).innerHTML = "";
+              }
               //Get the card component ids
               var cardId = i.toString();
               var cardUserId = "hd" + cardId;
@@ -169,13 +204,48 @@ chatManager
             //Replace bubble with new message
             var onMessageHeader = document.getElementById("hd" + i.toString());
             if (onMessageHeader.innerHTML === message.senderId) {
-              document.getElementById(i.toString()).innerHTML = message.parts[0].payload.content;
+              var newMessage = message.parts[0].payload.content;
+              document.getElementById(i.toString()).innerHTML = newMessage;
+              //Reset quote h6
+              document.getElementById("quote" + i.toString()).innerHTML = "";
+              var newQuoteMsg = "";
+              //Is quoting a message
+              if (newMessage.indexOf("QMsg") === 0) {
+                //Get quoted message and actual message
+                var newLenEnd = newMessage.indexOf("QEnd");
+                var newMessageLength = parseInt(newMessage.substring(4, newLenEnd));
+                newQuoteMsg = newMessage.substr(newLenEnd + 4, newMessageLength);
+                var newQuoteId = "quote" + i.toString();
+                newMessage = newMessage.substr(newLenEnd + newMessageLength + 4);
+                document.getElementById(newQuoteId).setAttribute("title", newQuoteMsg);
+                document.getElementById(newQuoteId).innerHTML = "Quoting a message";
+                document.getElementById(i.toString()).innerHTML = newMessage;
+                /*
+                var newQuoteSender;
+                currentUser.fetchMultipartMessages({
+                  roomId: roomId,
+                  direction: "older",
+                  limit: 100
+                })
+                .then(messages => {
+                  messages.forEach(element => {
+                    if (element.parts[0].payload.content === newQuoteMsg) {
+                      var newQuoteId = "quote" + i.toString();
+                      newQuoteSender = element.senderId;
+                      document.getElementById(newQuoteId).setAttribute("title", newQuoteMsg);
+                      document.getElementById(newQuoteId).innerHTML = "Quoting: " + newQuoteSender;
+                    }
+                  })
+                })
+                .catch(err => console.error(err));
+                */
+              }
               //Add new message to log if appropriate
               if (message.senderId === logId) {
                 const ul = document.getElementById("logList");
                 var li = document.createElement("li");
                 var div = document.createElement("div");
-                div.innerHTML = message.parts[0].payload.content;
+                //div.innerHTML = message.parts[0].payload.content;
                 div.setAttribute("class", "logContent");
                 li.appendChild(div);
                 ul.appendChild(li);

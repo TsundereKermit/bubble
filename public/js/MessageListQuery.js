@@ -127,7 +127,7 @@ $(document).ready(() => {
     //Handles button click events
     switch (target) {
       case "quote": 
-        console.log("Quoting message: " + logText);
+        $("#message-text").val("QMsg" + logText.length + "QEnd" + logText);
         break;
       case "delete":
         break;
