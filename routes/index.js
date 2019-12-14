@@ -216,7 +216,7 @@ router.post('/newRoom', (req, res) => {
             creatorId: inputUser,
             name: roomName,
         })
-        .then(() => {})
+        .then()
         .catch((err) => {
             //Error in creating room
             errors.push({ msg: "Something went wrong..." });
@@ -296,6 +296,7 @@ router.post('/joinRoom', (req, res) => {
     }
 });
 
+//changeRoomForm is submitted
 router.post('/changeRoom', (req, res) => {
     //Form data
     const { userId, changeRoomName } = req.body; 
@@ -319,6 +320,7 @@ router.post('/changeDM', (req, res) => {
     });
 });
 
+//chatlog form is submitted
 router.post("/chatlog", (req, res) => {
     //Form data
     const { userId, roomId, logChangeName } = req.body;
@@ -332,6 +334,7 @@ router.post("/chatlog", (req, res) => {
     });
 });
 
+//deleteMsg form is submitted
 router.post("/deleteMsg", (req, res) => {
     //Form data
     const { roomId, userId, message } = req.body;
@@ -355,6 +358,28 @@ router.post("/deleteMsg", (req, res) => {
     })
     .catch(err => console.error(err));
 
+    //Render the new room
+    res.render('index', { 
+        name: userId, 
+        title: 'Bubble',
+        roomId: roomId,
+        logId: userId
+    });
+});
+
+router.post("/kickUser", (req, res) => {
+    //Form data 
+    const {userId, roomId, kickUser} = req.body;
+
+    if (userId !== kickUser) {
+        chatkit.removeUsersFromRoom({
+            roomId: roomId,
+            userIds: [kickUser]
+        })
+        .then()
+        .catch(err => console.error(err));
+    }
+    
     //Render the new room
     res.render('index', { 
         name: userId, 

@@ -34,9 +34,13 @@ chatManager
       roomId = currentUser.rooms[0].id;
       document.getElementById("deleteMsgRoom").value = roomId;
       document.getElementById("quoteMsgRoom").value = roomId;
+      document.getElementById("kickUserRoomId").value = roomId;
+      document.getElementById("dropKick").value = roomId;
     } else { //Not 1st room
       document.getElementById("deleteMsgRoom").value = roomId;
       document.getElementById("quoteMsgRoom").value = roomId;
+      document.getElementById("kickUserRoomId").value = roomId;
+      document.getElementById("dropKick").value = roomId;
     }
 
     //Check for user privileges

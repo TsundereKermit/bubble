@@ -1,3 +1,4 @@
+//Error messages modal popup
 $(document).ready(() => {
     $("#modalCloseBtn").click(() => {
         $("#errorModal").removeClass("d-block");

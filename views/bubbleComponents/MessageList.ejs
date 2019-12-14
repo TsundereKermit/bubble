@@ -181,9 +181,15 @@
     <input type="text" name="userId" value=<%= name %>>
     <input type="text" name="roomId" value=<%= roomId %>>
 </form>
+<!-- kick user form -->
+<form action="/index/kickUser" method="POST" class="d-none" id="kickUserForm">
+    <input type="text" name="userId" value=<%= name %>>
+    <input type="text" name="roomId" id="kickUserRoomId">
+</form>
 <!-- Username right click -->
 <div class="dropdown-menu dropdown-menu-sm" id="context-menu">
     <button class="dropdown-item" id="logContextBtn" name="logChangeName" type="submit" form="chatlogForm">ChatLog</button>
+    <button class="dropdown-item" id="kickBtn" name="kickUser" type="submit" form="kickUserForm">Kick this user</button>
     <button class="dropdown-item" href="#" id="dm">Start a DM</button>
     <button class="dropdown-item" href="#" id="block">Block</button>
 </div>
@@ -195,6 +201,7 @@
 <!-- Vertical ellipsis left click -->
 <div class="dropdown-menu dropdown-menu-sm" id="context-menu-3">
     <button class="dropdown-item" id="dropdownLog" name="logChangeName" type="submit" form="chatlogForm">ChatLog</button>
+    <button class="dropdown-item" id="dropKick" name="kickUser" type="submit" form="kickUserForm">Kick this user</button>
     <button class="dropdown-item" href="#" id="dropdownFriend">Start a DM</button>
     <button class="dropdown-item" href="#" id="dropdownBlock">Block</button>
     <button class="dropdown-item" id="dropdownQuote" name="message">Quote message</button>

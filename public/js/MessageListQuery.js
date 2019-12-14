@@ -58,6 +58,26 @@ $(document).ready(() => {
     var logButton = document.getElementById("logContextBtn");
     logButton.innerHTML = "ChatLog (" + logUsername + ")";
     logButton.value = logUsername;
+
+    //Setup kick user button
+    var kickButton = document.getElementById("kickBtn");
+    kickButton.value = logUsername;
+
+    //Admin privileges
+    if (userIsAdmin) {
+      //user is admin
+      if (username === logUsername) {
+        //cannot kick self
+        $("#kickBtn").hide();
+      } else {
+        $("#kickBtn").show();
+      }
+    } else {
+      //not admin
+      $("#kickBtn").hide();
+    }
+
+    //Hide other context menus (if applicable)
     $("#context-menu-2").hide();
     $("#context-menu-3").hide();
     $("#context-menu")
@@ -79,7 +99,9 @@ $(document).ready(() => {
   $("#context-menu button").on("click", e => {
     var target = e.target.id;
     switch (target) {
-      case "log":
+      case "logContextBtn":
+        break;
+      case "kickBtn":
         break;
       case "friend":
         console.log("Adding friend with username: " + logUsername);
@@ -193,6 +215,24 @@ $(document).ready(() => {
     var logButton = document.getElementById("dropdownLog");
     logButton.innerHTML = "ChatLog (" + logUsername + ")";
     logButton.value = logUsername;
+
+    //Setup kick user button
+    var kickButton = document.getElementById("dropKick");
+    kickButton.value = logUsername;
+
+    //Admin privileges
+    if (userIsAdmin) {
+      //user is admin
+      if (username === logUsername) {
+        //cannot kick self
+        $("#dropKick").hide();
+      } else {
+        $("#dropKick").show();
+      }
+    } else {
+      //not admin
+      $("#dropKick").hide();
+    }
 
     //Admin privileges
     if (!userIsAdmin && logUsername !== username) {
@@ -314,7 +354,7 @@ $(document).ready(() => {
     $("#context-menu-4").hide();
   });
   
-  //Handles button click events
+  //Handles button click events (client side)
   $("#context-menu-4 button").on("click", e => {
 
     var target = e.target.id;
