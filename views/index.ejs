@@ -13,16 +13,10 @@
       <div class="col-9 mh-100" id="messageList-and-aux">
         <% include ./bubbleComponents/MessageList %>
       </div>
-      <div class="col-9 mh-100 d-none" id="directMessageList-and-aux">
-        <% include ./bubbleComponents/DirectMessageForm %>
-      </div>
       <div class="col-3 px-0 pb-rooms mh-100 d-flex flex-column" id="rooms-group-dm" style="padding-bottom:31px">
         <% include ./bubbleComponents/ChooseRooms %>
-        <div class="btn-group btn-group-vertical d-flex" role="group">
+        <div class="btn-group btn-group-vertical d-flex" id="indexRoomList" role="group">
           <% include ./bubbleComponents/RoomList %>
-        </div>
-        <div class="btn-group btn-group-vertical d-flex" role="group">
-          <% include ./bubbleComponents/DirectMessageList %>
         </div>
         <div class="flex-grow-1 bg-secondary"></div>
         <div class="btn-group" role="group">

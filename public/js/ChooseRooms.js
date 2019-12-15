@@ -1,3 +1,4 @@
+
 $(document).ready(() => {
   //Direct Message List button clicked
   $("#dmBtn").click(() => {
@@ -6,10 +7,28 @@ $(document).ready(() => {
     $("#roomBtn").removeClass();
     $("#roomBtn").addClass("btn btn-secondary rounded-0");
     //Change display properties
-    $("#dmList").removeClass();
-    $("#dmList").addClass("d-block");
-    $("#roomList").removeClass();
-    $("#roomList").addClass("d-none");
+    chatManager
+    .connect()
+    .then(currentUser => {
+      //Gets all user rooms in an array
+      const userRooms = currentUser.rooms;
+      var nCount = 0;
+      var pCount = 0;
+      //Loops through the user's rooms
+      userRooms.forEach(element => {
+        // console.log(element);
+        if(element.isPrivate === false){
+          $("#normalRoom" + nCount).removeClass();
+          $("#normalRoom" + nCount).addClass("btn btn-outline-primary roomName rounded-0 w-100 px-0 mx-0 d-none");      
+          nCount++;
+        }
+        if(element.isPrivate === true){
+          $("#privateRoom" + pCount).removeClass();
+          $("#privateRoom" + pCount).addClass("btn btn-outline-primary roomName rounded-0 w-100 px-0 mx-0 d-block");
+          pCount++;
+        }
+      })
+    })
     $("#friendBtn").removeClass();
     $("#friendBtn").addClass("btn btn-primary d-block");
     $("#roomBtn1").removeClass();
@@ -20,10 +39,12 @@ $(document).ready(() => {
     $("#logBtn").addClass("d-none");
     $("#bubBtn").removeClass();
     $("#bubBtn").addClass("d-none");
-    $("#messageList-and-aux").removeClass();
-    $("#messageList-and-aux").addClass("d-none");
-    $("#directMessageList-and-aux").removeClass();
-    $("#directMessageList-and-aux").addClass("col-9 mh-100 d-block");
+    $("#dm").removeClass();
+    $("#dm").addClass("d-block");
+    $("#log").removeClass();
+    $("#log").addClass("d-none");
+    $("#bub").removeClass();
+    $("#bub").addClass("d-none");
   });
   //Room List button clicked
   $("#roomBtn").click(() => {
@@ -32,10 +53,28 @@ $(document).ready(() => {
     $("#roomBtn").removeClass();
     $("#roomBtn").addClass("btn btn-primary rounded-0");
     //Change display properties
-    $("#roomList").removeClass();
-    $("#roomList").addClass("d-block");
-    $("#dmList").removeClass();
-    $("#dmList").addClass("d-none");
+    chatManager
+    .connect()
+    .then(currentUser => {
+      //Gets all user rooms in an array
+      const userRooms = currentUser.rooms;
+      var nCount = 0;
+      var pCount = 0;
+      //Loops through the user's rooms
+      userRooms.forEach(element => {
+        // console.log(element);
+        if(element.isPrivate === false){
+          $("#normalRoom" + nCount).removeClass();
+          $("#normalRoom" + nCount).addClass("btn btn-outline-primary roomName rounded-0 w-100 px-0 mx-0 d-block");      
+          nCount++;
+        }
+        if(element.isPrivate === true){
+          $("#privateRoom" + pCount).removeClass();
+          $("#privateRoom" + pCount).addClass("btn btn-outline-primary roomName rounded-0 w-100 px-0 mx-0 d-none");
+          pCount++;
+        }
+      })
+    })
     $("#roomBtn1").removeClass();
     $("#roomBtn1").addClass("btn btn-primary d-block");
     $("#roomBtn2").removeClass();
@@ -43,12 +82,14 @@ $(document).ready(() => {
     $("#friendBtn").removeClass();
     $("#friendBtn").addClass("d-none");
     $("#logBtn").removeClass();
-    $("#logBtn").addClass("btn btn-secondary d-block");
+    $("#logBtn").addClass("btn btn-secondary rounded-0 d-block");
     $("#bubBtn").removeClass();
-    $("#bubBtn").addClass("btn btn-primary d-block");
-    $("#messageList-and-aux").removeClass();
-    $("#messageList-and-aux").addClass("col-9 mh-100 d-block");
-    $("#directMessageList-and-aux").removeClass();
-    $("#directMessageList-and-aux").addClass("d-none");
+    $("#bubBtn").addClass("btn btn-primary rounded-0 d-block");
+    $("#dm").removeClass();
+    $("#dm").addClass("d-none");
+    $("#log").removeClass();
+    $("#log").addClass("d-none");
+    $("#bub").removeClass();
+    $("#bub").addClass("d-block");
   });
 });
