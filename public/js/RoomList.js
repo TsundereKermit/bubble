@@ -13,8 +13,10 @@ chatManager
     var nCount = 0;
     var pCount = 0;
     const div = document.getElementById("roomList");
+
     //Gets all user rooms in an array
     const userRooms = currentUser.rooms;
+
     //Loops through the user's rooms
     userRooms.forEach(element => {
       // console.log(element);
@@ -22,6 +24,7 @@ chatManager
         console.log(element);
       //Makes a room input button for each room in the array
       var button = document.createElement("button");
+
       //Changes button profile for current room
       if (roomId === element.id) {
         button.setAttribute(
@@ -36,6 +39,7 @@ chatManager
         );
         button.setAttribute("id", "normalRoom" + nCount);
       }
+      
       //Sets up data for POST request
       button.setAttribute("form", "changeRoomForm");
       button.setAttribute("type", "submit");

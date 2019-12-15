@@ -24,6 +24,7 @@
                         <h5 class="card-title usernameH5 flex-grow-1" id="hd0"></h5>&nbsp;
                         <i id="img0"></i>
                     </div>
+                    <h6 id="quote0" data-toggle="tooltip" data-placement="top"></h6>
                     <p class="card-text bubbleContent" id="0"></p>&nbsp;
                 </div>
             </div>
@@ -38,6 +39,7 @@
                         <h5 class="card-title usernameH5 flex-grow-1" id="hd1"></h5>&nbsp;
                         <i id="img1"></i>
                     </div>
+                    <h6 id="quote1"></h6>
                     <p class="card-text bubbleContent" id="1"></p>&nbsp;
                 </div>
             </div>
@@ -52,6 +54,7 @@
                         <h5 class="card-title usernameH5 flex-grow-1" id="hd2"></h5>&nbsp;
                         <i id="img2"></i>
                     </div>
+                    <h6 id="quote2"></h6>
                     <p class="card-text bubbleContent" id="2"></p>&nbsp;
                 </div>
             </div>
@@ -68,6 +71,7 @@
                         <h5 class="card-title usernameH5 flex-grow-1" id="hd3"></h5>&nbsp;
                         <i id="img3"></i>
                     </div>
+                    <h6 id="quote3"></h6>
                     <p class="card-text bubbleContent" id="3"></p>&nbsp;
                 </div>
             </div>
@@ -82,6 +86,7 @@
                         <h5 class="card-title usernameH5 flex-grow-1" id="hd4"></h5>&nbsp;
                         <i id="img4"></i>
                     </div>
+                    <h6 id="quote4"></h6>
                     <p class="card-text bubbleContent" id="4"></p>&nbsp;
                 </div>
             </div>
@@ -96,6 +101,7 @@
                         <h5 class="card-title usernameH5 flex-grow-1" id="hd5"></h5>&nbsp;
                         <i id="img5"></i>
                     </div>
+                    <h6 id="quote5"></h6>
                     <p class="card-text bubbleContent" id="5"></p>&nbsp;
                 </div>
             </div>
@@ -112,6 +118,7 @@
                         <h5 class="card-title usernameH5 flex-grow-1" id="hd6"></h5>&nbsp;
                         <i id="img6"></i>
                     </div>
+                    <h6 id="quote6"></h6>
                     <p class="card-text bubbleContent" id="6"></p>&nbsp;
                 </div>
             </div>
@@ -126,6 +133,7 @@
                         <h5 class="card-title usernameH5 flex-grow-1" id="hd7"></h5>&nbsp;
                         <i id="img7"></i>
                     </div>
+                    <h6 id="quote7"></h6>
                     <p class="card-text bubbleContent" id="7"></p>&nbsp;
                 </div>
             </div>
@@ -140,6 +148,7 @@
                         <h5 class="card-title usernameH5 flex-grow-1" id="hd8"></h5>&nbsp;
                         <i id="img8"></i>
                     </div>
+                    <h6 id="quote8"></h6>
                     <p class="card-text bubbleContent" id="8"></p>&nbsp;
                 </div>
             </div>
@@ -150,7 +159,7 @@
 <div id="log">
     <div class="card pl-3 vh-100 pr-0" id="logCard" style="padding-bottom:70px">
         <h5 class="card-title" id="titId"></h5>
-        <div class="card-body pl-0 pr-0 h-100 logCardBody" style="overflow-y:auto;display:flex;flex-direction:column-reverse">
+        <div id="logScrollDetect" class="card-body pl-0 pr-0 h-100 logCardBody" style="overflow-y:auto;display:flex;flex-direction:column-reverse">
             <div class="card-text h-auto" id="logP">
                 <ul id="logList" style="list-style-type: none;padding:0;"></ul>
             </div>
@@ -177,33 +186,45 @@
     <input type="text" name="roomId" id="deleteMsgRoom">
     <input type="text" name="userId" value=<%- name %>>
 </form>
+<!-- quoteMsgForm -->
+<form action="/index/quoteMsg" method="POST" class="d-none" id="quoteMsgForm">
+    <input type="text" name="roomId" id="quoteMsgRoom">
+    <input type="text" name="userId" value=<%- name %>>
+</form>
 <!-- New chat log user form -->
 <form action="/index/chatlog" method="POST" class="d-none" id="chatlogForm">
     <input type="text" name="userId" value=<%= name %>>
     <input type="text" name="roomId" value=<%= roomId %>>
 </form>
+<!-- kick user form -->
+<form action="/index/kickUser" method="POST" class="d-none" id="kickUserForm">
+    <input type="text" name="userId" value=<%= name %>>
+    <input type="text" name="roomId" id="kickUserRoomId">
+</form>
 <!-- Username right click -->
 <div class="dropdown-menu dropdown-menu-sm" id="context-menu">
     <button class="dropdown-item" id="logContextBtn" name="logChangeName" type="submit" form="chatlogForm">ChatLog</button>
+    <button class="dropdown-item" id="kickBtn" name="kickUser" type="submit" form="kickUserForm">Kick this user</button>
     <button class="dropdown-item" href="#" id="dm">Start a DM</button>
     <button class="dropdown-item" href="#" id="block">Block</button>
 </div>
 <!-- Message right click -->
 <div class="dropdown-menu dropdown-menu-sm" id="context-menu-2">
-    <button class="dropdown-item" href="#" id="quote">Quote message</button>
+    <button class="dropdown-item" id="quote" name="message">Quote message</button>
     <button class="dropdown-item" type="submit" form="deleteMsgForm" id="delete" name="message">Delete message</button>
 </div>
 <!-- Vertical ellipsis left click -->
 <div class="dropdown-menu dropdown-menu-sm" id="context-menu-3">
     <button class="dropdown-item" id="dropdownLog" name="logChangeName" type="submit" form="chatlogForm">ChatLog</button>
+    <button class="dropdown-item" id="dropKick" name="kickUser" type="submit" form="kickUserForm">Kick this user</button>
     <button class="dropdown-item" href="#" id="dropdownFriend">Start a DM</button>
     <button class="dropdown-item" href="#" id="dropdownBlock">Block</button>
-    <button class="dropdown-item" href="#" id="dropdownQuote">Quote message</button>
+    <button class="dropdown-item" id="dropdownQuote" name="message">Quote message</button>
     <button class="dropdown-item" type="submit" form="deleteMsgForm" id="dropdownDelete" name="message">Delete message</button>
 </div>
 <!-- Chat log right click -->
 <div class="dropdown-menu dropdown-menu-sm" id="context-menu-4">
-    <button class="dropdown-item" href="#" id="logRClickQuote">Quote message</button>
+    <button class="dropdown-item" id="logRClickQuote" name="message">Quote message</button>
     <button class="dropdown-item" type="submit" form="deleteMsgForm" id="logRClickDelete" name="message">Delete message</button>
 </div>
 <!-- External scripts -->
