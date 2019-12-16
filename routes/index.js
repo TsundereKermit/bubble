@@ -42,11 +42,11 @@ router.get("/index", (req, res) => {
     //Render the index page
     res.render("index", {
         //name: req.user.name,
-        name: "Ace",
+        name: "TsundereKermit",
         title: "Bubble",
         roomId: "jPBGwdGQli", 
         //logId: req.user.name
-        logId: 'Ace'
+        logId: 'TsundereKermit'
     });
 });
 

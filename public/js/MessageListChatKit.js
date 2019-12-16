@@ -185,6 +185,7 @@ chatManager
 
               //Changes the card components
               document.getElementById(cardId).innerHTML = lastMessage;
+              document.getElementById(cardId).setAttribute("title", lastMessage);
               document.getElementById(cardUserId).innerHTML = cardUser.id;
               document.getElementById(cardUserId).classList.add(cardUser.id);
               messageAppended = true;
@@ -226,6 +227,7 @@ chatManager
 
               //Changes the card components
               document.getElementById(cardId).innerHTML = lastMessage;
+              document.getElementById(cardId).setAttribute("title", lastMessage);
               document.getElementById(cardUserId).innerHTML = cardUser.id;
             }
           }
