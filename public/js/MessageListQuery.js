@@ -234,7 +234,6 @@ $(document).ready(() => {
       $("#dropKick").hide();
     }
 
-    //Admin privileges
     if (!userIsAdmin && logUsername !== username) {
       //Not admin nor bubble owner
       $("#dropdownDelete").show();

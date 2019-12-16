@@ -367,6 +367,7 @@ router.post("/deleteMsg", (req, res) => {
     });
 });
 
+//kickUserForm submitted
 router.post("/kickUser", (req, res) => {
     //Form data 
     const {userId, roomId, kickUser} = req.body;
@@ -387,6 +388,6 @@ router.post("/kickUser", (req, res) => {
         roomId: roomId,
         logId: userId
     });
-})
+});
 
 module.exports = router;
