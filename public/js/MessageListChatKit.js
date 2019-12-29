@@ -66,15 +66,18 @@ chatManager
             var li = document.createElement("li");
             var div = document.createElement("div");
 
+            //Get msg from element for inputting into the log div
             var logMsg = element.parts[0].payload.content;
+
             //Check for quoting
             if (logMsg.indexOf("QMsg") === 0) {
-              //FIXME Temporary solution
               //Get quoted message and actual message
               var logLenEnd = logMsg.indexOf("QEnd");
               var logMessageLength = parseInt(logMsg.substring(4, logLenEnd));
               logMsg = logMsg.substr(logLenEnd + logMessageLength + 4);
             }
+
+            //Set div text
             div.innerHTML = logMsg;
 
             div.setAttribute("class", "logContent");
@@ -303,7 +306,6 @@ chatManager
                 var logInnerHTML = message.parts[0].payload.content;
                 //Check for quoting
                 if (logInnerHTML.indexOf("QMsg") === 0) {
-                  //FIXME Temporary solution
                   //Get quoted message and actual message
                   var newLogLenEnd = logInnerHTML.indexOf("QEnd");
                   var newLogMessageLength = parseInt(logInnerHTML.substring(4, newLogLenEnd));
