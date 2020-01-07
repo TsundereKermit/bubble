@@ -324,7 +324,7 @@ chatManager
       messageLimit: 0
     });
 
-    //TODO this block comment is for DM mode read cursors
+    //This block comment is for DM mode read cursors
     /*
     if($("#log").is(":visible")) {
       currentUser.fetchMultipartMessages({

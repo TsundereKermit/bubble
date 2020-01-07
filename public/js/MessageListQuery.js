@@ -98,21 +98,6 @@ $(document).ready(() => {
   //Handles button click events
   $("#context-menu button").on("click", e => {
     var target = e.target.id;
-    switch (target) {
-      case "logContextBtn":
-        break;
-      case "kickBtn":
-        break;
-      case "friend":
-        console.log("Adding friend with username: " + logUsername);
-        break;
-      case "block":
-        console.log("Blocking user: " + logUsername);
-        break;
-      default:
-        console.error("An error has occured...");
-        break;
-    }
     
     //Hides menu after button click
     $(this)
