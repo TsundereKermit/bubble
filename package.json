@@ -4,8 +4,9 @@
   "description": "ISU4U Term Project - Bubble, the chatting app that prevents Yang from spamming.",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon appDev.js"
+    "app": "node app.js",
+    "dev": "nodemon appDev.js",
+    "beta": "nodemon app.js"
   },
   "repository": {
     "type": "git",

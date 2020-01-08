@@ -8,15 +8,19 @@ chatManager
   //Connect to chatkit servers
   .connect()
   .then(currentUser => {
+
     //Default room
     if (roomId === "jPBGwdGQli") {
       roomId = currentUser.rooms[0].id;
     }
+
     const form = document.getElementById("message-form");
     //When the message input is detected, a simple mesage is sent to the chatkit servers
     form.addEventListener("submit", e => {
+
       e.preventDefault();
       const input = document.getElementById("message-text");
+
       //Sending input
       currentUser
         .sendSimpleMessage({
@@ -25,6 +29,7 @@ chatManager
         })
         .then()
         .catch(err => console.error(err));
+        
       //Clear input form
       input.value = "";
     });

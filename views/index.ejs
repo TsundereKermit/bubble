@@ -9,16 +9,20 @@
 <body class="h-100">
   <div id="bubbleApp" class="vh-100">
     <% include ./partials/messages %>
+    <!-- Bubble app -->
     <div class="row h-100" id="bubbleMainBody">
+      <!-- Main UI -->
       <div class="col-9 mh-100" id="messageList-and-aux">
         <% include ./bubbleComponents/MessageList %>
       </div>
+      <!-- Sidebar -->
       <div class="col-3 px-0 pb-rooms mh-100 d-flex flex-column" id="rooms-group-dm" style="padding-bottom:31px">
         <% include ./bubbleComponents/ChooseRooms %>
         <div class="btn-group btn-group-vertical d-flex" id="indexRoomList" role="group">
           <% include ./bubbleComponents/RoomList %>
         </div>
         <div class="flex-grow-1 bg-secondary"></div>
+        <!-- Modal popups -->
         <div class="btn-group" role="group">
           <% include ./bubbleComponents/NewRoomForm %>
           <% include ./bubbleComponents/JoinRoomForm %>
@@ -30,6 +34,7 @@
       </div>
     </div>
     <div class="row">
+      <!-- Input box -->
       <div class="col-md-12">
           <% include ./bubbleComponents/SendMessageForm %>
       </div>

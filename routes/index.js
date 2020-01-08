@@ -1,9 +1,5 @@
 const express = require('express');
 const router = express.Router();
-/**
- * const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
- * Not completely sure how to implement this yet
- */
 const Chatkit = require('@pusher/chatkit-server');
 
 //New ChatKit instance
@@ -42,11 +38,11 @@ router.get("/index", (req, res) => {
     //Render the index page
     res.render("index", {
         //name: req.user.name,
-        name: "Ace",
+        name: "TsundereKermit",
         title: "Bubble",
         roomId: "jPBGwdGQli", 
         //logId: req.user.name
-        logId: 'Ace'
+        logId: 'TsundereKermit'
     });
 });
 
@@ -374,6 +370,7 @@ router.post("/deleteMsg", (req, res) => {
     });
 });
 
+//kickUserForm submitted
 router.post("/kickUser", (req, res) => {
     //Form data 
     const {userId, roomId, kickUser} = req.body;
@@ -394,6 +391,6 @@ router.post("/kickUser", (req, res) => {
         roomId: roomId,
         logId: userId
     });
-})
+});
 
 module.exports = router;
