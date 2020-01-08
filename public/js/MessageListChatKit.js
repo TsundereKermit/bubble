@@ -7,11 +7,7 @@ var roomId = document.getElementById("roomId").textContent;
 //Gets the ChatKit roomId
 var logId = document.getElementById("logId").textContent;
 
-/**
- * Experimental
- * We are using our own token provider instead of ChatKit's native token provider right now, the native one
- * supports production usage while our own supports experimental usage
- */
+//Initialize token provider with ChatKit test endpoint
 const tokenProvider = new Chatkit.TokenProvider({
   url:
     "https://us1.pusherplatform.io/services/chatkit_token_provider/v1/c8c2181d-9998-47f7-afab-c3978ecf675c/token"
@@ -135,26 +131,6 @@ chatManager
                 document.getElementById(quoteId).setAttribute("title", quotedMessage);
                 document.getElementById(quoteId).innerHTML = "Quoting a message";
                 
-                //I originally wanted to use usernames in the quoting header but this keeps breaking
-                /*
-                var quoteSender;
-                currentUser.fetchMultipartMessages({
-                  roomId: roomId,
-                  direction: "older",
-                  limit: 100
-                })
-                .then(messages => {
-                  messages.forEach(element => {
-                    if (element.parts[0].payload.content === quotedMessage) {
-                      var quoteId = "quote" + i.toString();
-                      quoteSender = element.senderId;
-                      document.getElementById(quoteId).setAttribute("title", quotedMessage);
-                      document.getElementById(quoteId).innerHTML = "Quoting: " + quoteSender;
-                    }
-                  })
-                })
-                .catch(err => console.error(err));
-                */
               } else {
                 //Reset quoting h6
                 document.getElementById("quote" + i.toString()).innerHTML = "";
@@ -168,23 +144,6 @@ chatManager
               
               //Add the setting button
               document.getElementById(imgId).setAttribute("class", "fas fa-ellipsis-v");
-
-              //Presence tags (WIP)
-              /*
-              document
-                .getElementById(presId)
-                .setAttribute("class", "fas fa-circle");
-              //Check for user presence
-              if (userArray[i].presence.state === "online") {
-                document
-                  .getElementById(presId)
-                  .setAttribute("style", "color:green");
-              } else {
-                document
-                  .getElementById(presId)
-                  .setAttribute("style", "color:gray");
-              }
-              */
 
               //Changes the card components
               document.getElementById(cardId).innerHTML = lastMessage;
@@ -210,23 +169,6 @@ chatManager
 
               //Add the setting button
               document.getElementById(imgId).setAttribute("class", "fas fa-ellipsis-v");
-
-              //Presence tags (WIP)
-              /*
-              document
-                .getElementById(presId)
-                .setAttribute("class", "fas fa-circle");
-              //Check for user presence
-              if (userArray[i].presence.state === "online") {
-                document
-                  .getElementById(presId)
-                  .setAttribute("style", "color:green");
-              } else {
-                document
-                  .getElementById(presId)
-                  .setAttribute("style", "color:gray");
-              }
-              */
 
               //Changes the card components
               document.getElementById(cardId).innerHTML = lastMessage;
@@ -275,28 +217,8 @@ chatManager
 
                 //Change bubble content 
                 document.getElementById(i.toString()).innerHTML = newMessage;
-                
-                //I originally wanted to use usernames in the quoting header but this keeps breaking
-                /*
-                var newQuoteSender;
-                currentUser.fetchMultipartMessages({
-                  roomId: roomId,
-                  direction: "older",
-                  limit: 100
-                })
-                .then(messages => {
-                  messages.forEach(element => {
-                    if (element.parts[0].payload.content === newQuoteMsg) {
-                      var newQuoteId = "quote" + i.toString();
-                      newQuoteSender = element.senderId;
-                      document.getElementById(newQuoteId).setAttribute("title", newQuoteMsg);
-                      document.getElementById(newQuoteId).innerHTML = "Quoting: " + newQuoteSender;
-                    }
-                  })
-                })
-                .catch(err => console.error(err));
-                */
               }
+
               //Add new message to log if appropriate
               if (message.senderId === logId) {
                 const ul = document.getElementById("logList");
