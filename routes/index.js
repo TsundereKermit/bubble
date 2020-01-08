@@ -50,8 +50,8 @@ router.get("/index", (req, res) => {
     });
 });
 
-//addFriend form is submitted
-router.post('/addFriend', (req, res) => {
+//makeDM form is submitted
+router.post('/makeDM', (req, res) => {
     //Form data
     const { inputUser, friendId } = req.body;
     let errors = []
@@ -98,7 +98,7 @@ router.post('/addFriend', (req, res) => {
                             chatkit.createRoom({
                                 creatorId: inputUser,
                                 name: friendId,
-                                //private: true,
+                                isPrivate: true,
                             })
                             .then(() => {
                                 console.log('DM with ' + friendId + ' created successfully');
@@ -139,6 +139,74 @@ router.post('/addFriend', (req, res) => {
             logId: inputUser 
         });
     });
+
+    //addFriend form is submitted
+router.post('/addFriend', (req, res) => {
+    //Form data
+    const { inputUser, friendId } = req.body;
+    let errors = []
+    var dmId;
+
+    //Empty form
+    if (!friendId) {
+        errors.push({ msg: "Please fill in the friend ID" })
+    }
+
+    //Refreshes the page if empty form
+    if (errors.length > 0) {
+        res.render('index', { 
+            name: inputUser, 
+            errors, 
+            title: 'Bubble', 
+            roomId: 'jPBGwdGQli', 
+            logId: inputUser 
+        });
+    } else {
+        chatkit.getRooms({
+            includePrivate: true
+        })
+        .then(room => {
+            room.forEach(element => {
+                if(element.name === friendId){
+                    // dmId = element.id;
+                    //Join the room
+                    chatkit.addUsersToRoom({
+                        roomId: element.id,
+                        userIds: [friendId]
+                    })
+                    .then()
+                    .catch(err => {
+                        //Room does not exist
+                        errors.push({ msg: "Something went wrong..." });
+                        res.render('index', { 
+                            name: inputUser, 
+                            errors, 
+                            title: 'Bubble', 
+                            roomId: 'jPBGwdGQli', 
+                            logId: inputUser
+                        });
+                    });
+                }
+            })
+        }).catch((err) => { //for get rooms
+            console.log(err);
+        });
+
+        
+        
+        //Sets up pushed messages
+        errors.push({ msg: friendId + " has been added to the DM" });
+
+        //Renders the index page
+        res.render('index', { 
+            name: inputUser, 
+            errors,
+            title: 'Bubble', 
+            roomId: 'jPBGwdGQli', 
+            logId: inputUser
+        });
+    }
+});
 
 //newRoom form is submitted
 router.post('/newRoom', (req, res) => {
