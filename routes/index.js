@@ -1,9 +1,5 @@
 const express = require('express');
 const router = express.Router();
-/**
- * const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
- * Not completely sure how to implement this yet
- */
 const Chatkit = require('@pusher/chatkit-server');
 
 //New ChatKit instance
