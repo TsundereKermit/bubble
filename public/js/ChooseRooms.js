@@ -31,6 +31,8 @@ $(document).ready(() => {
     })
     $("#friendBtn").removeClass();
     $("#friendBtn").addClass("btn btn-primary d-block");
+    $("#addFriendBtn").removeClass();
+    $("#addFriendBtn").addClass("btn btn-primary d-block");
     $("#roomBtn1").removeClass();
     $("#roomBtn1").addClass("d-none");
     $("#roomBtn2").removeClass();
@@ -81,6 +83,8 @@ $(document).ready(() => {
     $("#roomBtn2").addClass("btn btn-primary d-block");
     $("#friendBtn").removeClass();
     $("#friendBtn").addClass("d-none");
+    $("#addFriendBtn").removeClass();
+    $("#addFriendBtn").addClass("d-none");
     $("#logBtn").removeClass();
     $("#logBtn").addClass("btn btn-secondary rounded-0 d-block");
     $("#bubBtn").removeClass();
