@@ -245,28 +245,6 @@ chatManager
       },
       messageLimit: 0
     });
-
-    //This block comment is for DM mode read cursors
-    /*
-    if($("#log").is(":visible")) {
-      currentUser.fetchMultipartMessages({
-        roomId: roomId,
-        limit: 1
-      })
-      .then(messages => {
-        //Find the message and sends a cursor based on message
-        for (let m of messages) {
-          currentUser.setReadCursor({
-            roomId: roomId,
-            position: m.id
-          })
-          .then()
-          .catch(err => console.error(err))
-        }
-      })
-      .catch(err => console.error(err));
-    }
-    */
   })
   .catch(error => {
     console.error("error:", error);
