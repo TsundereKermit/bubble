@@ -1,0 +1,37 @@
+<!-- Rendered data -->
+<div id="name" class="d-none"><%= name %></div>
+<div id="roomId" class="d-none"><%= roomId %></div>
+<div id="logId" class="d-none"><%= logId %></div>
+<!-- DM mode -->
+<div id="dm">
+    <div class="card pl-3 vh-100 pr-0" id="dmCard" style="padding-bottom:70px">
+        <h5 class="card-title" id="titId"></h5>
+        <div id="dmScrollDetect" class="card-body pl-0 pr-0 h-100 dmCardBody" style="overflow-y:auto;display:flex;flex-direction:column-reverse">
+            <div class="card-text h-auto" id="dmP">
+                <ul id="dmList" style="list-style-type: none;padding:0;"></ul>
+            </div>
+        </div>  
+    </div>
+</div>
+<!-- deleteMsgForm -->
+<form action="/index/deleteMsg" method="POST" class="d-none" id="deleteMsgForm">
+    <input type="text" name="roomId" id="deleteMsgRoom">
+    <input type="text" name="userId" value=<%- name %>>
+</form>
+<!-- quoteMsgForm -->
+<form action="/index/quoteMsg" method="POST" class="d-none" id="quoteMsgForm">
+    <input type="text" name="roomId" id="quoteMsgRoom">
+    <input type="text" name="userId" value=<%- name %>>
+</form>
+<!-- DM right click -->
+<div class="dropdown-menu dropdown-menu-sm" id="context-menu">
+    <button class="dropdown-item" id="dmRClickQuote" name="message">Quote message</button>
+    <button class="dropdown-item" type="submit" form="deleteMsgForm" id="dmRClickDelete" name="message">Delete message</button>
+</div>
+<!-- External scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://unpkg.com/@pusher/chatkit-client@1/dist/web/chatkit.js"></script>
+<!-- ChatKit -->
+<script type="text/javascript" src="/js/DirectMessageListChatKit.js"></script>
+<!-- jQuery -->
+<script type="text/javascript" src="/js/DirectMessageListQuery.js"></script>

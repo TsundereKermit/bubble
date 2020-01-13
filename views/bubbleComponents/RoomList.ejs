@@ -1,8 +1,12 @@
 <!-- Rendered data -->
 <div id="name" class="d-none"><%= name %></div>
 <div id="roomId" class="d-none"><%= roomId %></div>
+<div id="roomType" class="d-none"><%= roomType %></div>
 <!-- changeRoomForm -->
 <form action="/index/changeRoom" method="POST" class="d-none" id="changeRoomForm">
+    <input type="text" name="userId" value=<%- name %>>
+</form>
+<form action="/index/changeDM" method="POST" class="d-none" id="changeDMForm">
     <input type="text" name="userId" value=<%- name %>>
 </form>
 <div class="btn-group-vertical w-100 overflow-auto" role="group" aria-label="Room list button group" id="roomList"></div>

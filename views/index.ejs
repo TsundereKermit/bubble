@@ -1,3 +1,6 @@
+<!-- Rendered data -->
+<div id="roomType" class="d-none"><%= roomType %></div>
+
 <html lang=en class="vw-100 vh-100">
 
 <head>
@@ -12,9 +15,16 @@
     <!-- Bubble app -->
     <div class="row h-100" id="bubbleMainBody">
       <!-- Main UI -->
+      <% if(roomType === 'normal') { %>
       <div class="col-9 mh-100" id="messageList-and-aux">
         <% include ./bubbleComponents/MessageList %>
       </div>
+      <% } %>
+      <% if(roomType === 'DM') { %>
+      <div class="col-9 mh-100" id="directmessageList-and-aux">
+        <% include ./bubbleComponents/DirectMessageList %>
+      </div>
+      <% } %>
       <!-- Sidebar -->
       <div class="col-3 px-0 pb-rooms mh-100 d-flex flex-column" id="rooms-group-dm" style="padding-bottom:31px">
         <% include ./bubbleComponents/ChooseRooms %>

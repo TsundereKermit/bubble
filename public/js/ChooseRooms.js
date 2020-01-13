@@ -2,10 +2,10 @@
 $(document).ready(() => {
   //Direct Message List button clicked
   $("#dmBtn").click(() => {
-    $("#dmBtn").removeClass();
-    $("#dmBtn").addClass("btn btn-primary rounded-0");
-    $("#roomBtn").removeClass();
-    $("#roomBtn").addClass("btn btn-secondary rounded-0");
+    // $("#dmBtn").removeClass();
+    // $("#dmBtn").addClass("btn btn-primary rounded-0");
+    // $("#roomBtn").removeClass();
+    // $("#roomBtn").addClass("btn btn-dark rounded-0");
     //Change display properties
     chatManager
     .connect()
@@ -47,13 +47,17 @@ $(document).ready(() => {
     $("#log").addClass("d-none");
     $("#bub").removeClass();
     $("#bub").addClass("d-none");
+    // $("#directmessageList-and-aux").removeClass();
+    // $("#directmessageList-and-aux").addClass("col-9 mh-100 d-block");
+    // $("#messageList-and-aux").removeClass();
+    // $("#messageList-and-aux").addClass("d-none");
   });
   //Room List button clicked
   $("#roomBtn").click(() => {
-    $("#dmBtn").removeClass();
-    $("#dmBtn").addClass("btn btn-secondary rounded-0");
-    $("#roomBtn").removeClass();
-    $("#roomBtn").addClass("btn btn-primary rounded-0");
+    // $("#dmBtn").removeClass();
+    // $("#dmBtn").addClass("btn btn-dark rounded-0");
+    // $("#roomBtn").removeClass();
+    // $("#roomBtn").addClass("btn btn-primary rounded-0");
     //Change display properties
     chatManager
     .connect()
@@ -95,5 +99,9 @@ $(document).ready(() => {
     $("#log").addClass("d-none");
     $("#bub").removeClass();
     $("#bub").addClass("d-block");
+    // $("#messageList-and-aux").removeClass();
+    // $("#messageList-and-aux").addClass("col-9 mh-100 d-block");
+    // $("#directmessageList-and-aux").removeClass();
+    // $("#directmessageList-and-aux").addClass("d-none");
   });
 });

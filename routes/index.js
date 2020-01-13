@@ -42,7 +42,8 @@ router.get("/index", (req, res) => {
         title: "Bubble",
         roomId: "jPBGwdGQli", 
         //logId: req.user.name
-        logId: 'TsundereKermit'
+        logId: 'TsundereKermit',
+        roomType: 'normal'
     });
 });
 
@@ -123,7 +124,8 @@ router.post('/makeDM', (req, res) => {
             errors, 
             title: 'Bubble', 
             roomId: 'jPBGwdGQli', 
-            logId: inputUser
+            logId: inputUse,
+            roomType: 'DM'
         })
     }
        
@@ -132,7 +134,8 @@ router.post('/makeDM', (req, res) => {
             name: inputUser, 
             title: 'Bubble', 
             roomId: 'jPBGwdGQli',
-            logId: inputUser 
+            logId: inputUser,
+            roomType: 'DM'
         });
     });
 
@@ -155,7 +158,8 @@ router.post('/addFriend', (req, res) => {
             errors, 
             title: 'Bubble', 
             roomId: 'jPBGwdGQli', 
-            logId: inputUser 
+            logId: inputUser,
+            roomType: 'DM'
         });
     } else {
         chatkit.getRooms({
@@ -179,7 +183,8 @@ router.post('/addFriend', (req, res) => {
                             errors, 
                             title: 'Bubble', 
                             roomId: 'jPBGwdGQli', 
-                            logId: inputUser
+                            logId: inputUser,
+                            roomType: 'DM'
                         });
                     });
                 }
@@ -199,7 +204,8 @@ router.post('/addFriend', (req, res) => {
             errors,
             title: 'Bubble', 
             roomId: 'jPBGwdGQli', 
-            logId: inputUser
+            logId: inputUser,
+            roomType: 'DM'
         });
     }
 });
@@ -222,7 +228,8 @@ router.post('/newRoom', (req, res) => {
             errors, 
             title: 'Bubble', 
             roomId: 'jPBGwdGQli', 
-            logId: inputUser
+            logId: inputUser,
+            roomType: 'normal'
         })
     } else {
         //Creates the room based on submitted data
@@ -240,7 +247,8 @@ router.post('/newRoom', (req, res) => {
                 errors, 
                 title: 'Bubble', 
                 roomId: 'jPBGwdGQli', 
-                logId: inputUser
+                logId: inputUser,
+                roomType: 'normal'
             });
         });
 
@@ -253,7 +261,8 @@ router.post('/newRoom', (req, res) => {
             errors,
             title: 'Bubble', 
             roomId: 'jPBGwdGQli',
-            logId: inputUser
+            logId: inputUser,
+            roomType: 'normal'
         });
     }
 });
@@ -276,7 +285,8 @@ router.post('/joinRoom', (req, res) => {
             errors, 
             title: 'Bubble', 
             roomId: 'jPBGwdGQli', 
-            logId: inputUser 
+            logId: inputUser,
+            roomType: 'normal'
         });
     } else {
         //Join the room
@@ -293,7 +303,8 @@ router.post('/joinRoom', (req, res) => {
                 errors, 
                 title: 'Bubble', 
                 roomId: 'jPBGwdGQli', 
-                logId: inputUser
+                logId: inputUser,
+                roomType: 'normal'
             });
         });
         
@@ -306,7 +317,8 @@ router.post('/joinRoom', (req, res) => {
             errors,
             title: 'Bubble', 
             roomId: 'jPBGwdGQli', 
-            logId: inputUser
+            logId: inputUser,
+            roomType: 'normal'
         });
     }
 });
@@ -320,7 +332,22 @@ router.post('/changeRoom', (req, res) => {
         name: userId, 
         title: 'Bubble',
         roomId: changeRoomName,
-        logId: userId
+        logId: userId,
+        roomType: 'normal'
+    });
+});
+
+//changeRoomForm is submitted
+router.post('/changeDM', (req, res) => {
+    //Form data
+    const { userId, changeRoomName } = req.body; 
+    //Render the new room
+    res.render('index', { 
+        name: userId, 
+        title: 'Bubble',
+        roomId: changeRoomName,
+        logId: userId,
+        roomType: 'DM'
     });
 });
 
@@ -333,7 +360,8 @@ router.post("/chatlog", (req, res) => {
         name: userId,
         title: "Bubble",
         roomId: roomId,
-        logId: logChangeName
+        logId: logChangeName,
+        roomType: 'normal'
     });
 });
 
@@ -366,7 +394,8 @@ router.post("/deleteMsg", (req, res) => {
         name: userId, 
         title: 'Bubble',
         roomId: roomId,
-        logId: userId
+        logId: userId,
+        roomType: 'normal'
     });
 });
 
@@ -389,7 +418,8 @@ router.post("/kickUser", (req, res) => {
         name: userId, 
         title: 'Bubble',
         roomId: roomId,
-        logId: userId
+        logId: userId,
+        roomType: 'normal'
     });
 });
 

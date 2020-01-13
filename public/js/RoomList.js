@@ -3,8 +3,10 @@ var username = document.getElementById("name").textContent;
 
 //Gets the ChatKit roomId
 var roomId = document.getElementById("roomId").textContent;
+// var dmName = document.getElementById("dmName").textContent;
 
-var dmName = document.getElementById("dmName".textContent);
+//Gets the room type specified from index
+var roomType = document.getElementById("roomType").textContent;
 
 chatManager
   .connect()
@@ -27,17 +29,33 @@ chatManager
 
       //Changes button profile for current room
       if (roomId === element.id) {
-        button.setAttribute(
-          "class",
-          "btn btn-primary roomName rounded-0 w-100 px-0 mx-0 d-block"
-        );
-        button.setAttribute("id", "normalRoom" + nCount);
+        if(roomType === 'normal'){
+          button.setAttribute(
+            "class",
+            "btn btn-primary roomName rounded-0 w-100 px-0 mx-0 d-block"
+          );
+          button.setAttribute("id", "normalRoom" + nCount);
+        }else if(roomType === 'DM'){
+          button.setAttribute(
+            "class",
+            "btn btn-primary roomName rounded-0 w-100 px-0 mx-0 d-none"
+          );
+          button.setAttribute("id", "normalRoom" + nCount);
+        }
       } else {
+        if(roomType === 'normal'){
         button.setAttribute(
           "class",
           "btn btn-outline-primary roomName rounded-0 w-100 px-0 mx-0 d-block"
         );
         button.setAttribute("id", "normalRoom" + nCount);
+        }else if(roomType === 'DM'){
+          button.setAttribute(
+            "class",
+            "btn btn-outline-primary roomName rounded-0 w-100 px-0 mx-0 d-none"
+          );
+          button.setAttribute("id", "normalRoom" + nCount);
+        }
       }
       
       //Sets up data for POST request
@@ -58,21 +76,37 @@ chatManager
       //Makes a room input button for each room in the array
       var button = document.createElement("button");
       //Changes button profile for current room
-      if (dmName === element.name) {
-        button.setAttribute(
-          "class",
-          "btn btn-primary roomName rounded-0 w-100 px-0 mx-0 d-none"
-        );
-      button.setAttribute("id", "privateRoom" + pCount);
+      if (roomId === element.id) {
+        if(roomType === 'DM'){
+          button.setAttribute(
+            "class",
+            "btn btn-primary roomName rounded-0 w-100 px-0 mx-0 d-block"
+          );
+          button.setAttribute("id", "privateRoom" + pCount);
+        }else if(roomType === 'normal'){
+          button.setAttribute(
+            "class",
+            "btn btn-primary roomName rounded-0 w-100 px-0 mx-0 d-none"
+          );
+          button.setAttribute("id", "privateRoom" + pCount);
+        }
       } else {
-        button.setAttribute(
-          "class",
-          "btn btn-outline-primary roomName rounded-0 w-100 px-0 mx-0 d-none"
-        );
-      button.setAttribute("id", "privateRoom" + pCount);
+        if(roomType === 'DM'){
+          button.setAttribute(
+            "class",
+            "btn btn-outline-primary roomName rounded-0 w-100 px-0 mx-0 d-block"
+          );
+          button.setAttribute("id", "privateRoom" + pCount);
+        }else if(roomType === 'normal'){
+          button.setAttribute(
+            "class",
+            "btn btn-outline-primary roomName rounded-0 w-100 px-0 mx-0 d-none"
+          );
+          button.setAttribute("id", "privateRoom" + pCount);
+        }
       }
       //Sets up data for POST request
-      button.setAttribute("form", "changeRoomForm");
+      button.setAttribute("form", "changeDMForm");
       button.setAttribute("type", "submit");
       button.setAttribute("value", element.id);
       button.setAttribute("name", "changeRoomName");
