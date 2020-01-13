@@ -218,7 +218,12 @@ router.post('/newRoom', (req, res) => {
 
     //Empty form
     if (!roomName || !roomId) {
-        errors.push({ msg: "Please fill in all fields" })
+        errors.push({ msg: "Please fill in all fields" });
+    }
+
+    //Default room
+    if (roomId === "jPBGwdGQli") {
+        errors.push({msg: "This room ID is forbidden"});
     }
 
     //Refreshes the page if an empty form is filled

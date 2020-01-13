@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema({
     }
 });
 
+//Gets all user schemas from MongoDB
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
