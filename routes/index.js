@@ -17,17 +17,20 @@ router.get("/index", (req, res) => {
     //Get all rooms that the user is in
     chatkit.getUserRooms({
       userId: "TsundereKermit"
+      //userId: req.user.name
     })
     .then(res => {
         //Add the room id to the rooms array if the user is the creator (admin)
         res.forEach(element => {
             if (element.created_by_id === "TsundereKermit") {
+            //if (element.created_by_id === req.user.name) {
                 createdRooms.push(element.id);
             }
         });
         //Adds the room array to the user's permissions data
         chatkit.updateUser({
             id: "TsundereKermit",
+            //id: req.user.name,
             customData: {
                 perm: createdRooms
             }
@@ -287,11 +290,11 @@ router.post('/newRoom', (req, res) => {
 router.post('/joinRoom', (req, res) => {
     //Form data
     const { inputUser, roomId } = req.body;
-    let errors = []
+    let errors = [];
 
     //Empty form
     if (!roomId) {
-        errors.push({ msg: "Please fill in the room ID" })
+        errors.push({ msg: "Please fill in the room ID" });
     }
 
     //Refreshes the page if empty form
