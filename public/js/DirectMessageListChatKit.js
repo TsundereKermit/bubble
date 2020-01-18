@@ -4,7 +4,7 @@ var username = document.getElementById("name").textContent;
 //Gets the ChatKit roomId
 var roomId = document.getElementById("roomId").textContent;
 
-//Gets the ChatKit roomId
+//Gets the ChatKit logId
 var logId = document.getElementById("logId").textContent;
 
 //Initialize token provider with ChatKit test endpoint
@@ -42,9 +42,31 @@ chatManager
       })
       .then(messages => {
 
-        //Chat log mode
+        //Get the room that the DirectMessageList should display based on roomId
+        var currentRooms = currentUser.rooms;
+        var thisRoom;
+        currentRooms.forEach(element => {
+          if (element.id === roomId) {
+            thisRoom = element;
+          }
+        });
+
+        //Gets an array of all users in the room
+        var userArray = thisRoom.users;
+        var friend;
+        userArray.forEach(element => {
+          //Setting a variable for the other DM user for future use as heading
+          if(element.name !== logId){
+            friend = element.name;
+          }
+        })
+
+        //Set DM title
+        const h5 = document.getElementById("titId");
+        h5.innerHTML = friend;
+
         const ul = document.getElementById("dmList");
-        //Adds the message to the log if it belongs to the user
+        //Adds the message
         messages.forEach(element => {
             var li = document.createElement("li");
             var div = document.createElement("div");
@@ -61,23 +83,20 @@ chatManager
             }
 
             //Set div text
-            div.innerHTML = dmMsg;
+            //Puts the name of the sender of the message in front of their message
+            if(element.senderId === logId){
+              div.innerHTML = logId + ": " + dmMsg;
 
-            div.setAttribute("class", "dmContent");
-            li.appendChild(div);
-            ul.appendChild(li);
-          
-        });
+              div.setAttribute("class", "dmContent");
+              li.appendChild(div);
+              ul.appendChild(li);
+            }else if(element.senderId !== logId){
+              div.innerHTML = friend + ": " + dmMsg;
 
-        //Set chat log title
-        const h5 = document.getElementById("titId");
-        h5.innerHTML = logId;
-
-        //Get the room that the MessageList should display based on roomId
-        currentRooms.forEach(element => {
-          if (element.id === roomId) {
-            thisRoom = element;
-          }
+              div.setAttribute("class", "dmContent");
+              li.appendChild(div);
+              ul.appendChild(li);
+            }
         });
       })
       .catch(err => {
@@ -91,32 +110,62 @@ chatManager
         //New message received
         onMessage: message => {
 
-              //Add new message to log if appropriate
-                const ul = document.getElementById("dmList");
-                var li = document.createElement("li");
-                var div = document.createElement("div");
+          //Get the room that the DirectMessageList should display based on roomId
+          var currentRooms = currentUser.rooms;
+          var thisRoom;
+          currentRooms.forEach(element => {
+            if (element.id === roomId) {
+              thisRoom = element;
+            }
+          });
 
-                var DMInnerHTML = message.parts[0].payload.content;
-                //Check for quoting
-                if (DMInnerHTML.indexOf("QMsg") === 0) {
-                  //Get quoted message and actual message
-                  var newDMLenEnd = DMInnerHTML.indexOf("QEnd");
-                  var newDMMessageLength = parseInt(DMInnerHTML.substring(4, newDMLenEnd));
-                  DMInnerHTML = DMInnerHTML.substr(newDMLenEnd + newDMMessageLength + 4);
-                }
-                div.innerHTML = DMInnerHTML;
+          //Gets an array of both users in the room
+          var userArray = thisRoom.users;
+          var friend;
+          userArray.forEach(element => {
+            //Setting a variable for the other user in the DM, to be used in the future for heading
+            if(element.name !== logId){
+              friend = element.name;
+            }
+          })
 
-                div.setAttribute("class", "dmContent");
-                li.appendChild(div);
-                ul.appendChild(li);
+          //Add new message 
+          const ul = document.getElementById("dmList");
+          var li = document.createElement("li");
+          var div = document.createElement("div");
+
+          var DMInnerHTML = message.parts[0].payload.content;
+          //Check for quoting
+          if (DMInnerHTML.indexOf("QMsg") === 0) {
+            //Get quoted message and actual message
+            var newDMLenEnd = DMInnerHTML.indexOf("QEnd");
+            var newDMMessageLength = parseInt(DMInnerHTML.substring(4, newDMLenEnd));
+            DMInnerHTML = DMInnerHTML.substr(newDMLenEnd + newDMMessageLength + 4);
+          }
+
+          //Puts the name of the user who sent the message in front of the message
+          if(message.senderId === logId){
+            div.innerHTML = logId + ": " + DMInnerHTML;
+
+            div.setAttribute("class", "dmContent");
+            li.appendChild(div);
+            ul.appendChild(li);
+          }else if(message.senderId !== logId){
+            div.innerHTML = friend + ": " + DMInnerHTML;
+
+            div.setAttribute("class", "dmContent");
+            li.appendChild(div);
+            ul.appendChild(li);
+          }
         }
       },
       messageLimit: 0
     });
 
-    //This block comment is for DM mode read cursors
+    /*This block comment is for DM mode read cursors
+    Still in testing as there is not enough time to complete it*/
     /*
-    if($("#log").is(":visible")) {
+    if($("#dm").is(":visible")) {
       currentUser.fetchMultipartMessages({
         roomId: roomId,
         limit: 1

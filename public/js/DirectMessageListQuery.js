@@ -8,7 +8,7 @@ $(document).ready(() => {
     var dmUsername;
     var dmText;
   
-    //Log text right click
+    //DM text right click
     $(".dmCardBody").contextmenu(e => {
   
       //Get target text
@@ -43,7 +43,7 @@ $(document).ready(() => {
       var target = e.target.id;
       switch (target) {
         case "dmRClickQuote":
-          msgVal = "QMsg" + dmText.length + "QEnd" + dmText;
+          msgVal = "'Quote: " + dmText + "' ";
           $("#message-text").val(msgVal);
           break;
         case "dmRClickDelete":

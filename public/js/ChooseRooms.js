@@ -1,12 +1,8 @@
-
 $(document).ready(() => {
   //Direct Message List button clicked
   $("#dmBtn").click(() => {
-    // $("#dmBtn").removeClass();
-    // $("#dmBtn").addClass("btn btn-primary rounded-0");
-    // $("#roomBtn").removeClass();
-    // $("#roomBtn").addClass("btn btn-dark rounded-0");
     //Change display properties
+    //Hides all the normal room buttons and shows the private room buttons
     chatManager
     .connect()
     .then(currentUser => {
@@ -16,7 +12,6 @@ $(document).ready(() => {
       var pCount = 0;
       //Loops through the user's rooms
       userRooms.forEach(element => {
-        // console.log(element);
         if(element.isPrivate === false){
           $("#normalRoom" + nCount).removeClass();
           $("#normalRoom" + nCount).addClass("btn btn-outline-primary roomName rounded-0 w-100 px-0 mx-0 d-none");      
@@ -29,6 +24,7 @@ $(document).ready(() => {
         }
       })
     })
+    //Hides the create and join room buttons and shows the create dm and add friend buttons
     $("#friendBtn").removeClass();
     $("#friendBtn").addClass("btn btn-primary d-block");
     $("#addFriendBtn").removeClass();
@@ -37,28 +33,23 @@ $(document).ready(() => {
     $("#roomBtn1").addClass("d-none");
     $("#roomBtn2").removeClass();
     $("#roomBtn2").addClass("d-none");
+    //Hides the chat log and bubble mode buttons
     $("#logBtn").removeClass();
     $("#logBtn").addClass("d-none");
     $("#bubBtn").removeClass();
     $("#bubBtn").addClass("d-none");
+    //Hides the bubble mode ui and shows the dm ui
     $("#dm").removeClass();
     $("#dm").addClass("d-block");
     $("#log").removeClass();
     $("#log").addClass("d-none");
     $("#bub").removeClass();
     $("#bub").addClass("d-none");
-    // $("#directmessageList-and-aux").removeClass();
-    // $("#directmessageList-and-aux").addClass("col-9 mh-100 d-block");
-    // $("#messageList-and-aux").removeClass();
-    // $("#messageList-and-aux").addClass("d-none");
   });
   //Room List button clicked
   $("#roomBtn").click(() => {
-    // $("#dmBtn").removeClass();
-    // $("#dmBtn").addClass("btn btn-dark rounded-0");
-    // $("#roomBtn").removeClass();
-    // $("#roomBtn").addClass("btn btn-primary rounded-0");
     //Change display properties
+    //Hides all the private room buttons and shows the public room buttons
     chatManager
     .connect()
     .then(currentUser => {
@@ -68,7 +59,6 @@ $(document).ready(() => {
       var pCount = 0;
       //Loops through the user's rooms
       userRooms.forEach(element => {
-        // console.log(element);
         if(element.isPrivate === false){
           $("#normalRoom" + nCount).removeClass();
           $("#normalRoom" + nCount).addClass("btn btn-outline-primary roomName rounded-0 w-100 px-0 mx-0 d-block");      
@@ -81,6 +71,7 @@ $(document).ready(() => {
         }
       })
     })
+    //Hides the create dm and add friend buttons and shows the create room and join room buttons
     $("#roomBtn1").removeClass();
     $("#roomBtn1").addClass("btn btn-primary d-block");
     $("#roomBtn2").removeClass();
@@ -89,19 +80,17 @@ $(document).ready(() => {
     $("#friendBtn").addClass("d-none");
     $("#addFriendBtn").removeClass();
     $("#addFriendBtn").addClass("d-none");
+    //Shows the chat log and bubble mode buttons
     $("#logBtn").removeClass();
     $("#logBtn").addClass("btn btn-secondary rounded-0 d-block");
     $("#bubBtn").removeClass();
     $("#bubBtn").addClass("btn btn-primary rounded-0 d-block");
+    //Hides the dm ui and shows the bubble mode ui
     $("#dm").removeClass();
     $("#dm").addClass("d-none");
     $("#log").removeClass();
     $("#log").addClass("d-none");
     $("#bub").removeClass();
     $("#bub").addClass("d-block");
-    // $("#messageList-and-aux").removeClass();
-    // $("#messageList-and-aux").addClass("col-9 mh-100 d-block");
-    // $("#directmessageList-and-aux").removeClass();
-    // $("#directmessageList-and-aux").addClass("d-none");
   });
 });

@@ -3,7 +3,6 @@ var username = document.getElementById("name").textContent;
 
 //Gets the ChatKit roomId
 var roomId = document.getElementById("roomId").textContent;
-// var dmName = document.getElementById("dmName").textContent;
 
 //Gets the room type specified from index
 var roomType = document.getElementById("roomType").textContent;
@@ -21,14 +20,15 @@ chatManager
 
     //Loops through the user's rooms
     userRooms.forEach(element => {
-      // console.log(element);
+      //Checks if the room is public
       if(element.isPrivate === false){
         console.log(element);
-      //Makes a room input button for each room in the array
+      //Makes a room input button for each public room in the array
       var button = document.createElement("button");
 
       //Changes button profile for current room
       if (roomId === element.id) {
+        //Depending on the room type, the buttons will be defaultly hidden or shown 
         if(roomType === 'normal'){
           button.setAttribute(
             "class",
@@ -71,12 +71,14 @@ chatManager
     });
 
     userRooms.forEach(element => {
+      //Checks if the room is private
       if(element.isPrivate === true){
         console.log(element);
-      //Makes a room input button for each room in the array
+      //Makes a room input button for each private room in the array
       var button = document.createElement("button");
       //Changes button profile for current room
       if (roomId === element.id) {
+        //Depending on the room type, the buttons will be defaultly hidden or shown
         if(roomType === 'DM'){
           button.setAttribute(
             "class",
