@@ -419,6 +419,7 @@ router.post("/deleteMsg", (req, res) => {
 router.post("/dmDeleteMsg", (req, res) => {
     //Form data
     const { roomId, userId, message } = req.body;
+    var viewedMsg;
 
     chatkit.fetchMultipartMessages({
         roomId: roomId,
@@ -426,7 +427,8 @@ router.post("/dmDeleteMsg", (req, res) => {
     })
     .then(messages => {
         for (let m of messages) {
-            if (m.parts[0].content === message) {
+            viewedMsg = userId + ": " + m.parts[0].content;
+            if (viewedMsg === message) {
                 chatkit.deleteMessage({
                     roomId: roomId,
                     messageId: m.id
