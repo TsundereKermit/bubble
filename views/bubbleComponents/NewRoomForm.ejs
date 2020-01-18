@@ -1,10 +1,18 @@
 <!-- Rendered data -->
 <div id="name" class="d-none"><%= name %></div>
+<div id="roomType" class="d-none"><%= roomType %></div>
 <!-- Button that calls the modal popup -->
+<!-- Makes the button hidden or shown by default depending on the room type-->
+<% if(roomType === 'normal') { %>
 <button id="roomBtn1" type="button" class="btn btn-primary" data-toggle="modal" data-target="#createRoomModal">
   Create room
 </button>
-
+<% } %>
+<% if(roomType === 'DM') { %>
+  <button id="roomBtn1" type="button" class="btn btn-primary d-none" data-toggle="modal" data-target="#createRoomModal">
+    Create room
+  </button>
+<% } %>
 <!-- createRoomModal popup -->
 <div class="modal fade" tabindex="-1" role="dialog" id="createRoomModal">
   <div class="modal-dialog modal-dialog-centered" role="document">

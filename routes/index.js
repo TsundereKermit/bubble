@@ -38,12 +38,12 @@ router.get("/index", (req, res) => {
     //Render the index page
     res.render("index", {
         //name: req.user.name,
-        name: "TsundereKermit",
+        name: "Ace",
         title: "Bubble",
         roomId: "jPBGwdGQli", 
         //logId: req.user.name
-        logId: 'TsundereKermit',
-        roomType: 'normal'
+        logId: 'Ace',
+        roomType: 'normal',
     });
 });
 
@@ -54,13 +54,17 @@ router.post('/makeDM', (req, res) => {
     let errors = []
     var existingUser = false;
     var takenRoom = false;
+    var roomNameOp1 = inputUser + "-" + friendId;
+    var roomNameOp2 = friendId + "-" + inputUser;
 
+    //Gets all the chatkit users
     chatkit.getUsers()
         .then(user => {
             var usernames = [];
             user.forEach(element => {
                 usernames.push(element.name);
             })
+            //Checks through all the chatkit users to see if the "friend" exists
             for(i = 0; i < usernames.length; i++) {
                 if(usernames[i] === friendId) {
                     existingUser = true;
@@ -70,19 +74,24 @@ router.post('/makeDM', (req, res) => {
             }
             console.log(user);
             console.log(usernames);
+
+            //If the friend does exist, get all the existing rooms (including private ones)
             if(existingUser){
-                chatkit.getRooms()
+                chatkit.getRooms({
+                    includePrivate: true
+                })
                     .then(room => {
                         var rooms = [];
                         room.forEach(element => {
                             rooms.push(element.name);
                         })
+                        //Checks through al the rooms to see if a DM with that person already exists
                         for(j = 0; j < rooms.length; j++){
-                            if(rooms[j] === friendId){
+                            if(rooms[j] === roomNameOp1 || rooms[j] === roomNameOp2){
                                 takenRoom = true;
                                 console.log(j);
                                 console.log(takenRoom);
-                            }else if(rooms[j] !== friendId && !takenRoom){
+                            }else if((rooms[j] !== roomNameOp1 && !takenRoom) || (rooms[j] !== roomNameOp2 && !takenRoom)){
                                 takenRoom = false;
                                 console.log(j);
                                 console.log(takenRoom);
@@ -90,11 +99,13 @@ router.post('/makeDM', (req, res) => {
                         }
                         console.log(room);
                         console.log(rooms);
+
+                        //If the DM does not yet exist, make the DM with the needed credentials
                         if(!takenRoom){
                             //Creates the room based on submitted data
                             chatkit.createRoom({
                                 creatorId: inputUser,
-                                name: friendId,
+                                name: roomNameOp1,
                                 isPrivate: true,
                             })
                             .then(() => {
@@ -124,8 +135,8 @@ router.post('/makeDM', (req, res) => {
             errors, 
             title: 'Bubble', 
             roomId: 'jPBGwdGQli', 
-            logId: inputUse,
-            roomType: 'DM'
+            logId: inputUser,
+            roomType: 'DM',
         })
     }
        
@@ -135,16 +146,17 @@ router.post('/makeDM', (req, res) => {
             title: 'Bubble', 
             roomId: 'jPBGwdGQli',
             logId: inputUser,
-            roomType: 'DM'
+            roomType: 'DM',
         });
     });
 
-    //addFriend form is submitted
+//addFriend form is submitted
 router.post('/addFriend', (req, res) => {
     //Form data
     const { inputUser, friendId } = req.body;
     let errors = []
-    var dmId;
+    var roomNameOp1 = inputUser + "-" + friendId;
+    var roomNameOp2 = friendId + "-" + inputUser;
 
     //Empty form
     if (!friendId) {
@@ -159,17 +171,18 @@ router.post('/addFriend', (req, res) => {
             title: 'Bubble', 
             roomId: 'jPBGwdGQli', 
             logId: inputUser,
-            roomType: 'DM'
+            roomType: 'DM',
         });
     } else {
+        //Gets all the existing rooms (including private ones)
         chatkit.getRooms({
             includePrivate: true
         })
         .then(room => {
+            //Checks if the room the user is trying to add the friend into exists
             room.forEach(element => {
-                if(element.name === friendId){
-                    // dmId = element.id;
-                    //Join the room
+                if(element.name === roomNameOp1 || element.name === roomNameOp2){
+                    //Adds the friend to the room
                     chatkit.addUsersToRoom({
                         roomId: element.id,
                         userIds: [friendId]
@@ -184,16 +197,14 @@ router.post('/addFriend', (req, res) => {
                             title: 'Bubble', 
                             roomId: 'jPBGwdGQli', 
                             logId: inputUser,
-                            roomType: 'DM'
+                            roomType: 'DM',
                         });
                     });
                 }
             })
-        }).catch((err) => { //for get rooms
+        }).catch((err) => {
             console.log(err);
         });
-
-        
         
         //Sets up pushed messages
         errors.push({ msg: friendId + " has been added to the DM" });
@@ -205,7 +216,7 @@ router.post('/addFriend', (req, res) => {
             title: 'Bubble', 
             roomId: 'jPBGwdGQli', 
             logId: inputUser,
-            roomType: 'DM'
+            roomType: 'DM',
         });
     }
 });
@@ -234,7 +245,7 @@ router.post('/newRoom', (req, res) => {
             title: 'Bubble', 
             roomId: 'jPBGwdGQli', 
             logId: inputUser,
-            roomType: 'normal'
+            roomType: 'normal',
         })
     } else {
         //Creates the room based on submitted data
@@ -253,7 +264,7 @@ router.post('/newRoom', (req, res) => {
                 title: 'Bubble', 
                 roomId: 'jPBGwdGQli', 
                 logId: inputUser,
-                roomType: 'normal'
+                roomType: 'normal',
             });
         });
 
@@ -267,7 +278,7 @@ router.post('/newRoom', (req, res) => {
             title: 'Bubble', 
             roomId: 'jPBGwdGQli',
             logId: inputUser,
-            roomType: 'normal'
+            roomType: 'normal',
         });
     }
 });
@@ -291,7 +302,7 @@ router.post('/joinRoom', (req, res) => {
             title: 'Bubble', 
             roomId: 'jPBGwdGQli', 
             logId: inputUser,
-            roomType: 'normal'
+            roomType: 'normal',
         });
     } else {
         //Join the room
@@ -309,7 +320,7 @@ router.post('/joinRoom', (req, res) => {
                 title: 'Bubble', 
                 roomId: 'jPBGwdGQli', 
                 logId: inputUser,
-                roomType: 'normal'
+                roomType: 'normal',
             });
         });
         
@@ -323,7 +334,7 @@ router.post('/joinRoom', (req, res) => {
             title: 'Bubble', 
             roomId: 'jPBGwdGQli', 
             logId: inputUser,
-            roomType: 'normal'
+            roomType: 'normal',
         });
     }
 });
@@ -338,21 +349,21 @@ router.post('/changeRoom', (req, res) => {
         title: 'Bubble',
         roomId: changeRoomName,
         logId: userId,
-        roomType: 'normal'
+        roomType: 'normal',
     });
 });
 
-//changeRoomForm is submitted
+//changeDMForm is submitted
 router.post('/changeDM', (req, res) => {
     //Form data
     const { userId, changeRoomName } = req.body; 
-    //Render the new room
+    //Render the new room (DM)
     res.render('index', { 
         name: userId, 
         title: 'Bubble',
         roomId: changeRoomName,
         logId: userId,
-        roomType: 'DM'
+        roomType: 'DM',
     });
 });
 
@@ -366,7 +377,7 @@ router.post("/chatlog", (req, res) => {
         title: "Bubble",
         roomId: roomId,
         logId: logChangeName,
-        roomType: 'normal'
+        roomType: 'normal',
     });
 });
 
@@ -400,7 +411,41 @@ router.post("/deleteMsg", (req, res) => {
         title: 'Bubble',
         roomId: roomId,
         logId: userId,
-        roomType: 'normal'
+        roomType: 'normal',
+    });
+});
+
+//dmDeleteMsg form is submitted
+router.post("/dmDeleteMsg", (req, res) => {
+    //Form data
+    const { roomId, userId, message } = req.body;
+
+    chatkit.fetchMultipartMessages({
+        roomId: roomId,
+        limit: 100,
+    })
+    .then(messages => {
+        for (let m of messages) {
+            if (m.parts[0].content === message) {
+                chatkit.deleteMessage({
+                    roomId: roomId,
+                    messageId: m.id
+                })
+                .then()
+                .catch(err => console.error(err));
+                break;
+            }
+        }
+    })
+    .catch(err => console.error(err));
+
+    //Render the new room
+    res.render('index', { 
+        name: userId, 
+        title: 'Bubble',
+        roomId: roomId,
+        logId: userId,
+        roomType: 'DM',
     });
 });
 
@@ -424,7 +469,7 @@ router.post("/kickUser", (req, res) => {
         title: 'Bubble',
         roomId: roomId,
         logId: userId,
-        roomType: 'normal'
+        roomType: 'normal',
     });
 });
 

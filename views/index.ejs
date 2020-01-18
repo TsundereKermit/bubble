@@ -15,6 +15,7 @@
     <!-- Bubble app -->
     <div class="row h-100" id="bubbleMainBody">
       <!-- Main UI -->
+      <!-- Depending on the room type, the main UI will be either for the group chat or for DM-->
       <% if(roomType === 'normal') { %>
       <div class="col-9 mh-100" id="messageList-and-aux">
         <% include ./bubbleComponents/MessageList %>
