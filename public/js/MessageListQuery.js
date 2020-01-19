@@ -130,7 +130,6 @@ $(document).ready(() => {
     } else {
       //Is admin
       $("#delete").show();
-      $("#edit").show();
     }
 
     //Set up delete/quoting mechanisms
@@ -315,7 +314,6 @@ $(document).ready(() => {
     } else {
       //Is admin
       $("#logRClickDelete").show();
-      $("#logRClickEdit").show();
     }
 
     //Set up delete/quoting mechanisms
