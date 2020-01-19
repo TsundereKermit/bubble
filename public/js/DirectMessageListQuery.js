@@ -4,8 +4,7 @@ $(document).ready(() => {
     //Initializing the quoted string 
     var msgVal = "";
   
-    //Context menus
-    var dmUsername;
+    //Context menu
     var dmText;
   
     //DM text right click
@@ -15,8 +14,7 @@ $(document).ready(() => {
       var top = e.pageY;
       var left = e.pageX;
       dmText = e.target.innerHTML;
-      dmUsername = document.getElementById("titId").innerHTML;
-  
+
       //Set up delete/quoting mechanisms
       $("#dmRClickDelete").val(dmText);
       $("#dmRClickQuote").val(dmText);
@@ -43,7 +41,7 @@ $(document).ready(() => {
       var target = e.target.id;
       switch (target) {
         case "dmRClickQuote":
-          msgVal = "'Quote: " + dmText + "' ";
+          msgVal = "'Quote: " + dmText + "' -> ";
           $("#message-text").val(msgVal);
           break;
         case "dmRClickDelete":

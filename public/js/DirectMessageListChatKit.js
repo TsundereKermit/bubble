@@ -71,16 +71,8 @@ chatManager
             var li = document.createElement("li");
             var div = document.createElement("div");
 
-            //Get msg from element for inputting into the log div
+            //Get msg from element for inputting into the dm div
             var dmMsg = element.parts[0].payload.content;
-
-            //Check for quoting
-            if (dmMsg.indexOf("QMsg") === 0) {
-              //Get quoted message and actual message
-              var dmLenEnd = dmMsg.indexOf("QEnd");
-              var dmMessageLength = parseInt(dmMsg.substring(4, dmLenEnd));
-              dmMsg = dmMsg.substr(dmLenEnd + dmMessageLength + 4);
-            }
 
             //Set div text
             //Puts the name of the sender of the message in front of their message
@@ -135,13 +127,6 @@ chatManager
           var div = document.createElement("div");
 
           var DMInnerHTML = message.parts[0].payload.content;
-          //Check for quoting
-          if (DMInnerHTML.indexOf("QMsg") === 0) {
-            //Get quoted message and actual message
-            var newDMLenEnd = DMInnerHTML.indexOf("QEnd");
-            var newDMMessageLength = parseInt(DMInnerHTML.substring(4, newDMLenEnd));
-            DMInnerHTML = DMInnerHTML.substr(newDMLenEnd + newDMMessageLength + 4);
-          }
 
           //Puts the name of the user who sent the message in front of the message
           if(message.senderId === logId){
