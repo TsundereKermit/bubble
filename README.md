@@ -1,14 +1,7 @@
 # bubble
 ISU4U Term Project - Bubble, the chatting app that prevents Yang from spamming.
 
-### Go the localhost:5000 after starting the application!
-#### Usage
-```
-$ npm install
-```
-```
-$ npm start
-# Or run with nodemon (dev purposes)
-$ npm run dev
-```
 
+Sadly, because of the termination of ChatKit services, this application is no longer usable
+
+![alt text](https://i.kym-cdn.com/photos/images/newsfeed/001/857/750/4ab.png)
