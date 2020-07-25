@@ -1,5 +1,5 @@
 # bubble
-ISU4U Term Project - Bubble, the chatting app that prevents Yang from spamming.
+ICS4U Term Project - Bubble, the chatting app that prevents Yang from spamming.
 
 
 Sadly, because of the termination of ChatKit services, this application is no longer usable
